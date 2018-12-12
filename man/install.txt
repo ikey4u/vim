@@ -1,0 +1,115 @@
+# 公共
+
+    pip3 install neovim
+
+注意其中 pip3 要对应于 vim 所使用的 python.
+
+# Ubuntu Linux 安装 vim 8.1
+
+- 移除已有版本并编译 vim8.1, 如果已安装此版本, 可跳过
+
+    sudo apt remove vim vim-runtime gvim
+
+    sudo apt install -y libncurses5-dev libgnome2-dev libgnomeui-dev \
+    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+    python3-dev ruby-dev lua5.1 liblua5.1-dev libperl-dev git
+
+    cd /tmp
+    git clone https://github.com/vim/vim.git
+    cd vim
+    ./configure --with-features=huge \
+        --enable-multibyte \
+        --enable-rubyinterp=yes \
+        --enable-python3interp=yes \
+        --with-python3-config-dir=$(python3-config --configdir) \
+        --enable-perlinterp=yes \
+        --enable-luainterp=yes \
+        --enable-gui=gtk2 \
+        --enable-cscope \
+        --prefix=/usr/local
+    make VIMRUNTIMEDIR=/usr/local/share/vim/vim81
+
+    cd /tmp/vim
+    sudo make install
+
+    sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
+    sudo update-alternatives --set editor /usr/local/bin/vim
+    sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
+    sudo update-alternatives --set vi /usr/local/bin/vim
+
+- 安装插件
+
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.setup/vim/bundle/Vundle.vim
+    :PluginInstall
+
+
+- 安装字体
+
+    git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
+    fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
+
+- 安装 ycm
+
+    - 安装 cmake 和 clang,  如果已安装, 则跳过
+
+        sudo apt install cmake
+        cd /tmp
+        wget http://releases.llvm.org/3.9.1/clang+llvm-3.9.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+        tar -Jxvf clang+llvm-3.9.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+        cd clang+llvm-3.9.1-x86_64-linux-gnu-ubuntu-16.04/
+        sudo cp -r * /usr/local #将对应的文件拷贝到/usr/local中的对应目录
+        clang --version #测试安装
+
+
+    - 编译 ycm
+
+        cd ~/.setup/vim/plugged/YouCompleteMe
+        python3 install.py --clang-completer --java-completer --go-completer --system-libclang
+
+    - 附上手动编译
+
+        1. 安装 cmake, clang
+
+        2. 设置 python 头文件和库
+
+            PYINC=/usr/include/python3.5m
+            PYLIB=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu/libpython3.5m.so
+
+        3. 编译
+
+            cd ~/.setup/vim/
+            mkdir -p ycm_build
+            cd ycm_build
+            cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/usr/local . ~/.setup/vim/bundle/YouCompleteMe/third_party/ycmd/cpp \
+            -DPYTHON_INCLUDE_DIR=${PYINC} \
+            -DPYTHON_LIBRARY=${PYLIB} \
+            -DUSE_PYTHON2=OFF
+            cmake --build . --target ycm_core
+
+    其中的 python 头文件和库路径都可以通过 `python3-config
+    --includes` 和 `python3-config --ldflags` 得到.
+    注意库必须是动态共享库, 静态库无法编译 ycm, 除此之外,
+    配置 ycm 时, 需要对应的 python3 路径, 可以用 `which python3` 得
+    到绝对路径.
+
+# Mac OS 安装 vim
+
+安装 xcode
+
+    xcode-select --install
+    sudo xcode-select -switch /Library/Developer/CommandLineTools
+
+查看 vim 信息
+
+    brew search macvim
+    brew info macvim
+
+安装
+
+    brew install cmake
+    brew install macvim --with-lua --with-override-system-vim
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.setup/vim/bundle/Vundle.vim
+    :PluginInstall
+    cd ~/.setup/vim/bundle/YouCompleteMe
+    python3 install.py --clang-completer --java-completer --go-completer --system-libclang
