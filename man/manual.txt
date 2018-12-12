@@ -1,0 +1,420 @@
+# 安装
+
+    参见 ./install.txt
+
+# 功能快速预览
+
+    - \man 快速打开本手册
+    - <leader>' 和 <leader>'' 分别给当前单词加上单双引号
+    - <leader>ev 和 <leader>sv 分别用于打开配置文件和重载配置文件
+    - <leader>man 快速打开 $HOME/.vim/manual.txt, 即本手册
+    - 自动监视 vimrc 以及 settings 目录下 .vim 文件的更改, 并自动更新 vimrc
+    - 大文件打开, 超过 10 M 的文件自动启用大文件打开功能, 对于 json 类文件,
+    - 格式化后打开更快捷, 如果未格式化(是指所有内容都在一行显示, 则打开十分hua缓
+    - 慢,因为 vim 要分析其结构)
+    - :Tabmsg <cmd> 在新的 tab 中捕获 ex 的输出消息
+    - :Recent 在新的 tab 中打开最近文件列表, 可以到该文件列表定位到所需文件后,
+    - 按下 gf 即可打开文件.
+    - :Fmt 一键将文件格式置为 unix, 编码方式为 utf-8
+
+# 依赖安装
+
+    # 依赖 ctags,程序前缀设置为 ex
+
+        macos 需要安装: brew install automake
+        git clone https://github.com/universal-ctags/ctags.git
+        cd ctags/
+        ./autogen.sh
+        ./configure --prefix=/usr/local/ --program-prefix=ex
+        make && sudo make install
+        用法: exctags -R *
+        ctrl+] 到定义处 ctrl+t 返回原位置 ctrl+w+] 在新窗口打开定义
+
+
+    # 依赖 GNU Global
+
+        下载源码 https://www.gnu.org/software/global/download.html
+        wget http://tamacom.com/global/global-6.6.2.tar.gz
+        tar zxvf global-6.6.2.tar.gz
+        cd global-6.6.2
+        ./configure --with-universal-ctags=/usr/local/bin/exctags
+        make && sudo make install
+        用法: gtags --gtagslabel ctags
+        将光标移动到某个定义出,执行 :Gtags 即可查看定义, 执行 :Gtags -r 即可查看引用.
+
+    # pdf 转换插件
+
+        提供一个将 vim 里面的内容高亮转换为 pdf 的插件,位于 plugin 目录需要安
+        装 wkhtmltopdf,下载地址 https://wkhtmltopdf.org/downloads.html如果安装
+        到系统目录,则不需要任何设置,安装到其他地方,则需要设置变量
+        g:html2pdf_exepath 的值,指定路径,需要时绝对路径. 转换命令 :TOpdf生成的
+        文件名为 PDF@xxx.pdf xxx 为你当前转换的文件名称,保存路径为当前路径
+
+    # 实时预览 html
+
+        安装 browser-sync 来同步预览 html
+        macos:
+            brew install npm
+            npm install -g browser-sync
+        下载地址:https://github.com/BrowserSync/browser-sync
+        编写一个脚本 livehtml 存放到系统路径中
+        脚本内容如下:
+        browser-sync start --server --files "css/*.css, *.html
+        调用方法:
+        :call Pre()
+        杀死进程:
+        :call KillPre()
+
+    # 代码高亮到网页
+
+        vim 自带了一个 TOhtml 命令,但是它生成的是一个完整的网页,所以在此命令基
+        础上,我编写了一个插件,让其生成一个单独的 div并将其内容放置到 0 号寄存
+        器中,插件位于 ~/.vim/plugin/code.vim依赖 bs4 python 包,使用 pip3
+        install bs4 即可对于指定文件,执行 :TOCode 即可. 然后使用 "0p 粘贴.代码
+        边框样式我修改为了圆角边框,感觉好看点.也可以使用可是模式选择指定行转换
+        为高亮删除单词
+
+IDApython 自动补全
+>打开 IDA Pro, 输入如下命令查看 python 文件路径
+import idc;print(idc.__file__)
+/Applications/IDAPro7.0/ida64.app/Contents/MacOS/python/idc.pyc
+
+> 在 vimrc 文件开始处写入如下代码(加入系统搜索路径)
+python3 << EOF
+import os
+os.environ['PYTHONPATH']="$PYTHONPATH:/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/"
+EOF
+试过下面的命令,不行:
+sys.path.insert(0, "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python")
+> 进入 /Applications/IDAPro7.0/ida.app/Contents/MacOS/python 路径
+生成 ctags, gtags 等文件,方便查看定义
+> 打开 vim 导入 idc,idaapi,idautils  即可自动补全
+
+○自动补全
+> Python 补全的缺陷和 Hack
+YCM 的 Python 自动补全是静态分析, 因此无法有效的动态加载的模块进行补全
+比如 python3 的 multiprocessing 库, 其 __init__.py 是动态生成的,
+因而 YCM 无法自动补全.
+
+YCM 内部通过 jedi 来自动补全 python, YCM 作者使用了一个 JediHTTPServer
+来接收 jedi 的输出, 实质上命令等价于
+import jedi
+jedi.Script('import multiprocessing; multiprocessing.').completions()
+
+实际上 jedi 提供了动态解释补全, 但是目前没有什么好的办法对一个 python 文件获取
+locals 变量, 这需要运行一个将文件, Jedi 的动态补全例子如下:
+
+import multiprocessing as mp
+import jedi
+namespace = locals()
+print(namespace['namespace'])
+inter = jedi.Interpreter(source = "mp.", namespaces = [namespace])
+print(inter.completions())
+
+研究了一天一夜 YCM, 希望能够把 locals() 的输出传递到 Jedi,
+但是没有结果, 反倒是一个不经意的发现, 打开如下文件
+~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd/completers/python/jedi_completer.py
+修改其中的
+def _GetResponse( self, handler, request_data = {} ):
+"""POST JSON data to JediHTTP server and return JSON response."""
+handler = ToBytes( handler )
+为如下代码(即加入一个 pass 关键字):
+def _GetResponse( self, handler, request_data = {} ):
+pass
+"""POST JSON data to JediHTTP server and return JSON response."""
+handler = ToBytes( handler )
+然后重新打开一个文件, 发现 multiprocessing 可以补全了.
+在 github 上提了个 issue, 作者说是这样的话启用了 vim 默认的 omnifunc 补全.
+这一缺陷是 Jedi 所导致的, 没法传递 locals(), 因此只好等待 Jedi 解决掉这个问题
+了.
+
+
+**************************************************
+                VIM个人笔记备忘
+                [@note]
+**************************************************
+1.替换语法:":[range]s/from/to/[flags]"
+   注意需要转义的字符: *./\[]&
+
+2.窗口大小调整
+   :res +10 水平方向增加10行
+   :vertical res +10 垂直方向增加10行
+   其中res代表resize
+
+3.强制以root权限保存
+   :w !sudo tee %
+
+4.vim命令行无法显示输入中文:
+   打开~/.bashrc 或者 ~/.zshrc,在最后加入以下配置:
+   export LC_ALL=en_US.UTF-8
+   export LANG=en_US.UTF-8
+   更新一下系统对中文的语言支持,在Ubuntu中可以通过Dash输入Language来打开语言支持界面
+
+5:vim在控制台打开后用鼠标右键选择粘贴时开头的几个字符会缺失
+   需要首先进入插入模式,然后鼠标右键粘贴即可解决这个问题
+
+6:一些容易忘记的快捷键
+     窗口间游走
+     Ctrl + w + h：向左移动窗口
+     Ctrl + w + j： 向下移动窗口
+     Ctrl + w + j： 向上移动窗口
+     Ctrl + w + l： 向右移动窗口
+     Ctrl + w + w：这个命令会在所有窗口中循环移动
+     Ctrl + w + t：移动到最左上角的窗口
+     Ctrl + w + b：移动到最右下角的窗口
+     Ctrl + w + p：移动到前一个访问的窗口
+     移动窗口
+     Ctrl + w + r：向右或向下方交换窗口，而Ctrl + w + R则和它方向相反。
+     Ctrl + w + x：交换同列或同行的窗口的位置.vim默认交换当前窗口的与它下一个窗口的位置,如果下方没有窗口,则试着与上一个窗口交换位置.亦可在此命令前加上数量,与制定的窗口交换位置.
+
+ 7:窗口尺寸更改
+    :resize [+-]N
+    :vertical resize [+-]N
+
+8: vim 内置的 ins-completion 相关补全快捷键
+ 整行 快捷键：<C-X><C-L>
+ 文件名 快捷键：<C-X><C-F>
+ 当前文件中的关键字 快捷键：<C-X><C-P>或<C-X><C-N>
+ 关键字 快捷键：<C-N>或<C-P>
+ <C-N>、<C-P>跟<C-X><C-N>、<C-X><C-P>类似，但是查找范围更广，不局限于当前文件。
+
+9:系统剪贴板粘贴到 vim 命令行上
+ 输入冒号(:),定位到命令行,然后 Ctrl + R 然后再按下 +
+
+9:插入行号
+ 将 src=...的形式替换为 srcXX=...
+ src00=http\://mirrors.neusoft.edu.cn/android/repository/addon-6.xml
+ src01=http\://mirrors.neusoft.edu.cn/android/repository/addon.xml
+ src02=http\://mirrors.neusoft.edu.cn/android/repository/extras/intel/addon.xml
+ src03=http\://mirrors.neusoft.edu.cn/android/repository/sys-img/android-tv/sys-img.xml
+ src04=http\://mirrors.neusoft.edu.cn/android/repository/sys-img/android-wear/sys-img.xml
+ src05=http\://mirrors.neusoft.edu.cn/android/repository/sys-img/android/sys-img.xml
+ src06=http\://mirrors.neusoft.edu.cn/android/repository/sys-img/google_apis/sys-img.xml
+ src07=http\://mirrors.neusoft.edu.cn/android/repository/sys-img/x86/addon-x86.xml
+ src08=http\://mirrors.neusoft.edu.cn/android/repository/addons_list-2.xml
+ src09=http\://mirrors.neusoft.edu.cn/android/repository/repository-10.xml
+ 先 shift+v 行选择模式选中上述所有行,然后执行如下命令:
+ '<,'>s/=/\=printf('%02d=',line('.')-line("'<"))/
+ 这个命令的主要限制是,得有一些特定的模式需要被替换.
+
+10:以root权限写入文件
+    :w !sudo tee %
+
+ 11:有时候我们已经打开了 vim,然后希望从 shell 的命令行中
+ 新打开一个文件,这个新打开的文件我们仍希望处于已有的 vim
+ 实例中.怎么做呢?有以下几种方法,添加到 ~/.bashrc 中即可:
+ #>>> commands for awesome vim
+ #@1 remote new tab
+ alias gvimtab="gvim --remote-tab"
+ #@2 open file in sp mode overrding the current focused vim window
+ alias gvimcsp="gvim --remote +split"
+ #@3 open file in vsp mode overrding the current focused vim window
+ alias gvimcvsp="gvim --remote +vsplit"
+ #@4 open file in sp mode not overrding the current focused vim window
+ gvimsp()
+ {
+     if [[ $# == 1 ]]
+     then
+         fpath=$(realpath $1)
+         gvim --remote-send  ":split ${fpath}<CR>"
+     else
+         gvim --remote-send  ":split<CR>"
+     fi
+ }
+ #@5 open file in vsp mode not overrding the current focused vim window
+ gvimvsp()
+ {
+     if [[ $# == 1 ]]
+     then
+         fpath=$(realpath $1)
+         gvim --remote-send  ":vsplit ${fpath}<CR>"
+     else
+         gvim --remote-send  ":vsplit<CR>"
+     fi
+ }
+
+12: xxd 编辑二进制文件应注意的问题
+    通常地我会在 vim 中打开一个二进制文件,然后使用 :%!xxd -g 1 来将其转换为十六进制模式
+    但是 vim 会根据 .vimrc 中的 fileencoding 设置对文件内容进行解释,
+    当无法解释文件内容时就会显示成 0x3f 也就是问号(?).这样我们看的时候就会发现有许多地方不对.
+    怎么解决呢?方法有两个:
+    1) 注释掉set fileencodings设置
+    2) 重新开一个 vim 指定 -b 选项(binary):gvim -b xxx
+    这样的话,再使用 %!xxd 来查看即可.通常地我们使用 fileencodings 来让 vim 正确编码,
+    所以第 2) 种是比较好的选择.
+
+13: vim 命令行执行结果重定向到 vim
+:r !ls -la
+
+13: vim 中的特殊按键
+    Shift: <S-?>,比如 Shift+s : <S-s>
+    Ctrl:  <C-?>,比如 Ctrl+s  : <C-s>
+    Alt :  <A-?>,比如 Alt+s  : <A-s>
+    F1~F12 : <F1> 到 <F12>
+    回车:    <CR> 或者 <Enter> 或者 <Return>
+    空格:    <Space>
+    Esc:     <Esc>
+
+14: 顺畅的跳转到文件的某处
+    normal 模式下直接输入 {count}% 即可,
+    比如要跳转到 50%,直接输入 50% 即可.
+    15:搜索
+    我们使用 '/' 来进行搜索时默认是大小写不敏感的
+    /pattern\C :大小写敏感
+    /pattern\c :大小写不敏感
+
+16: 美化(格式化) json 文件
+    :%!python -m json.tool
+    其中 % 表示应用到整个文件, -m 告诉 python 将某个库作为脚本运行
+    但是对于 unicode 字符则会显示 \uxxxx,解决方法如下:
+    在 ~/.vimrc 中加入如下命令:
+    command! JsonFormat :execute '%!python -m json.tool'
+    \ | :execute '%!python -c "import re,sys;chr=__builtins__.__dict__.get(\"unichr\", chr);sys.stdout.write(re.sub(r\"\\\\u[0-9a-f]{4}\", lambda x: chr(int(\"0x\" + x.group(0)[2:], 16)).encode(\"utf-8\"), sys.stdin.read()))"'
+    \ | :set ft=javascript
+    \ | :1
+    然后执行 :JsonFormat 即可.
+    https://qiita.com/tomoemon/items/cc29b414a63e08cd4f89
+
+17: mapleader
+缺省的 <leader> 是 '\',可以使用
+let mapleader = "," 来修改 \ 为 ',',不过我保持默认
+
+18:关于 vim 中的快捷键自定义 map
+默认的 :map 操作是递归的,而 :noremap 则是非递归的,什么意思呢?
+比如 :map j gg
+:map Q j
+:noremap W j
+那么 Q 将会被映射为 gg,因为 j 被映射为 gg 了.而 W 只会被映射为 j.
+map 的语法格式如下:
+{cmd} {attr} {lhs} {rhs}
+其中:{cmd} 属于下列命令之一 ':map', ':map!', ':nmap', ':vmap', ':imap', :cmap', ':smap', ':xmap', ':omap', ':lmap' 等等
+   {attr} 是可选的,属于下列之一或多个: <buffer>, <silent>,<expr> <script>, <unique> 和 <special>.
+       <silent> 属性指明执行命令时不在命令行上进行回显
+   {lhs} 左侧序列值,是你要定义的快捷方式
+   {rhs} 右侧序列值,是具体执行快捷方式所对应的 vim 命令
+
+19:字符选取
+选择一个单引号内的内容,vi',选择一个双引号内的内容,vi"
+选择一个圆括号中的内容,vib,选择一个花括号中的内容,viB
+如果想包含单引号,双引号等可以将 i 替换为 a.
+更多请参考 :h text-objects
+
+20:<200b> <200e> Unicode 字符
+:%s/<c-v>u200b//g
+
+21: 删除模式
+d/while:模式删除,也就是说从当前位置删除到 while 单词处(不包括 while)
+
+22: evince 无法正确显示所有页面(pdf/evince):
+rm -rf $HOME/.local/share/gvfs-metadata/
+
+23:文件格式和编码
+文件格式 :h ff
+文件编码 :h encoding-names
+set ff=[unix|dos]
+ser fenc=<encoding-names>
+
+24: 在 vim 中打开光标下的文件
+按下 gf 即可
+
+25: hack vim
+>> put 命令
+格式==> :[line]pu[t] [x]
+在行 line 处放入寄存器 x 中的内容,
+一个等号(=), 在其后面跟着一个表达式. 其中字符竖线(|)和双引号(")需要转义.
+使用 put 生成一个自增序列
+    :put =range(11,15)
+    :0put =range(11,15)
+    :123put =range(11,15)
+    " 注意下面使用两个单引号来来表示双引号, v:val 用于获取 list 中的每一个
+    " 元素值, v:key 用于获取字典的键
+    :put =map(range(1,150), 'printf(''%04d'', v:val)')
+    :for i in range(1,10) | put ='192.168.0.'.i | endfor
+
+在 vim8 以上版本:
+    my_array[0] = 0;
+    my_array[0] = 0;
+    my_array[0] = 0;
+    my_array[0] = 0;
+    my_array[0] = 0;
+    my_array[0] = 0;
+    my_array[0] = 0;
+使用块模式选中数组中的一列 0, 然后按下g <C-a> 即可自增所有数字,如下
+    my_array[1] = 0;
+    my_array[2] = 0;
+    my_array[3] = 0;
+    my_array[4] = 0;
+    my_array[5] = 0;
+    my_array[6] = 0;
+    my_array[7] = 0;
+
+[ctag gtags]
+ctags:
+    生成 tags 文件: exctags -R *
+    <c-w>+] 在当前窗口跳转到定义处
+    c+] 在新窗口中调到定义处
+    c-t 跳回原来的地方
+    ctags 并不会自动更新,如何自动更新呢?
+    安装 autotags.vim 插件,然后在 .vimrc 中加入如下选项:
+        let g:autotagCtagsCmd="exctags"
+        let g:autotagTagsFile="tags"
+gtags:
+    生成适合 ctags 支持的 GPATH  GRTAGS  GTAGS 文件命令:
+    gtags --gtagslabel ctags
+    :Gtags [option] pattern
+    :Gtags -r
+    也可以使用 cscope:
+    Find symbol		    :cs find s
+    Find definition		:cs find g
+    Find reference		:cs find c
+    Find text string	:cs find t
+    Find egrep pattern	:cs find e
+    Find path		    :cs find f
+    Find include file	:cs find i
+    You can move tag list using:
+      Go to the next tag	     :tn
+      Go to the previous tag	 :tp
+      Pop tag stack		         :pop
+    自动更新 gtags 可以在 ~/.vimrc 中设置如下选项:
+    let Gtags_Auto_Update = 1
+
+[quickfix]
+关闭窗口  :ccl[ose]
+打开窗口  :cope[n]
+下一个    :cn[ext]
+前一个    :cp[revious]
+列出所有  :cl[ist]
+
+
+
+[显示单词个数]
+%s/pattern//gn
+关键为最末的n,只显示匹配数目,不真正的匹配替换.
+
+[bro 命令]
+:bro {command} 打开一个对话框, 选择文件, command 支持如下命令
+|:wall|, |:wq|, |:wqall|, |:x|, |:xall|, |:exit|,
+|:view|, |:sview|, |:r|, |:saveas|, |:sp|, |:mkexrc|,
+|:mkvimrc|, |:mksession|, |:mkview|, |:split|,
+|:vsplit|, |:tabe|, |:tabnew|, |:cfile|, |:cgetfile|,
+|:caddfile|, |:lfile|, |:lgetfile|, |:laddfile|,
+|:diffsplit|, |:diffpatch|, |:open|, |:pedit|,
+|:redir|, |:source|, |:update|, |:visual|, |:vsplit|,
+
+[trickes]
+> g; 和 g, 则可以在整个 changelist 里面来回跳转，敲 :help changelist 可以看说明。
+> 行排序 :sort r /regex/
+
+[替换 搜索 @ replace search]
+只替换 visual 选中的部分, 使用 %V 原子指明, 如下替换 us 为 az.
+:s/\%Vus/az/g
+[替换空行 @ blank/empty line]
+:g/^\s*$/d
+
+[文件编码 @ foramt encoding]
+set fileformat=unix
+set fileencoding=utf-8
+
+[PLUGIN @ fzf]
+命令行文件搜索插件: https://github.com/junegunn/fzf#as-vim-plugin
+TODO(安装使用)

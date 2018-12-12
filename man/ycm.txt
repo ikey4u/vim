@@ -1,0 +1,149 @@
+> YCM 在 mac 下的安装:
+默认安装的vim 启用了对 python3 以及 cscope 的支持,可以使用 brew info xxx 来查看.
+然后编译 ycm with python3.
+
+mkdir ~/.vim/ycm_build && cd ~/.vim/ycm_build
+
+1:安装 llvm, 使用 brew 安装
+brew install --with-toolchain llvm
+我安装的时候报如下错误:
+    ==> cmake -G Unix Makefiles /private/tmp/llvm-20180408-18969-1696v67/llvm-6.0.0.src -DCMAKE_C_FLAGS_RELEASE=-DNDEBUG -DCMAKE_CXX_FLAGS_RELEASE=-DND
+    Last 15 lines from /Users/bugnofree/Library/Logs/Homebrew/llvm/01.cmake:
+      command.
+
+
+    CMake Warning at tools/xcode-toolchain/CMakeLists.txt:60 (message):
+      Failed to detect the version of an installed copy of Xcode, falling back to
+      highest supported version.  Set XCODE_VERSION to override.
+
+
+    CMake Error at tools/xcode-toolchain/CMakeLists.txt:80 (message):
+      Could not identify toolchain dir
+
+
+    -- Configuring incomplete, errors occurred!
+    See also "/tmp/llvm-20180408-18969-cajc2j/CMakeFiles/CMakeOutput.log".
+    See also "/tmp/llvm-20180408-18969-cajc2j/CMakeFiles/CMakeError.log".
+
+    READ THIS: https://docs.brew.sh/Troubleshooting
+
+    These open issues may also help:
+    llvm: missing lldb header files https://github.com/Homebrew/homebrew-core/issues/25147
+    xcode-select: error: --switch must be run as root (e.g. `sudo xcode-select --switch <xcode_folder_path>`).
+解决方法:
+    sudo xcode-select -s /Applications/Xcode.app
+    sudo xcodebuild -license accept
+
+注意输出:
+    To use the bundled libc++ please add the following LDFLAGS:
+      LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+
+    This formula is keg-only, which means it was not symlinked into /usr/local,
+    because macOS already provides this software and installing another version in
+    parallel can cause all kinds of trouble.
+
+    If you need to have this software first in your PATH run:
+      echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> ~/.zshrc
+
+    For compilers to find this software you may need to set:
+        LDFLAGS:  -L/usr/local/opt/llvm/lib
+        CPPFLAGS: -I/usr/local/opt/llvm/include
+可以得到 llvm 的路径,其实我们也可以使用 brew --prefix llvm 来获得前缀, 得到安装路径是 /usr/local/opt/llvm.
+注意, 可以指定自定义 python 的路径:
+cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$(brew --prefix llvm) \
+-DUSE_PYTHON2=OFF \
+-DPYTHON_INCLUDE_DIR=$(python3-config --prefix)"/include/python3.6m" \
+-DPYTHON_LIBRARY=$(python3-config --prefix)"/lib/libpython3.6m.dylib" \
+. \
+~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+
+    如果使用系统自带的库,看也是使用如下命令:
+    cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/ -DUSE_PYTHON2=OFF . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+    系统自带的 clang 库其路径可以通过如下命令找到:
+    xcodebuild -find clang
+    比如输出为
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+    则 llvm 根路径为
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/
+
+cmake 的输出如下:
+    -- The C compiler identification is AppleClang 9.1.0.9020039
+    -- The CXX compiler identification is AppleClang 9.1.0.9020039
+    -- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
+    -- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -- works
+    -- Detecting C compiler ABI info
+    -- Detecting C compiler ABI info - done
+    -- Detecting C compile features
+    -- Detecting C compile features - done
+    -- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
+    -- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -- works
+    -- Detecting CXX compiler ABI info
+    -- Detecting CXX compiler ABI info - done
+    -- Detecting CXX compile features
+    -- Detecting CXX compile features - done
+    -- Found PythonLibs: /usr/local/Frameworks/Python.framework/Versions/3.6/lib/libpython3.6m.dylib (found suitable version "3.6.5", minimum required is "3.4")
+    -- Using libclang to provide semantic completion for C/C++/ObjC
+    -- Using external libclang: /usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib
+    -- Configuring done
+    -- Generating done
+    -- Build files have been written to: /Users/bugnofree/.vim/ycm_build
+上面的输出给出了使用的 llvm 以及使用的 python 版本,编译使用如下命令
+cmake --build . --target ycm_core
+
+安装其他支持:
+- Go
+    进入目录 YouCompleteMe/third_party/ycmd/third_party/gocode 执行 go build
+- JavaScript
+    进入目录 YouCompleteMe/third_party/ycmd/third_party/tern_runtime 执行
+    npm install --production
+    配置 tern 插件并安装: Plugin 'marijnh/tern_for_vim'
+    安装后进入 ~/.vim/bundle/tern_for_vim/ 下执行 npm install
+    最后配置全局配置文件 ~/.tern-project 如下:
+    {
+        "libs": [
+            "browser",
+            "underscore",
+            "jquery"
+                ],
+            "plugins": {
+              "node": {}
+            }
+    }
+    然后再重新打开 vim, 打开 js 文件即可.
+
+在 vimrc 中配置如下选项,使用 python3 解释器, 具体路径使用 which python3 来查看:
+let g:ycm_path_to_python_interpreter='/usr/local/bin/python3'
+let g:ycm_server_python_interpreter='/usr/local/bin/python3'
+
+
+[YCM @ ycm/youcompleteme]
+>> 手动禁用 YCM:
+let g:ycm_auto_trigger = 0
+>> 更新 ycm:
+每一次更新 youcompleteme 插件后,都需要重新编译.
+cd ~/.vim
+mkdir ycm_build
+cd ycm_build
+cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/usr/local . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+cmake --build . --target ycm_core
+cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~/.vim/
+然后删除 ycm_build 目录即可.
+>> 配置 ycm 标签
+在 flags 列表最后加入如下语句:
+'-isystem', '/usr/include',
+'-isystem', '/usr/include/c++/5',
+'-isystem', '/usr/include/c++/7',
+'-isystem', '/usr/include/x86_64-linux-gnu/c++',
+>> 测试文件
+C++:
+#include <cstdio>
+#include <cstring>
+using namespace std;
+int main()
+{
+    string s;
+    return 0;
+}
+>> 已知的问题
+对于类中的私有函数(private),YCM将无法自动检索,
+这是 clang 的一个 bug,目前(2017-12-17)还未解决.
