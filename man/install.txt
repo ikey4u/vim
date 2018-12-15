@@ -111,5 +111,5 @@
     brew install macvim --with-lua --with-override-system-vim
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.setup/vim/bundle/Vundle.vim
     :PluginInstall
-    cd ~/.setup/vim/bundle/YouCompleteMe
-    python3 install.py --clang-completer --java-completer --go-completer --system-libclang
+    python3 install.py --clang-completer --java-completer --go-completer --rust-completer
+    如果安装失败, 可以试一下系统的 libclang(--system-libclang).

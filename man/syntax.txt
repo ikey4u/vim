@@ -19,6 +19,9 @@ v:varname/The variable is one that Vim predefines
 默认情况下, 一个变量如果在一个函数内部, 那么则是 a:varname 类型的,
 如果不在函数内部, 那么则默认是全局变量.
 
+通过 set 设置的选项也可以通过 let 来设置, 使用方法为: let &{option} = {expr}.
+然而一个异常是 pythonthreedll 选项, 你不能通过上述语法来设置, vim 手册说是为了安全考虑.
+
 除了用户定义的变量, vim 也提供了许多内置变量, 这些变量可以通过 & 符号来访问
 &varname	: 一个 vim 选项, 默认是访问全局类型的变量
 &l:varname	: 局部
@@ -87,7 +90,6 @@ expand 函数
 :r		root (one extension removed)
 :e		extension only
 let @a=expand("%:p") ==> 寄存器 a 的值为文件的完整路径
-
 
 >>> 正则表达式搜索替换
 keywords:regular expression/regexp/正则表达式/替换/搜索
@@ -196,3 +198,4 @@ try
 catch [pattern]
     [command]
 endtry
+

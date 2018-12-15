@@ -14,30 +14,25 @@ endfunction
 "函数Pre执行次数过多,将会导致livehtml以及内部实际进程browser-sync进程很多,杀死方法如下:
 "ps -elf | grep livehtml | awk '{print $4}'| xargs kill -9 $1
 function! KillPre()
-    " Linux
-    " call system("ps -elf | grep livehtml | awk '{print $4}'| xargs kill -9 $1")
-    " call system("ps -elf | grep browser-sync | awk '{print $4}'| xargs kill -9 $1")
-    " Macos
-    call system("ps aux | grep livehtml | awk '{print $2}'| xargs kill -9 $1")
-    call system("ps aux | grep browser-sync | awk '{print $2}'| xargs kill -9 $1")
+    if g:os == "linux"
+        call system("ps -elf | grep livehtml | awk '{print $4}'| xargs kill -9 $1")
+        call system("ps -elf | grep browser-sync | awk '{print $4}'| xargs kill -9 $1")
+    elseif g:os == "mac"
+        call system("ps aux | grep livehtml | awk '{print $2}'| xargs kill -9 $1")
+        call system("ps aux | grep browser-sync | awk '{print $2}'| xargs kill -9 $1")
+    endif
 endfunction
 
 "在当前目录打开terminator
 "在normal模式下输入sh以在当前目录打开命令行
 function! OpenShell()
-    " Linux
-    "    call system("/usr/bin/terminator . &")
-    " MacOS
-    call system("/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal . &")
+    call system(g:terminal." &")
 endfunction
 nmap sh :call OpenShell()<CR>
 
-"[在当前目录打开文件浏览器]
+"在当前目录打开文件浏览器]
 function! OpenExp()
-    " Linux
-    " call system("nautilus . &")
-    " MacOS
-    call system("open . &")
+    call system(g:openex." .")
 endfunction
 nmap se :call OpenExp()<CR>
 

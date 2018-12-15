@@ -1,3 +1,19 @@
+"===========================================================================
+"                           Configuration Variables
+"===========================================================================
+
+let g:pyhome = expand($HOME)."/.pyenv/versions/3.6.0"
+let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
+let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
+let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
+let g:openex = "open"
+
+"TODO
+" - set guifont
+" - install browser-sync
+
+"**************DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING**************
+" Detect operating system
 if !exists("g:os")
     if has("mac")
         let g:os = "mac"
@@ -10,31 +26,37 @@ if !exists("g:os")
     endif
 endif
 
-if has("gui_running")
-   if has('python3')
-       if g:os == "mac"
-           command! -nargs=1 Py py3 <args>
-           set pythonthreedll="/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib"
-           set pythonthreehome="/Library/Frameworks/Python.framework/Versions/3.7"
-           set pyx=3
-        elseif g:os == "linux"
-           command! -nargs=1 Py py3 <args>
-           set pythonthreedll=$HOME/.pyenv/versions/3.6.5/lib
-           set pythonthreehome=$HOME/.pyenv/versions/3.6.5
-           set pyx=3
-       endif
-   endif
+" Set variables of python binary and python dll
+let g:pybin = g:pyhome."/bin/python3"
+function! SetPydll()
+python3 << EOF
+"""
+set pythonthreedll value, it cannot set from variable dynamic for security,
+so here I set it through environment  DYNAMIC_PYTHON3_DLL
+Using echo $DYNAMIC_PYTHON3_DLL to examine the value.
+"""
+import vim
+import os
+pyhome = vim.eval("g:pyhome")
+os.environ['DYNAMIC_PYTHON3_DLL'] = pyhome + "/lib"
+EOF
+endfunction
+call SetPydll()
+
+if has('python3')
+   command! -nargs=1 Py py3 <args>
+   let &pythonthreehome=g:pyhome
+   let &pyx=3
 endif
 
-" IDApython 自动补全
-"if has("gui_running")
-"python3 << EOF
-"import os
-"os.environ['PYTHONPATH']="$PYTHONPATH:/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/"
-"#os.environ['PYTHONPATH']="$PYTHONPATH:/usr/local/Cellar/python@2/2.7.14_3/Frameworks/Python.framework/Versions/2.7/lib/python2.7/"
-"os.environ['PYTHONPATH']="$PYTHONPATH:/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python3.6/multiprocessing"
-"EOF
-"endif
+" IDApython autocomplete
+python3 << EOF
+import os
+import vim
+idapro = vim.eval("g:idapro")
+if idapro.strip() != "":
+    os.environ['PYTHONPATH']="$PYTHONPATH:" + idapro
+EOF
 
 if has("win32")
     " [windows] Configuration without any external dependencies

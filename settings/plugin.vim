@@ -62,18 +62,14 @@ Plug 'mattn/emmet-vim', { 'commit': 'dcf8f6efd8323f11e93aa1fb1349c8a1dcaa1e15' }
 " JavaScript 自动补全
 Plug 'marijnh/tern_for_vim'
 ""安装YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --java-completer --go-completer --system-libclang' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --java-completer --go-completer --rust-completer' }
 
 " deoplete 自动补全插件, 需要安装 pip3 install neovim
-if g:os == "mac"
-    let g:python3_host_prog = '/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7/bin/python3'
-elseif g:os == "linux"
-    let g:python3_host_prog = $HOME.'/.pyenv/versions/3.6.5/bin/python3.6'
-endif
+let g:python3_host_prog = g:pybin
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install neovim'}
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
@@ -86,8 +82,3 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 
 call plug#end()            " required
-
-"filetype plug indent on    " required
-" reStructuredText 插件
-" Plug 'Rykka/riv.vim'
-" Plug 'gu-fan/InstantRst'

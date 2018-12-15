@@ -12,12 +12,8 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_confirm_extra_conf=0
 "让Vim的补全菜单行为与一般IDE一致
 set completeopt=longest,menu
-if g:os == "linux"
-    let g:ycm_path_to_python_interpreter=$HOME.'/.pyenv/versions/3.6.5/bin/python3.6'
-endif
-"let g:ycm_server_python_interpreter='/Library/Frameworks/Python.framework/Versions/3.6/bin/python3'
-" let g:ycm_path_to_python_interpreter='/usr/bin/python3.5'
-" let g:ycm_server_python_interpreter='/usr/bin/python3.5'
+let g:ycm_path_to_python_interpreter = g:pybin
+let g:ycm_server_python_interpreter=g:pybin
 let g:ycm_seed_identifiers_with_syntax=1
 "是否在注释中也开启补全
 let g:ycm_complete_in_comments=1
@@ -194,7 +190,7 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " ctag -R * && cscope -Rbq
 " tags 文件设置
 set tags=./tags;,tags;
-set tags+=/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags;
+set tags+=g:idaprotag;
 " gtags 设置
 "替换默认的 ctags 和 cscope
 "set cscopetag
