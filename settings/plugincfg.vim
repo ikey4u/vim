@@ -9,7 +9,7 @@ let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_show_diagnostics_ui = 0
 "打开vim时不再询问是否加载ycm_extra_conf.py配置
-let g:ycm_confirm_extra_conf=0
+"let g:ycm_confirm_extra_conf=0
 "让Vim的补全菜单行为与一般IDE一致
 set completeopt=longest,menu
 let g:ycm_path_to_python_interpreter = g:pybin

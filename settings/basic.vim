@@ -96,8 +96,8 @@ set formatoptions+=mM       "formatoptions,设置自动换行的条件, m 表示
 "因此这里使用if语句判断,如果是gvim则启用
 if has("gui_running")
     set lines=50            "设置行数,也就是上下的长度
-    set columns=180         "设置列数,也就是左右的宽度
-    winpos 225 150          "设置窗口的位置, 第一个参数表示距离屏幕左侧的距离,
+    set columns=141         "设置列数,也就是左右的宽度
+    winpos 244 93          "设置窗口的位置, 第一个参数表示距离屏幕左侧的距离,
                             "第二个参数表示距离屏幕上侧的距离
 endif
 

@@ -7,6 +7,7 @@ let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
 let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
 let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
 let g:openex = "open"
+"TODO (set winpos)
 
 "TODO
 " - set guifont
