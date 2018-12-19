@@ -5,6 +5,7 @@ TODO: Enrich the manual.
 # Testing
 
 ✓: Full tested
+
 ✗: Not tested
 
 - [✓] macos
@@ -18,16 +19,17 @@ TODO: Enrich the manual.
 
 When the clone is done, edit `~/.vim/vimrc` and configure specific variables:
 
-- `g:pyhome`  The python3 home, there should be several directories:
-
+- `g:pyhome`  The python3 home, there should be several directories in this home:
+```
     ├── bin/
     ├── include/
     ├── lib/
     └── share/
+```
 - `g:idapro` and `g:idaprotag` If you write IDA script, you may need set them.
 - `g:terminal` The full path to your terminal binary.
 - `g:openex` The command to open file explorer
 
 Now, open your gvim and run `:PlugInstall`, it will install the basics for your vim.
 If you want to have the full features, you should press `\man` in vim to open the embedded
-manual to install dependency.
+manual to install dependencies.
