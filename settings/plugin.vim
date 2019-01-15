@@ -62,14 +62,14 @@ Plug 'mattn/emmet-vim', { 'commit': 'dcf8f6efd8323f11e93aa1fb1349c8a1dcaa1e15' }
 " JavaScript 自动补全
 Plug 'marijnh/tern_for_vim'
 ""安装YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --java-completer --go-completer --rust-completer' }
+Plug 'Valloric/YouCompleteMe'
 
 " deoplete 自动补全插件, 需要安装 pip3 install neovim
 let g:python3_host_prog = g:pybin
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install neovim'}
+  Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
