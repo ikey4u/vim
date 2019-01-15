@@ -175,5 +175,5 @@ def FlagsForFile( filename, **kwargs ):
 
 def PythonSysPath(**kwargs):
   sys_path = kwargs['sys_path']
-  sys_path.insert(1, '/Users/bugnofree/.pyenv/versions/2.7.15/lib/python2.7/site-packages')
+  #  sys_path.insert(1, '/Users/bugnofree/.pyenv/versions/2.7.15/lib/python2.7/site-packages')
   return sys_path
