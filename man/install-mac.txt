@@ -1,0 +1,24 @@
+---
+Title: macos 安装 vim
+Date: 2019-01-15
+Author: bugnofree
+---
+
+编译环境参考 @[./install-overview.txt]
+
+配置完成后执行如下命令完成安装
+
+安装 xcode
+
+    xcode-select --install
+    sudo xcode-select -switch /Library/Developer/CommandLineTools
+
+查看 vim 信息
+
+    brew search macvim
+    brew info macvim
+
+安装 macvim
+
+    brew install cmake
+    brew install macvim --with-lua --with-override-system-vim
