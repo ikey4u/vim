@@ -106,10 +106,52 @@ Author: bugnofree
             注意, 这里的 completer 仅当你安装了对应的编译器, 比如 go, 那么go-completer 才会正确安装.
             如果没有这样的编译器, 去掉对应的选项即可.
 
-# 检测 ycm 是否正常工作
+# 代码补全的依赖(ycm)
 
 重新打开 vim, 输入 `:YcmDebugInfo` 如果没有错, 则恭喜你成功安装.
 
 ycm 自动补全可以使用 c-z 强制触发.
 
 如果报错了, 没关系, 参见 @[./install-ycm.txt]
+
+# 阅读源码需要配置的依赖
+
+- ctags
+
+    安装 cmake 之后, 执行如下命令编译 ctags, 程序前缀设置为 ex
+
+        git clone https://github.com/universal-ctags/ctags.git
+        cd ctags/
+        ./autogen.sh
+        ./configure --prefix=/usr/local/ --program-prefix=ex
+        make && sudo make install
+
+    - 生成 tags
+            exctags -R *
+    - 使用方法
+        - `ctrl+]` 到定义处
+        - `ctrl+t` 返回原位置
+        - `ctrl+w+]` 在新窗口打开定义
+    - 其他
+
+        ctags 并不会自动更新,如何自动更新呢?
+
+        安装 autotags.vim 插件, 然后在 .vimrc 中加入如下选项
+            let g:autotagCtagsCmd="exctags"
+            let g:autotagTagsFile="tags"
+
+- GNU Global
+
+        wget http://tamacom.com/global/global-6.6.2.tar.gz
+        tar zxvf global-6.6.2.tar.gz
+        cd global-6.6.2
+        ./configure --with-universal-ctags=/usr/local/bin/exctags
+        make && sudo make install
+
+    - 生成 tag `gtags --gtagslabel ctags`
+    - 用法
+
+        将光标移动到某个定义出,执行 :Gtags 即可查看定义, 执行 :Gtags -r 即可查看引用.
+
+    若要自动更新 gtags, 可以在 ~/.vimrc 中设置如下选项:
+        let Gtags_Auto_Update = 1
