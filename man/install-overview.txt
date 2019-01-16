@@ -110,4 +110,6 @@ Author: bugnofree
 
 重新打开 vim, 输入 `:YcmDebugInfo` 如果没有错, 则恭喜你成功安装.
 
+ycm 自动补全可以使用 c-z 强制触发.
+
 如果报错了, 没关系, 参见 @[./install-ycm.txt]

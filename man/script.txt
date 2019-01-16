@@ -123,81 +123,82 @@ Author: bugnofree
 
 # 正则表达式
 
-    替换语法如下
-        :range s[ubstitute]/pattern/string/cgiI
-            For each line in the range replace a match of the pattern
-            with the string where:
-            c Confirm each substitution
-            g Replace all occurrences in the line (without g - only first).
-            i Ignore case for the pattern.
-            I Don't ignore case for the pattern.
-        line range:
-            number an absolute line number
-            .  the current line
-            $ the last line in the file
-            % the whole file. The same as 1,$
-        pattern:
-            .  any character except new line
-            \s whitespace character
-            \S non-whitespace character
-            \d digit
-            \D non-digit
-            \x hex digit
-            \X non-hex digit
-            \o octal digit
-            \O non-octal digit
-            \h head of word character (a,b,c...z,A,B,C...Z and _)
-            \H non-head of word character
-            \p printable character
-            \P like \p, but excluding digits
-            \w word character
-            \W non-word character
-            \a alphabetic character
-            \A non-alphabetic character
-            \l lowercase character
-            \L non-lowercase character
-            \u uppercase character
-            \U non-uppercase character
-        Quantifier
-            * matches 0 or more of the preceding characters, ranges or
-              metacharacters .* matches everything including empty line
-            \+ matches 1 or more of the preceding characters...
-            \= matches 0 or 1 more of the preceding characters...
-            \{n,m} matches from n to m of the preceding characters...
-            \{n} matches exactly n times of the preceding characters...
-            \{,m} matches at most m (from 0 to m) of the preceding characters...
-            \{n,} matches at least n of of the preceding characters...
-                where n and m are positive integers (>0)
+替换语法如下
 
-        Grouping and Backreferences
-            & the whole matched pattern
-            \L the following characters are made lowercase
-            \0 the whole matched pattern
-            \U the following characters are made uppercase
-            \1 the matched pattern in the first pair of \(\)
-            \E end of \U and \L
-            \2 the matched pattern in the second pair of \(\)
-            \e end of \U and \L
-            ...  ...
-            \r split line in two at this point
-            \9 the matched pattern in the ninth pair of \(\)
-            \l next character made lowercase
-            ~ the previous substitute string
-            \u next character made uppercase
-        Alternations
-            Using "\|" you can combine several expressions into one which
-            matches any of its components. The first one matched will be
-            used.
-            \(Date:\|Subject:\|From:\)
-            比如搜索逗号后者句号,可以使用:/\(,\|\.\)
-            在逗号或者句号后面加上一个空格,每个都手动进行确认.
-            :.,$s/\(,\|\.\)/\1 /gc
-            这里替换范围是从当前行到文件末尾,并对捕获组进行引用,也就是
-            捕获到逗号或者句号,然后将其加上一个空格后替换.  g表示对每一
-            行中所有的匹配都进行替换,c表示每一个匹配都进行逐一确认.
-    参考:
-    - @[http://vimregex.com/]
-    - @[https://github.com/johngrib/vimscript-cheatsheet]
+    :range s[ubstitute]/pattern/string/cgiI
+        For each line in the range replace a match of the pattern
+        with the string where:
+        c Confirm each substitution
+        g Replace all occurrences in the line (without g - only first).
+        i Ignore case for the pattern.
+        I Don't ignore case for the pattern.
+    line range:
+        number an absolute line number
+        .  the current line
+        $ the last line in the file
+        % the whole file. The same as 1,$
+    pattern:
+        .  any character except new line
+        \s whitespace character
+        \S non-whitespace character
+        \d digit
+        \D non-digit
+        \x hex digit
+        \X non-hex digit
+        \o octal digit
+        \O non-octal digit
+        \h head of word character (a,b,c...z,A,B,C...Z and _)
+        \H non-head of word character
+        \p printable character
+        \P like \p, but excluding digits
+        \w word character
+        \W non-word character
+        \a alphabetic character
+        \A non-alphabetic character
+        \l lowercase character
+        \L non-lowercase character
+        \u uppercase character
+        \U non-uppercase character
+    Quantifier
+        * matches 0 or more of the preceding characters, ranges or
+          metacharacters .* matches everything including empty line
+        \+ matches 1 or more of the preceding characters...
+        \= matches 0 or 1 more of the preceding characters...
+        \{n,m} matches from n to m of the preceding characters...
+        \{n} matches exactly n times of the preceding characters...
+        \{,m} matches at most m (from 0 to m) of the preceding characters...
+        \{n,} matches at least n of of the preceding characters...
+            where n and m are positive integers (>0)
+
+    Grouping and Backreferences
+        & the whole matched pattern
+        \L the following characters are made lowercase
+        \0 the whole matched pattern
+        \U the following characters are made uppercase
+        \1 the matched pattern in the first pair of \(\)
+        \E end of \U and \L
+        \2 the matched pattern in the second pair of \(\)
+        \e end of \U and \L
+        ...  ...
+        \r split line in two at this point
+        \9 the matched pattern in the ninth pair of \(\)
+        \l next character made lowercase
+        ~ the previous substitute string
+        \u next character made uppercase
+    Alternations
+        Using "\|" you can combine several expressions into one which
+        matches any of its components. The first one matched will be
+        used.
+        \(Date:\|Subject:\|From:\)
+        比如搜索逗号后者句号,可以使用:/\(,\|\.\)
+        在逗号或者句号后面加上一个空格,每个都手动进行确认.
+        :.,$s/\(,\|\.\)/\1 /gc
+        这里替换范围是从当前行到文件末尾,并对捕获组进行引用,也就是
+        捕获到逗号或者句号,然后将其加上一个空格后替换.  g表示对每一
+        行中所有的匹配都进行替换,c表示每一个匹配都进行逐一确认.
+参考:
+- @[http://vimregex.com/]
+- @[https://github.com/johngrib/vimscript-cheatsheet]
 
 
 

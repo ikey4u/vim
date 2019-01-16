@@ -5,20 +5,24 @@ Author: bugnofree
 ---
 
 - exec vs call
-    exec 将一个字符串当做命令执行.
-    而 call 则是调用一个函数.
 
-- 替换语法:":[range]s/from/to/[flags]"
-   注意需要转义的字符: *./\[]&
+    exec 将一个字符串当做命令执行, 而 call 则是调用一个函数.
+
+- 替换语法
+
+        :[range]s/from/to/[flags]
+
+    注意需要转义的字符
+
+        *./\[]&
 
 - 窗口大小调整
-
     以下 res 代表 resize
     - :res +10 水平方向增加10行
     - :vertical res +10 垂直方向增加10行
 
 - 强制以root权限保存
-       :w !sudo tee %
+        :w !sudo tee %
 
 - vim命令行无法显示输入中文
 
