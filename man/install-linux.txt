@@ -4,7 +4,8 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
-编译环境参考 @[./install-overview.txt]
+编译环境参考 @[./install-overview.txt] 或 @[http://ahageek.com/writer/special/vim/install-overview]
+
 
 配置完成后执行如下命令完成安装
 
