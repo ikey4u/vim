@@ -28,7 +28,11 @@ if !exists("g:os")
 endif
 
 " Set variables of python binary and python dll
-let g:pybin = g:pyhome."/bin/python3"
+if g:os == "win"
+    let g:pybin = g:pyhome."/python"
+else
+    let g:pybin = g:pyhome."/bin/python3"
+endif
 function! SetPydll()
 python3 << EOF
 """
@@ -39,7 +43,10 @@ Using echo $DYNAMIC_PYTHON3_DLL to examine the value.
 import vim
 import os
 pyhome = vim.eval("g:pyhome")
-os.environ['DYNAMIC_PYTHON3_DLL'] = pyhome + "/lib"
+if vim.eval("g:os") == "win":
+    os.environ['DYNAMIC_PYTHON3_DLL'] = pyhome
+else:
+    os.environ['DYNAMIC_PYTHON3_DLL'] = pyhome + "/lib"
 EOF
 endfunction
 call SetPydll()
@@ -70,8 +77,18 @@ else
 endif
 
 " Require some extra stuffs to make it work
-source $HOME/.vim/settings/ext.vim
+if g:os == "win"
+    source $HOME/vimfiles/settings/ext.vim
+else
+    source $HOME/.vim/settings/ext.vim
+endif
+
 if has("gui_running")
-    source $HOME/.vim/settings/plugin.vim
-    source $HOME/.vim/settings/plugincfg.vim
+    if has("win32")
+        source $HOME/vimfiles/settings/plugin.vim
+        source $HOME/vimfiles/settings/plugincfg.vim
+    else
+        source $HOME/.vim/settings/plugin.vim
+        source $HOME/.vim/settings/plugincfg.vim
+    endif
 endif

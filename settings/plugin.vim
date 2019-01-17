@@ -1,4 +1,8 @@
-call plug#begin('~/.vim/plugged')
+if has("win32")
+    call plug#begin("$HOME/vimfiles/plugged")
+else
+    call plug#begin("$HOME/.vim/plugged")
+endif
 
 " ------- 扩展插件 -------
 " Macos 下自动禁用中文输入法

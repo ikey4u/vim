@@ -3,7 +3,11 @@ let g:LargeFile=10									  "优化大文件编辑
 
 " ==================== YouCompleteMe ====================
 "默认配置文件路径"
-let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
+if has("win32")
+    let g:ycm_global_ycm_extra_conf = $HOME.'/vimfiles/.ycm_extra_conf.py'
+else
+    let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
+endif
 "关闭语法检测,太碍眼了
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0

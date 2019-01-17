@@ -6,7 +6,7 @@ Author: bugnofree
 
 # 安装
 
-    参见 ./install-overview.txt
+参见 ./install-overview.txt 或者 @[http://ahageek.com/writer/special/vim/install-overview/]
 
 # 功能快速预览
 

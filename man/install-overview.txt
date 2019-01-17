@@ -4,6 +4,10 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
+Windows 用户出门右拐参见 @[./install-windows.txt] 或 @[http://ahageek.com/writer/special/vim/install-windows]
+
+Linux, Mac 用户请继续往下看, 下面是你们的时间.
+
 # 编译环境配置
 
 ## python 配置
@@ -63,10 +67,10 @@ Author: bugnofree
     - 未安装 vim, 此时应保证前面的步骤已经正确完成,
         即 python3 和 pip3 已经准备就绪, 然后就可以编译安装了.
 
-        - Ubuntu @[./install-linux.txt]
-        - MacOS @[./install-mac.txt]
+        - Ubuntu @[./install-linux.txt] 或 @[http://ahageek.com/writer/special/vim/install-linux] 
+        - MacOS @[./install-mac.txt] 或@[http://ahageek.com/writer/special/vim/install-mac] 
 
-# 快速配置 vim
+# 配置 vim
 
 - 配置字体
     - macos

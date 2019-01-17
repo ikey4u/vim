@@ -67,7 +67,7 @@ if has('unix')
     endif
 elseif has('win32') || has('win64')
     " Windows
-    set guifont=Noto\ Sans\ Mono\ CJK\ SC\ Bold\ 10
+    set guifont=Source\ Code\ Pro:h10
 endif
 
 " 折叠

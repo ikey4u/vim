@@ -1,0 +1,45 @@
+---
+Title: vim 自定义选项
+Date: 2019-01-17
+Author: bugnofree
+---
+
+在 vimrc 文件开始处有如下几个选项需要自己配置一下
+
+    let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
+    let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
+    let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
+    let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
+    let g:openex = "open"
+
+- g:pyhome 是 python 的主目录, 可以通过如下命令获得
+
+        python -c "import sys; print(sys.executable)"
+
+    比如它输出
+
+        C:\Users\Administrator\AppData\Local\Programs\Python\Python37\python.exe
+
+    那么 python 主目录就是
+
+        C:\Users\Administrator\AppData\Local\Programs\Python\Python37
+
+    然而在 windows 下你需要替换反斜线为斜线
+
+        C:/Users/Administrator/AppData/Local/Programs/Python/Python37
+
+- `idapro`, `idaprotag` 如果你不知道是啥, 那么你不用管.
+- g:terminal
+
+    终端命令路径
+
+    - windows `C:\Windows\system32\cmd.exe`
+    - linux 自己找吧
+    - mac 参考默认设置
+- g:openex
+
+    打开文件浏览器
+
+    - windows `start`
+    - linux 自己找吧
+    - mac `open`
