@@ -113,3 +113,18 @@ YCM 不工作的时候极其蛋疼, 往往不知道从哪里调试错误, 十分
 - 安装其他的 python3 第三方库依赖
         py3=/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/bin/python3
         $py3 -m pip install neovim
+
+## 第三方库补全
+
+在 .ycm_extra_conf.py 中的最后面, 加上如下函数
+
+    def PythonSysPath(**kwargs):
+      sys_path = kwargs['sys_path']
+      sys_path.insert(1, "/path/to/third_party_packages/root")
+      return sys_path
+
+一般的我们用 pip 安装的都是安装到了某个 site-packages 目录下面, 比如我的是
+
+    /Users/bugnofree/.pyenv/versions/3.6.0/lib/python3.6/site-packages/
+
+那么就把这个值加入到 sys_path 中, 然后重启 vim 即可.
