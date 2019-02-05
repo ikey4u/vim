@@ -200,8 +200,60 @@ Author: bugnofree
 - @[http://vimregex.com/]
 - @[https://github.com/johngrib/vimscript-cheatsheet]
 
+# python 接口
 
+自带文档看一下即可, 查看命令 `:h python-vim`.
 
+一般的在 vim 里面用 python 写一个函数的方法如下
+
+    function! FuncName()
+    python >> EOF
+    import vim
+    // codes ...
+    EOF
+    endfunction
+
+里面的 vim 模块是 python 和 vim 之间进行交互的唯一模块.
+用法示例
+
+- 执行 vim 命令
+
+        vim.command(cmd)
+
+-  窗口与鼠标
+
+    索引为 n 的窗口
+        w = vim.windows[n]
+
+    当前窗口
+        cw = vim.current.window
+
+    其他
+        w.height = lines		# sets the window height
+        w.cursor = (row, col)	# sets the window cursor position
+        pos = w.cursor		# gets a tuple (row, col)
+
+- buffer
+
+    索引为 n 的 buffer
+        b = vim.buffers[n]
+
+    当前 buffer
+        cb = vim.current.buffer
+
+    buffer 的名称
+        name = b.name		# gets the buffer file name
+
+    获取第 n 行
+        line = b[n]			# gets a line from the buffer
+
+    其他常用操作
+        lines = b[n:m]		# gets a list of lines
+        num = len(b)		# gets the number of lines
+        b[n] = str			# sets a line in the buffer
+        b[n:m] = [str1, str2, str3]	# sets a number of lines at once
+        del b[n]			# deletes a line
+        del b[n:m]			# deletes a number of lines
 
 # 转 pdf 插件编写
 
@@ -236,4 +288,3 @@ Author: bugnofree
 
 使用命令 `:TOpdf` 即可将当前文件转换为 PDF, 输出的文件名称由前缀 `PDF@` 和当前文件名组成,
 PDF 的标题为当前文件名称(不带后缀).
-

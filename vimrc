@@ -1,6 +1,5 @@
 "===========================================================================
-"                           Configuration Variables
-"===========================================================================
+"                           Configuration Variables "===========================================================================
 
 let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
 let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"

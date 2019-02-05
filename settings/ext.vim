@@ -36,21 +36,16 @@ function! OpenExp()
 endfunction
 nmap se :call OpenExp()<CR>
 
-" [Json Unicode]
-" 这个方法在 windows 下无法正常工作,只好写个脚本处理了:
-" #! /usr/bin/env python3
-" #! coding:utf-8
-" import json
-" import sys
-" import os
-" import glob
-" jfiles = glob.glob("*.json")
-" for jf in jfiles:
-"     with open(jf,'r') as _:
-"         j = json.load(_)
-"     with open(os.path.splitext(jf)[0] + "-unicode.json","w") as _:
-"         json.dump(j,_,ensure_ascii = False,indent = 4)
-command! JsonFormat :execute '%!python -m json.tool'
-\ | :execute '%!python -c "import re,sys;chr=__builtins__.__dict__.get(\"unichr\", chr);sys.stdout.write(re.sub(r\"\\\\u[0-9a-f]{4}\", lambda x: chr(int(\"0x\" + x.group(0)[2:], 16)).encode(\"utf-8\"), sys.stdin.read()))"'
-\ | :set ft=javascript
-\ | :1
+" JSON 格式化
+function! JsonFormat()
+python3 << EOF
+import vim
+fpath = vim.eval("expand('%:p')")
+with open(fpath, "r+", encoding = "utf-8") as _:
+    lines = json.load(_)
+    _.seek(0)
+    _.truncate(0)
+    json.dump(lines, _, ensure_ascii = False, indent = 4)
+EOF
+endfunction
+command! JsonFormat call JsonFormat()

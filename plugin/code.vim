@@ -7,7 +7,6 @@ import vim
 
 vim.command("let g:html_use_css = 0")
 
-
 # write visual selected range into html
 buf = vim.current.buffer
 beg = buf.mark('<')

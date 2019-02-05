@@ -5,6 +5,10 @@ else
 endif
 
 " ------- 扩展插件 -------
+
+" dart 插件
+Plug 'dart-lang/dart-vim-plugin'
+
 " Macos 下自动禁用中文输入法
 Plug 'CodeFalling/fcitx-vim-osx'
 
