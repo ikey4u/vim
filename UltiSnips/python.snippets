@@ -53,3 +53,28 @@ with open("/Users/bugnofree/Downloads/output.log", 'w+') as _:
 	_.write("%s\n" % ($1))
 endsnippet
 
+
+# python package manager snippet for setup.py
+snippet setup
+#! /usr/bin/env python3
+#! -*- coding:utf-8 -*-
+
+from setuptools import setup, find_packages
+
+setup (
+	name = '$0',
+	version = '1.0',
+	author = 'bugnofree',
+	author_email = 'pwnkeeper@gmail.com',
+	url = '',
+	description = '',
+	long_description = open('README.md').read(),
+	packages = [''],
+	package_dir = {'': ''},
+	entry_points = {
+		'console_scripts' : [
+			' = '
+			]
+	}
+)
+endsnippet
