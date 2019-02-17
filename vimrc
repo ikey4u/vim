@@ -1,14 +1,18 @@
 "===========================================================================
-"                           Configuration Variables "===========================================================================
+"                           Configuration Variables
+"===========================================================================
+"
+" Adjust the values below and put it into user.vim in current direcotry
+"
+" let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
+" let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
+" let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
+" let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
+" let g:openex = "open"
+"
 
-let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
-let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
-let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
-let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
-let g:openex = "open"
-"TODO (set winpos)
-
-"TODO
+" TODO
+" - set winpos
 " - set guifont
 " - install browser-sync
 
@@ -24,6 +28,12 @@ if !exists("g:os")
     else
         let g:os = "unknown"
     endif
+endif
+
+if g:os == "win"
+    source $HOME/vimfiles/user.vim
+else
+    source $HOME/.vim/user.vim
 endif
 
 " Set variables of python binary and python dll
