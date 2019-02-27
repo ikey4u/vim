@@ -128,3 +128,10 @@ YCM 不工作的时候极其蛋疼, 往往不知道从哪里调试错误, 十分
     /Users/bugnofree/.pyenv/versions/3.6.0/lib/python3.6/site-packages/
 
 那么就把这个值加入到 sys_path 中, 然后重启 vim 即可.
+
+# vim 选项
+
+禁止 ycm 自动触发
+
+    let g:ycm_auto_trigger = 1
+
