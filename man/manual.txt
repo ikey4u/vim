@@ -4,6 +4,21 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
+# 手册预览
+
+- manual.txt: 本手册, 对手册的说明.
+- 安装手册
+    - install-overview.txt: 安装综述
+    - install-linux.txt: linux 下的安装手册
+    - install-mac.txt: mac 下的安装手册
+    - install-windows.txt: windows 下的安装手册
+    - options.txt: 安装后的配置选项
+- about.txt: 关于 vim 自己的感受
+- cmd.txt: vim 常用命令的解释
+- script.txt: vim 脚本编程
+- symbols.txt: vim 常用符号
+- ycm.txt: 自动补全 ycm 的配置
+
 # 安装
 
 参见 ./install-overview.txt 或者 @[http://ahageek.com/writer/special/vim/install-overview/]
