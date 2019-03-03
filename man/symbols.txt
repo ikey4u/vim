@@ -25,5 +25,8 @@ Author: bugnofree
 - >H ☞
 - *1 ☆
 - *2 ★
+- 0L ◐
+- 0R ◑
+- 0m ○
 
 更多可以参见 `:digraphs`
