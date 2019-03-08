@@ -1,0 +1,79 @@
+---
+Title: vim 插件配置手册
+Date: 2019-03-07
+Author: bugnofree
+---
+
+标志有 ~ 的是插件是工作良好, 如丝般顺化.
+标志有 x 的是插件是已经不再使用的或者禁用了的.
+标志有 ? 的是插件是目前有点问题, 但凑合还能用.
+
+# fcitx-vim-osx (~)
+
+场景是这样的, 当位于插入模式时, 你在输入中文, 如果你想移动一下光标,
+于是你按下 <ESC> 进入正常模式, 而输入法仍然保持这中文输入法,
+这个时候你按键移动时就不会生效, 而是启动了输入法, 这就很蛋疼.
+
+所以这个时候就要用这个工具了, 这个工具的地址为 @[https://github.com/dangxuandev/fcitx-remote-for-osx.git].
+
+不过我已经将其放到 `$HOME/.vim/plugin/fcitx-remote/mac` 里面了. 所以以下操作在这个目录里面进行.
+
+这个目录下面只有一个 main.m 和 build.py, 我们告诉 build.py 要编译的拼音输入法名称即可编译所需的二进制文件.
+
+怎么知道是哪一个输入法打呢? 执行下面的命令
+
+    python2 build.py build -general
+    ./fcitx-remote-general -h
+        Usage: fcitx-remote [OPTION]
+            -c		deactivate input method
+            -o		activate input method
+            -t		switch Active/Inactive
+            -s <imname>	switch to the input method uniquely identified by <imname>
+            [no option]	display fcitx state, 1 for inactive, 2 for acitve
+            -h		display this help and exit
+            -n		display current imname
+
+手动将输入法切换到要设置的输入法后, 执行下面打命令
+
+    ./fcitx-remote-general -n
+
+比如我的输出为 im.rime.inputmethod.Squirrel.Rime, 查看如下打对应表
+
+- baidu-pinyin: com.baidu.inputmethod.BaiduIM.pinyin,
+- baidu-wubi: com.baidu.inputmethod.BaiduIM.wubi,
+- sogou-pinyin: com.sogou.inputmethod.sogou.pinyin,
+- qq-wubi: com.tencent.inputmethod.QQInput.QQWubi,
+- squirrel-rime: com.googlecode.rimeime.inputmethod.Squirrel.Rime,
+- squirrel-rime-upstream: im.rime.inputmethod.Squirrel.Rime,
+- osx-pinyin: com.apple.inputmethod.SCIM.ITABC,
+- osx-wubi: com.apple.inputmethod.SCIM.WBX,
+- qingg: com.aodaren.inputmethod.Qingg,
+- loginput: com.logcg.inputmethod.LogInputMac.LogInputMacSP,
+- loginput2: com.logcg.inputmethod.LogInputMac2.LogInputMac2SP,
+- general: GENERAL
+
+所以我可以得到名称是 squirrel-rime-upstream, 因此执行下面命令编译二进制
+
+    python2 build.py build squirrel-rime-upstream
+
+此时会生成一个名称为 fcitx-remote-squirrel-rime-upstream 的二进制文件,
+将这个二进制文件重命名为 fcitx-remote 即可.
+
+对应的需要安装一个插件 @[https://github.com/dangxuandev/fcitx-vim-osx],
+这个我已经将其放到 `$HOME/.vim/plugin/fcitx-remote` 中了, 你不需要任何操作.
+
+# deoplete (✗)
+
+deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如下
+
+    let g:python3_host_prog = g:pybin
+    if has('nvim')
+        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'roxma/nvim-yarp'
+        Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+    let g:deoplete#enable_at_startup = 1
+
+其难以忍受打问题为: 新开一个窗口, 分屏打开两个文件, 第一次按下 <c-w> 会导致 <c-w> 失效.

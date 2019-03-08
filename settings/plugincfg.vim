@@ -3,11 +3,7 @@ let g:LargeFile=10									  "优化大文件编辑
 
 " ==================== YouCompleteMe ====================
 "默认配置文件路径"
-if has("win32")
-    let g:ycm_global_ycm_extra_conf = $HOME.'/vimfiles/.ycm_extra_conf.py'
-else
-    let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
-endif
+let g:ycm_global_ycm_extra_conf = g:home . '/' . '.ycm_extra_conf.py'
 "关闭语法检测,太碍眼了
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
@@ -74,27 +70,6 @@ inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
-" ==================== fcitx-vim-osx ====================
-" 这个其实挺烦人的, 不对, 可以说是相当的烦人了! 怎么解决呢?
-" 1: brew tap codefalling/fcitx-remote-for-osx
-" 2: brew info codefalling/fcitx-remote-for-osx/fcitx-remote-for-osx
-"    这个命令可以列出支持的输入法, 比如我用的是搜狗输入法, 那么就可以使用下面
-"    命令安装
-" 3: brew install codefalling/fcitx-remote-for-osx/fcitx-remote-for-osx --with-sogou-pinyin
-"   对于一般输入法可以使用如下方法安装
-"   brew install fcitx-remote-for-osx
-" 4: 打开系统配置, 进入 keyboard/Shortcuts/Input Sources/Select next source Input menu
-"   设置快捷键为 ctrl+shift+z
-" 5: 打开系统配置, 进入 keyboard/Input Sources/ 添加 US 输入法
-" 6: 但是这个时候有一个地方很不爽, 就是看你边用 vim, 然后到其他应用程序上比如
-" 命令中, 然后输入了中文, 回到 vim 中后, 还是中文输入法, 这就特么尴尬了,
-" 如果是 normal 模式中文使用很不方便, 怎么弄呢? 搜狗输入法的高级选项中有个
-" 自动英文的配置, 将 macvim 加入即可.
-" 更多详情参考:https://github.com/CodeFalling/fcitx-vim-osx
-
-" ==================== fcitx ====================
-" Linux 下进入 normal 模式自动禁用 fcitx 框架的输入法
-" cheetsheet:https://docs.emmet.io/cheat-sheet/
 
 " ==================== nerdcommenter ====================
 " 其快捷键如下(以C/C++为例):
@@ -223,13 +198,10 @@ nmap <F8> :TagbarToggle<CR>
 " 显示linux终端颜色,比如将 [[0;32m  OK  [0m]
 " 转换为颜色高亮显示,命令:':AnsiEsc' 执行转换,
 " 再执行一次则返回原有状态
-"
 
 " ==================== markdown-preview ====================
 " 禁止切换 buffer 时关闭预览
 let g:mkdp_auto_close = 0
-
-" ==================== nerdtree ====================
 
 " ==================== tern for vim ====================
 " cd ~/.vim/plugged/tern_for_vim && npm install

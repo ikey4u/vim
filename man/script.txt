@@ -44,14 +44,31 @@ Author: bugnofree
 
     常见的表达式有如下几种, 参考模仿即可
 
-        let var=expr let var+=expr let var-=expr let var.=expr
-        bool?expr-if-true:expr-if-false
-        bool||bool bool&&bool !bool
-        expr==expr expr!=expr expr>expr expr>=expr expr<expr expr<=expr
-        num+num num-num
-        str.str
-        num*num num/num num%num
-        +num -num
+    - let var=expr let var+=expr let var-=expr let var.=expr
+
+    - 三元操作符号
+
+            bool?expr-if-true:expr-if-false
+
+    - 逻辑运算
+
+            bool||bool bool&&bool !bool
+
+    - 算术运算
+
+            expr==expr expr!=expr expr>expr expr>=expr expr<expr expr<=expr
+            num+num num-num
+            num*num num/num num%num
+            +num -num
+
+    - 字符串拼接
+
+            "hello"."world" => "helloworld"
+            10 . "foo" => "10foo"
+
+            let s = "hello"
+            let s .= "world"
+            echom s => "helloworld"
 
 - 控制流
 
@@ -83,7 +100,20 @@ Author: bugnofree
 
 - 输入输出
 
+    在 vim 启动已经 `:messages` 中显示消息
+
         echom total
+
+    在脚本里面加入错误信息所在打文件和行号是一个不错的选择, 如下所示
+
+        let s:scriptpath = expand("<sfile>:p")
+        echomsg s:scriptpath . "." . expand("<slnum>") . " => No fcitx-remote is found!"
+
+    其中 `s:` 开头打变量是脚本(script)变量, expand 里面用 <sfile> 表示 source 打当前文件,
+    然后 `:p` 来展开完整路径, 这样打我们就得到了当前 source 打文件路径,
+    然后我们还需要获取当前行号, 可以使用 <slnum> 得到.
+
+    expand 功能很强大, 可以使用 `:h expand` 来查看.
 
 - 函数
     - 获取函数列表
@@ -120,6 +150,18 @@ Author: bugnofree
         catch [pattern]
             [command]
         endtry
+
+# 编程常用
+
+- source 命令
+
+    更新一个配置文件用, 如果更新打文件路径是变量和字符串混合, 则需要使用 exec
+
+        exec "source " . g:home . "/user.vim"
+
+    注意, 仅仅使用 source 命令, 比如下面这个是不行的
+
+        source g:home . "/user.vim"
 
 # 正则表达式
 
