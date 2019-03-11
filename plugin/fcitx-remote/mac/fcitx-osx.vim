@@ -1,6 +1,8 @@
-" Modified from https://github.com/CodeFalling/fcitx-remote-for-osx 
- " ---------------------------------------------------------------------
- "
+" Modified from https://github.com/CodeFalling/fcitx-remote-for-osx
+
+if(g:os != "mac")
+  finish
+endif
 
 let s:scriptpath = expand("<sfile>:p")
 
@@ -10,10 +12,6 @@ if exists('g:fcitx_remote')
 endif
 
 set ttimeoutlen=50
-
-if(g:os != "mac")
-  finish
-endif
 
 if exists('$SSH_TTY')
   finish
@@ -29,8 +27,7 @@ endif
 let s:keepcpo = &cpo
 let g:loaded_fcitx = 1
 set cpo&vim
-" ---------------------------------------------------------------------
-" Functions:
+
 function Fcitx2en()
   let inputstatus = system(s:fcitx)
   if inputstatus == 2
@@ -48,7 +45,7 @@ function Fcitx2zh()
     let b:inputtoggle = 0
   endtry
 endfunction
-" ---------------------------------------------------------------------
+
 " Autocmds:
 function Fcitx2zhOnce()
   call Fcitx2zh()
@@ -87,10 +84,7 @@ function! Multiple_cursors_after()
   call BindAu()
 endfunction
 
-" ---------------------------------------------------------------------
-"  Restoration And Modelines:
+" restore compatible options
 let &cpo=s:keepcpo
 unlet s:keepcpo
-"vim:fdm=expr:fde=getline(v\:lnum-1)=~'\\v"\\s*-{20,}'?'>1'\:1
-
 let g:fcitx_remote = 1
