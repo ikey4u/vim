@@ -56,7 +56,7 @@ Plug 'terryma/vim-multiple-cursors'
 " 状态栏
 Plug 'itchyny/lightline.vim'
 
-" 模糊搜索 :Files
-Plug 'junegunn/fzf.vim'
+" 文件搜索
+Plug '~/.fzf'
 
 call plug#end()
