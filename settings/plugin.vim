@@ -45,7 +45,6 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'artur-shaik/vim-javacomplete2'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'mattn/emmet-vim', { 'commit': 'dcf8f6efd8323f11e93aa1fb1349c8a1dcaa1e15' }
 Plug 'marijnh/tern_for_vim'
 Plug 'Valloric/YouCompleteMe'
