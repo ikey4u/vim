@@ -85,10 +85,8 @@ function! CNmark2ENmark()
         exe "try | %s/·/`/g | catch | endtry"
         exe "try | %s/、/,/g | catch | endtry"
 endfunction
-" map! <C-S> <ESC>:call CheckChineseMark()<ESC>:w<ESC>a
 
 " [英文标点替换为中文标点]
-" exe "try | %s/\./。/g | catch | endtry"
 function! ENmark2CNmark()
         exe "try | %s/:/：/g | catch | endtry"
         exe "try | %s/,/，/g  | catch | endtry"
@@ -105,7 +103,6 @@ function! ENmark2CNmark()
         exe "try | %s/$/￥/g | catch | endtry"
         exe "try | %s/!/！/g | catch | endtry"
 endfunction
-" map! <C-S> <ESC>:call Enmark2CNmark()<ESC>:w<ESC>a
 
 " [会话保存]
 " 功能:自动保存并加载会话
@@ -143,66 +140,6 @@ function! EnterHandler()
 		syntax on  "语法高亮
 endfunction
 
-
-" [自动插入文件声明]
-function! TitleInsert()
-"冒号后面的normal说明执行正常模式下的命令,这里首先跳到行首,然后输入12个空行
-:normal ggO
-call setline('.',"/*")
-:normal o
-call setline('.',"============================================================================================")
-:normal o////////////////////////////////////////////////////////////////////////////////////////////
-:normal o//                    _ooOoo_
-:normal o//               o8888888o
-:normal o//                   88" . "88
-:normal o//                   (| -_- |)
-:normal o//                   O\  =  /O
-:normal o//                ____/`---'\____
-:normal o//              .'  \\|     |//  `.
-:normal o//             /  \\|||  :  |||//  \
-:normal o//            /  _||||| -:- |||||-  \
-:normal o//            |   | \\\  -  /// |   |
-:normal o//            | \_|  ''\---/''  |   |
-:normal o//            \  .-\__  `-`  ___/-. /
-:normal o//          ___`. .'  /--.--\  `. . __
-:normal o//       ."" '<  `.___\_<|>_/___.'  >'"".
-:normal o//      | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-:normal o//      \  \ `-.   \_ __\ /__ _/   .-` /  /
-:normal o// ======`-.____`-.___\_____/___.-`____.-'======
-:normal o//                    `=---='
-:normal o// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-:normal o//           All of the bugs has been kiiled by the God!
-:normal o/////////////////////////////////////////////////////////////////////////////////////////
-:normal o
-call setline('.',"============================================================================================")
-:normal o
-call setline(".","DONE:")
-:normal o
-call setline(".","TODO:")
-:normal o
-call setline(".","INFO:")
-:normal o
-call setline(".","    Version:")
-:normal o
-call setline(".","    Author :Bugnofree")
-:normal o
-call setline(".","    Email  :pwnkeeper@163.com")
-:normal o
-call setline(".","    Date   :" . strftime("%Y-%m-%d %H:%M:%S"))
-:normal o
-call setline(".","    Blog   :www.ahageek.com")
-:normal o
-call setline(".","Reference:")
-:normal o
-call setline(".","    1:")
-:normal o
-call setline(".","    2:")
-:normal o
-call setline(".","*/")
-endfunction
-:map <F2> :call TitleInsert()<CR>
-
-
 " [VIM make 编译]
 ":cn下一个错误,:cp上一个错误,:cl,错误列表,:cw打开quickfix窗口 :cc显示错误详情
 autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -220,7 +157,7 @@ nmap <S-F3> a<C-R>=strftime("%Y-%m-%d %T")<CR><Esc>
 imap <S-F3> <C-R>=strftime("%Y-%m-%d %T")<CR>
 
 
-" [清除行位空格]
+" [清除行尾空格]
 " 常规模式(normal)下输入 cS 清除行尾空格(也就是按下Esc后,输入一个小写c再输入一个大写S)并保证为unix文件格式
 nmap cS :%s/\s\+$//g<CR>:noh :set fileformat=unix<CR>
 
@@ -240,7 +177,6 @@ nnoremap <silent><leader>-- :exe "vertical resize -15"<CR>
 " 然后替换下面的 x, y, l, c即可
 nnoremap <F12> :call MaxWindows(1, 23, 71, 239)<CR>
 function! MaxWindows(x, y, l, c)
-    echo "hello"
     exec "winpos ".a:x." ".a:y
     exec "set lines=".a:l
     exec "set columns=".a:c
@@ -270,11 +206,7 @@ nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " [快速打开自定义手册]
-if has("win32")
-    nnoremap <leader>man :split $HOME/vimfiles/man/manual.txt<cr>
-else
-    nnoremap <leader>man :split $HOME/.vim/man/manual.txt<cr>
-endif
+nnoremap <leader>man :exec "vsplit " . expand(g:home) . "/man/manual.txt"<cr>
 
 " [给当前单词加上双引号]
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
@@ -316,10 +248,44 @@ endfunction
 command! Recent call Recent()
 
 " [将文件编码转换为 unix.utf-8]
-function! Fmt()
+function! FormatUnixAndUTF8()
     set fileformat=unix
     set fileencoding=utf-8
     set nobomb
 endfunction
-command! Fmt call Fmt()
+command! FmtUU call FormatUnixAndUTF8()
 
+" JSON 格式化
+function! FormatJSON()
+python3 << EOF
+import vim
+import json
+fpath = vim.eval("expand('%:p')")
+with open(fpath, "r+", encoding = "utf-8") as _:
+    lines = json.load(_)
+    _.seek(0)
+    _.truncate(0)
+    json.dump(lines, _, ensure_ascii = False, indent = 4)
+EOF
+endfunction
+command! FmtJSON call FormatJSON()
+
+function! Myplan()
+    exec 'vsplit ' . expand(g:myplan)
+endfunction
+command! Myplan call Myplan()
+
+function! Mybook()
+    exec 'vsplit ' . expand(g:mybook)
+endfunction
+command! Mybook call Mybook()
+
+function! Mytmp()
+    exec 'vsplit ' . expand(g:mytmp)
+endfunction
+command! Mytmp call Mytmp()
+
+function! Myidea()
+    exec 'vsplit ' . expand(g:myidea)
+endfunction
+command! Myidea call Myidea()

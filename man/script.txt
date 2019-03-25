@@ -119,27 +119,36 @@ Author: bugnofree
     - 获取函数列表
             :help function-list
     - expand 函数
+
         假设当前文件为 ~/notes/python.txt
+
             :p		expand to full path
             :h		head (last path component removed)
             :t		tail (last path component only), 比如 expand("%:t") 得到 python.txt
             :r		root (one extension removed)
             :e		extension only
             let @a=expand("%:p") ==> 寄存器 a 的值为文件的完整路径
+
+        expand 也可以用于展开环境变量, 如 echo expand("$HOME") 将会输出 home 目录.
+
     - 定义函数,函数格式大致如下
+
             function! TheFunc()
                 function body ...
             endfunction
+
         函数名称以 `function!` 开始, 其后接着函数名称(函数名首字母必须为大写),
         最后以 `endfunction` 结束, 调用函数使用 `:call TheFunc()`.
 
         一个样例函数如下:
+
             nnoremap <F11> :call MaxWindows(1, 23, 71, 239)<CR>
             function! MaxWindows(x, y, l, c)
                 exec "winpos ".a:x." ".a:y
                 exec "set lines=".a:l
                 exec "set columns=".a:c
             endfunction
+
         需要用 a 前缀来表示在作用域里面寻找变量,
         set 命令在函数体内无法直接工作, 需要借助 exec 来执行.
 

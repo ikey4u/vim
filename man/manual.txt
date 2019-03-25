@@ -4,16 +4,7 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
-# TODO
-
-- vim 自动刷新 PDF 预览窗口
-
-    可参考的有
-
-    - Configure Preview to auto reload pdf and stay at the same location @[https://apple.stackexchange.com/questions/155753/configure-preview-to-auto-reload-pdf-and-stay-at-the-same-location]
-    - Automatically Refreshing Mac Preview when the PDF file is modified @[https://stackoverflow.com/questions/28315585/automatically-refreshing-mac-preview-when-the-pdf-file-is-modified]
-
-# 手册预览
+# 手册说明
 
 - manual.txt: 本手册, 对手册的说明.
 - 安装手册
@@ -33,20 +24,86 @@ Author: bugnofree
 
 参见 ./install-overview.txt 或者 @[http://ahageek.com/writer/special/vim/install-overview/]
 
-# 功能快速预览
+# 使用预览
+
+安装完成后, 在 `$HOME/.vim/user.vim` 中配置变量, 变量说明如下
+
+- g:pyhome
+
+    python 的主目录路径, 这个是必须要配置的.
+
+- g:terminal
+
+    终端程序的绝对路径, 在 normal 模式下可以使用 `sh` 打开终端.
+
+- g:openex
+
+    打开文件浏览器窗口的命令, normal 模式下可以使用 `ex` 调用.
+
+- g:myplan, g:mybook, g:mytmp, g:myidea
+
+    配置规划, 读书, 临时笔记, 思考的相关文档目录,
+    如果你需要则配置, 否则可忽略.
+
+- g:idapro, g:idaprotag
+
+    可忽略该配置
+
+其他功能如下
 
 - `<leader>man` 快速打开 `$HOME/.vim/manual.txt`, 即本手册
+
 - `<leader>'` 和 `<leader>''` 分别给当前单词加上单双引号
+
 - `<leader>ev` 和 `<leader>sv` 分别用于打开配置文件和重载配置文件
-- 自动监视 vimrc 以及 settings 目录下配置文件的更改, 并自动更新 vimrc
+
+- 自动监视 vimrc 以及 settings 目录下配置文件的更改, 并自动更新 vimrc.
+
 - 大文件优化打开, 超过 10 M 的文件自动启用大文件打开功能.
-    对于 json 类文件, 格式化后打开更快捷,
-    如果未格式化, 则所有内容都在一行显示,
-    则打开十分hhh缓慢缓慢,因为 vim 要分析其结构
+
+    对于 json 类文件, 格式化后打开更快捷, 如果未格式化, 则所有内容都在一行显示,
+    则打开十分缓慢,因为 vim 要分析其结构.
+
+- 修改窗口尺寸
+
+    - <leader>= 横向 +5
+    - <leader>- 横向 -5
+    - <leader>==  纵向 +15
+    - <leader>--  纵向 -15
+
+- 清楚 ^M 符号
+
+    正常模式下输入 cM 命令即可
+
+- 时间助手
+
+    - <F3> 插入模式或者正常模式下插入年月日格式时间, 比如 2019-03-25
+    - <S-F3> 插入模式或正常模式插入年月日时分秒格式时间, 如 2019-03-25 11:09:56
+
+- 会话保存
+
+    Ex 模式下输入 `:call MKS()` 即可保存会话, 保存到 `$HOME/ss.vim`,
+    使用 `gvim -S $HOME/ss.vim` 即可打开.
+
+- 标点符号转换
+
+    - 中文标点符号转英文 `:call CNmark2ENmark()`
+    - 英文标点符号转中文 `:call ENmark2CNmark()`
+
+- 清除行尾空格
+
+    正常模式下输入 cS 命令即可.
+
 - `:Tabmsg <cmd>` 在新的 tab 中捕获命令 `cmd` 的输出
+
 - `:Recent` 在新的 tab 中打开最近文件列表,
     可以到该文件列表定位到所需文件后,按下 gf 即可打开文件.
-- `:Fmt` 一键将文件格式置为 unix, 编码方式为 utf-8
+
+- `:FmtUU` 一键将文件格式置为 unix, 编码方式为 utf-8
+- `:FmtJSON` 一键将杂乱的 JSON 文件格式化.
+- `<C-F11>` 切换菜单栏
+- insert 模式下按 `jk` 进入 normal 模式
+
 
 - pdf 转换插件
 
@@ -85,3 +142,12 @@ Author: bugnofree
 
     代码边框样式我修改为了圆角边框,感觉好看点,
     也可以使用可是模式选择指定行转换为高亮删除单词
+
+# TODO
+
+- vim 自动刷新 PDF 预览窗口
+
+    可参考的有
+
+    - Configure Preview to auto reload pdf and stay at the same location @[https://apple.stackexchange.com/questions/155753/configure-preview-to-auto-reload-pdf-and-stay-at-the-same-location]
+    - Automatically Refreshing Mac Preview when the PDF file is modified @[https://stackoverflow.com/questions/28315585/automatically-refreshing-mac-preview-when-the-pdf-file-is-modified]

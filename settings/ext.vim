@@ -35,17 +35,3 @@ function! OpenExp()
     call system(g:openex." .")
 endfunction
 nmap se :call OpenExp()<CR>
-
-" JSON 格式化
-function! JsonFormat()
-python3 << EOF
-import vim
-fpath = vim.eval("expand('%:p')")
-with open(fpath, "r+", encoding = "utf-8") as _:
-    lines = json.load(_)
-    _.seek(0)
-    _.truncate(0)
-    json.dump(lines, _, ensure_ascii = False, indent = 4)
-EOF
-endfunction
-command! JsonFormat call JsonFormat()
