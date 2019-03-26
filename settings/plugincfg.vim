@@ -207,3 +207,5 @@ let g:mkdp_auto_close = 0
 " cd ~/.vim/plugged/tern_for_vim && npm install
 let g:tern_show_signature_in_pum = 1
 
+" nerdtree
+noremap <leader>r :NERDTreeFind<cr>
