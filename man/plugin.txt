@@ -122,3 +122,8 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
     打开当前文件所在的目录树, 可以定义一个快捷键.
 
     noremap <leader>r :NERDTreeFind<cr>
+
+- 增删改查
+
+    打开目录树后, 定位到所在文件或目录, 按下 m,
+    即可打开 nerdtree 的菜单, 可以增删改查文件和目录.
