@@ -49,6 +49,18 @@ Author: bugnofree
 
     可忽略该配置
 
+一个供参考的样例配置如下
+
+    let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
+    let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
+    let g:openex = "open"
+    let g:myplan = "$HOME/Documents/sync/myplan.txt"
+    let g:mybook = "$HOME/Documents/sync/mybook.txt"
+    let g:mytmp = "$HOME/Documents/sync/mytmp.txt"
+    let g:myidea = "$HOME/Documents/sync/myidea.txt"
+    let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
+    let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
+
 其他功能如下
 
 - `<leader>man` 快速打开 `$HOME/.vim/manual.txt`, 即本手册

@@ -2,13 +2,7 @@
 "                           Configuration Variables
 "===========================================================================
 "
-" Adjust the values below and put it into user.vim in current direcotry
-"
-" let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
-" let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
-" let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
-" let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
-" let g:openex = "open"
+"  Use \man command to open manual, and read it to config.
 "
 
 " TODO
@@ -16,7 +10,6 @@
 " - set guifont
 " - install browser-sync
 
-"**************DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING**************
 " Detect operating system
 if !exists("g:os")
     if has("mac")
@@ -35,6 +28,7 @@ if !exists("g:os")
 endif
 
 exec "source " . g:home . "/" . "user.vim"
+exec "source " . g:home . "/" . "settings/defuser.vim"
 exec "source " . g:home . "/" . "settings/python.vim"
 exec "source " . g:home . "/" . "settings/basic.vim"
 exec "source " . g:home . "/" . "settings/basicx.vim"
