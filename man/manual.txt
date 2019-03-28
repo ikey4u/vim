@@ -18,7 +18,7 @@ Author: bugnofree
 - script.txt: vim 脚本编程
 - symbols.txt: vim 常用符号
 - ycm.txt: 自动补全 ycm 的配置
-- plugin.txt: 插件配置手册
+- plugin.txt: 插件配置以及使用手册
 
 # 安装
 

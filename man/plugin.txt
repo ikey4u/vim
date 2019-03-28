@@ -123,7 +123,20 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
 
     noremap <leader>r :NERDTreeFind<cr>
 
-- 增删改查
+- 增删改查预览
 
     打开目录树后, 定位到所在文件或目录, 按下 m,
     即可打开 nerdtree 的菜单, 可以增删改查文件和目录.
+
+    按下 m 后具体的选项有
+
+    - (a)dd a childnode
+    - (m)ove the currnet node
+    - (d)elete the current node
+    - (r)eveal in Finder the current node
+    - (o)pen the current node with system editor
+    - (q)uicklook the current node
+    - (c)opy the current node
+    - (l)ist the current node
+
+    按下 ESC 退出.
