@@ -92,9 +92,9 @@ Linux, Mac 用户请继续往下看, 下面是你们的时间.
 
             git clone https://github.com/ikey4u/vim.git ~/.vim
 
-    - 编辑配置文件
+    - 配置用户选项
 
-        打开 `~/.vim/vimrc` 配置自定义变量.
+        可参见 options.txt 或者 @[http://ahageek.com/writer/special/vim/options/].
 
     - 打开 vim, 执行如下命令
 
@@ -102,8 +102,6 @@ Linux, Mac 用户请继续往下看, 下面是你们的时间.
 
     - 依赖安装
 
-        - deoplete.vim 补全依赖
-                python3 -m pip install neovim
         - ycm 补全依赖
                 cd $HOME/.vim/plugged/YouCompleteMe/
                 python3 install.py --clang-completer --java-completer --go-completer --rust-completer

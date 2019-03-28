@@ -4,7 +4,7 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
-# 手册说明
+# 手册中各文件说明
 
 - manual.txt: 本手册, 对手册的说明.
 - 安装手册
@@ -20,48 +20,13 @@ Author: bugnofree
 - ycm.txt: 自动补全 ycm 的配置
 - plugin.txt: 插件配置以及使用手册
 
-# 安装
+# 安装步骤
 
-参见 ./install-overview.txt 或者 @[http://ahageek.com/writer/special/vim/install-overview/]
+安装参见 install-overview.txt 或者 @[http://ahageek.com/writer/special/vim/install-overview/]
 
-# 使用预览
+# 功能一览
 
-安装完成后, 在 `$HOME/.vim/user.vim` 中配置变量, 变量说明如下
-
-- g:pyhome
-
-    python 的主目录路径, 这个是必须要配置的.
-
-- g:terminal
-
-    终端程序的绝对路径, 在 normal 模式下可以使用 `sh` 打开终端.
-
-- g:openex
-
-    打开文件浏览器窗口的命令, normal 模式下可以使用 `ex` 调用.
-
-- g:myplan, g:mybook, g:mytmp, g:myidea
-
-    配置规划, 读书, 临时笔记, 思考的相关文档目录,
-    如果你需要则配置, 否则可忽略.
-
-- g:idapro, g:idaprotag
-
-    可忽略该配置
-
-一个供参考的样例配置如下
-
-    let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
-    let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
-    let g:openex = "open"
-    let g:myplan = "$HOME/Documents/sync/myplan.txt"
-    let g:mybook = "$HOME/Documents/sync/mybook.txt"
-    let g:mytmp = "$HOME/Documents/sync/mytmp.txt"
-    let g:myidea = "$HOME/Documents/sync/myidea.txt"
-    let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
-    let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
-
-其他功能如下
+- `\r` 快速打开或刷新树形浏览器
 
 - `<leader>man` 快速打开 `$HOME/.vim/manual.txt`, 即本手册
 
@@ -112,10 +77,12 @@ Author: bugnofree
     可以到该文件列表定位到所需文件后,按下 gf 即可打开文件.
 
 - `:FmtUU` 一键将文件格式置为 unix, 编码方式为 utf-8
-- `:FmtJSON` 一键将杂乱的 JSON 文件格式化.
-- `<C-F11>` 切换菜单栏
-- insert 模式下按 `jk` 进入 normal 模式
 
+- `:FmtJSON` 一键将杂乱的 JSON 文件格式化.
+
+- `<C-F11>` 切换菜单栏
+
+- insert 模式下按 `jk` 进入 normal 模式
 
 - pdf 转换插件
 
@@ -133,16 +100,16 @@ Author: bugnofree
 - 实时预览 html
 
     安装 browser-sync 来同步预览 html
+
         brew install npm
         npm install -g browser-sync
 
     下载地址 @[https://github.com/BrowserSync/browser-sync],
     编写一个脚本 livehtml 存放到系统路径中, 脚本内容如下:
+
         browser-sync start --server --files "css/*.css, *.html
-    调用方法:
-        :call Pre()
-    杀死进程:
-        :call KillPre()
+
+    调用方法 `:call Pre()`, 杀死进程 `:call KillPre()`.
 
 - 代码高亮到网页
 

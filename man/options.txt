@@ -4,17 +4,28 @@ Date: 2019-01-17
 Author: bugnofree
 ---
 
-在 vimrc 文件开始处有如下几个选项需要自己配置一下
+安装完成后, 需要在 `$HOME/.vim` 下新建一个 user.vim 文件, 在该文件中配置几个选项,
+先看一个样例文件
 
     let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
-    let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
-    let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
+
     let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
     let g:openex = "open"
+    let g:myplan = "$HOME/Documents/sync/myplan.txt"
+    let g:mybook = "$HOME/Documents/sync/mybook.txt"
+    let g:mytmp = "$HOME/Documents/sync/mytmp.txt"
+    let g:myidea = "$HOME/Documents/sync/myidea.txt"
 
-- g:pyhome 是 python 的主目录, 可以通过如下命令获得
+    let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
+    let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
 
-        python -c "import sys; print(sys.executable)"
+你只需要修改各个选项的值即可(即等号后面的字符串), 各个选项的含义如下
+
+- g:pyhome
+
+    是 python 的主目录, 可以通过如下命令获得
+
+        python3 -c "import sys; print(sys.executable)"
 
     比如它输出
 
@@ -28,18 +39,29 @@ Author: bugnofree
 
         C:/Users/Administrator/AppData/Local/Programs/Python/Python37
 
-- `idapro`, `idaprotag` 如果你不知道是啥, 那么你不用管.
+    windows 用户也是一样的.
+
 - g:terminal
 
-    终端命令路径
+    终端程序的绝对路径, 在 normal 模式下可以使用 `sh` 打开终端.
 
     - windows `C:\Windows\system32\cmd.exe`
     - linux 自己找吧
     - mac 参考默认设置
+
 - g:openex
 
-    打开文件浏览器
+    打开文件浏览器窗口的命令, normal 模式下可以使用 `ex` 调用.
 
     - windows `start`
     - linux 自己找吧
     - mac `open`
+
+- g:myplan, g:mybook, g:mytmp, g:myidea
+
+    配置规划, 读书, 临时笔记, 思考的相关文档目录,
+    如果你需要则配置, 否则可忽略.
+
+- `idapro`, `idaprotag`
+
+    如果你不知道是啥, 那么你不用管.
