@@ -58,7 +58,7 @@ set fileformats=unix,dos,mac                          "给出文件的<EOL>格�
 if has('unix')
     if has('mac')
         " Mac
-        set guifont=Source\ Code\ Pro:h13
+        set guifont=Source\ Code\ Pro:h12
     else
         " Linux
         " git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
@@ -89,7 +89,7 @@ endif
 
 
 "文本格式化 命令为"gq"
-set textwidth=91            " textwidth,设置文本行宽度
+set textwidth=80            " textwidth,设置文本行宽度
 set formatoptions+=mM       "formatoptions,设置自动换行的条件, m 表示允许对 multi_byte 字符换行
 
 "设置lines或者columns会导致控制台中的vim使用异常

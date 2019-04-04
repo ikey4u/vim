@@ -29,4 +29,25 @@ Author: bugnofree
 - 0R ◑
 - 0m ○
 
+# 希腊字母
+
+    alpha	α	a*
+    beta	β	b*
+    gamma	γ	g*
+    delta	δ	d*
+    epsilon	ε	e*
+    eta	    η	y*
+    theta	θ	h*
+    kappa	κ	k*
+    lambda	λ	l*
+    mu	    μ	m*
+    pi	    π	p*
+    rho	    ρ	r*
+    sigma	σ	s*
+    tau	    τ	t*
+    phi 	φ	f*
+    psi 	ψ	q*
+    omega*	ω	w*
+
 更多可以参见 `:digraphs`
+

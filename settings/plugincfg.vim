@@ -1,4 +1,8 @@
-" ==================== LargeFile ====================
+" ===================================
+" 各插件配置参见 @[../man/plugin.txt]
+" ===================================
+
+" LargeFile
 let g:LargeFile=10									  "优化大文件编辑
 
 " ==================== YouCompleteMe ====================
@@ -106,34 +110,6 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 " 即可查看所有支持的类型
 
 
-" ==================== vimtex ====================
-" > 禁用 quickfix 窗口
-"     let g:vimtex_quickfix_enabled=0
-" > 声明使用的主程序, 需要在主文件的第一行写入如下指令
-"     %! TEX program = xelatex
-" > 主文件(采用如下几种方法之一)
-"     1. 也可以在 .vimrc 中加入下面这行,设置主文件为 main.tex,但这个我试了一下并不行
-"       autocmd BufReadPre *.tex let b:vimtex_main = 'main.tex'
-"     2. 假如主文件为 main.tex, 那么设置一个空的文件名字为 main.tex.latexmain 即可.
-"     这种感觉比较方便.
-" > 快捷键(使用 :help vimtex-default-mappings 即可查看所有的):
-"   预览: <leader>ll 选项信息: <leader>li 编译输出: <leader>lo
-" > 自动编译 bibtex 的问题:
-"   对于 bibtex 文件, vimtex 第一次会编译失败, 不要灰心, 再让 vimtex 执行一次即可.
-
-let g:tex_flavor = 'xelatex'
-let g:vimtex_quickfix_enabled = 1
-let g:vimtex_compiler_latexmk = {
-      \ 'build_dir': 'out',
-      \ 'options' : [
-      \   '-xelatex',
-      \   '-silent',
-      \   '-synctex=1',
-      \   '-interaction=nonstopmode',
-      \   '-file-line-error',
-      \   '-bibtex',
-      \ ],
-      \}
 
 " ==================== markdown-preview;mathjax-support-for-mkdp ====================
 " MarkdownPreview:打开预览
@@ -209,3 +185,20 @@ let g:tern_show_signature_in_pum = 1
 
 " nerdtree
 noremap <leader>r :NERDTreeFind<cr>
+
+" [vimtex]
+let g:vimtex_quickfix_enabled = 1
+let g:vimtex_view_method = 'skim'
+let g:vimtex_compiler_latexmk = {
+      \ 'build_dir': 'out',
+      \ 'continuous' : 1,
+      \ 'options' : [
+      \   '-xelatex',
+      \   '-verbose',
+      \   '-silent',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \   '-file-line-error',
+      \   '-bibtex',
+      \ ],
+      \}
