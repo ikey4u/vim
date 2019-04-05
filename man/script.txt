@@ -40,6 +40,43 @@ Author: bugnofree
         @varname	: vim 寄存器
         $varname	: 环境变量
 
+- 字典
+
+    定义一个字典
+
+        let colors = {
+        \ "apple": "red",
+        \ "banana": "yellow"
+        }
+
+    访问字典元素
+
+        echo colors["a"]
+        echo get(colors, "apple")
+
+    注意后一种形式, 如果键不存在, 则不会报错.
+
+    遍历一个字典的方法如下
+
+        for key in keys(mydict)
+            echo key . ': ' . mydict(key)
+        endfor
+
+    删除字典的一个键
+
+        remove(colors, "apple")
+
+    其他操作
+
+        if has_key(dict, 'foo')
+        if empty(dict)
+        keys(dict)
+        len(dict)
+        max(dict)
+        min(dict)
+        count(dict, 'x')
+        string(dict)
+
 - 表达式
 
     常见的表达式有如下几种, 参考模仿即可
@@ -130,6 +167,14 @@ Author: bugnofree
             let @a=expand("%:p") ==> 寄存器 a 的值为文件的完整路径
 
         expand 也可以用于展开环境变量, 如 echo expand("$HOME") 将会输出 home 目录.
+
+    - split
+
+        将一个表达式按照指定字符进行分割, 得到一个列表.
+
+            let colors = split(a:color, '\.')
+
+        这里注意点需要进行转义.
 
     - 定义函数,函数格式大致如下
 
@@ -339,3 +384,5 @@ Author: bugnofree
 
 使用命令 `:TOpdf` 即可将当前文件转换为 PDF, 输出的文件名称由前缀 `PDF@` 和当前文件名组成,
 PDF 的标题为当前文件名称(不带后缀).
+
+更多语法参考 https://devhints.io/vimscript

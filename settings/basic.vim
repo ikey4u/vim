@@ -110,20 +110,15 @@ set noundofile                                        "不创建撤销文件
 "状态栏的设置
 set ruler                                            "使状态栏显示光标位置
 set laststatus=2                                     "启用状态栏信息
-highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
+" highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 set cmdheight=2                                       "设置命令行的高度为2,默认为1
 "%b==>十进制显示光标下的字符,%B十六进制显示光标下的字符
 set statusline=[%n]\ %F%m%r%h\ %=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%B\ \|
 set statusline+=\ %{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}\ \|
 
-" 设置代码配色方案
-" 在 vim 中临时设置时可以使用 :colorscheme $THEME_NAME
-if has("gui_running")
-    "colorscheme diokai                                 "gvim配色方案
-    colorscheme desert                                 "gvim配色方案
-"else
-"    colorscheme diokai              				   "终端不需要配色方案
-endif
+" 设置代码默认配色方案
+set background=dark
+colorscheme cosmic_latte
 
 "弹出菜单的着色
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#2A2A2A guibg=#E8E8E8

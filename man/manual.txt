@@ -122,6 +122,28 @@ Author: bugnofree
     代码边框样式我修改为了圆角边框,感觉好看点,
     也可以使用可是模式选择指定行转换为高亮删除单词
 
+- 切换颜色主题
+
+    通过 :SetColor <colorname>.<light|dark> 来设置颜色主题.
+    比如 :SetColor cosmic_latte.light 来设置高亮颜色.
+
+    如果不指定参数, 则会打印支持的颜色主题. 样例输出如下
+
+        Usage: SetColor <colorname>.<light|dark>
+        Available color schemes:
+            desert.dark
+            diokai.dark
+            dracula.dark
+            perun.dark
+            rupza.dark
+            evening.dark
+            fruchtig.light
+            cosmic_latte.<dark|light>
+
+    你也可以仅仅传入一个参数, 此时将基于当前的背景色,
+    设置颜色主题, 如果有的颜色主题不支持当前背景色,
+    那么结果将可能十分丑.
+
 # TODO
 
 - vim 自动刷新 PDF 预览窗口

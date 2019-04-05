@@ -290,3 +290,34 @@ function! Myidea()
     exec 'vsplit ' . expand(g:myidea)
 endfunction
 command! Myidea call Myidea()
+
+function! SetColor(color)
+    let colors = split(a:color, '\.')
+
+    if len(colors) == 1
+        exec 'colorscheme '. colors[0]
+    elseif len(colors) == 2
+        let level = colors[1]
+        exec 'set background=' . level
+
+        let colorname = colors[0]
+        exec 'colorscheme '. colorname
+    else
+        echom "Usage: SetColor <colorname>.<light|dark>"
+        let colors = [
+                    \ "desert.dark",
+                    \ "diokai.dark",
+                    \ "dracula.dark",
+                    \ "perun.dark",
+                    \ "rupza.dark",
+                    \ "evening.dark",
+                    \ "fruchtig.light",
+                    \ "cosmic_latte.<dark|light>",
+                    \ ]
+        echom "Available color schemes:"
+        for color in colors
+            echom "    " . color
+        endfor
+    endif
+endfunction
+command! -nargs=? -complete=command SetColor call SetColor(<q-args>)
