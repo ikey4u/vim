@@ -16,9 +16,6 @@ Plug 'dart-lang/dart-vim-plugin'
 " 词法高亮(每个变量都是不同颜色)
 Plug 'jaxbot/semantic-highlight.vim'
 
-" 主题浏览器
-Plug 'jlanzarotta/colorschemeexplorer'
-
 "大文件打开加速
 Plug 'vim-scripts/LargeFile'
 

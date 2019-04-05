@@ -209,6 +209,9 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " [快速打开自定义手册]
 nnoremap <leader>man :exec "vsplit " . expand(g:home) . "/man/manual.txt"<cr>
 
+" [打开字体设置窗口]
+nnoremap <leader>font :exec "set guifont=*"<cr>
+
 " [给当前单词加上双引号]
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 nnoremap <leader>'' viw<esc>a"<esc>bi"<esc>lel
@@ -321,3 +324,4 @@ function! SetColor(color)
     endif
 endfunction
 command! -nargs=? -complete=command SetColor call SetColor(<q-args>)
+
