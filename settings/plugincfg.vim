@@ -86,30 +86,15 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 " 注释后面自动加空格
 let g:NERDSpaceDelims=1
 
+" [semantic highlight]
+let g:semanticEnableFileTypes = ['javascript', 'vim', 'text', 'cpp', 'c', 'go', 'python', 'tex']
 
-" ==================== semantic-highlight ====================
-" run :SemanticHighlight to convert variables into colors. Run :SemanticHighlightRevert to revert
-"
-
-" ==================== ultisnips;vim-snippets ====================
+" [ultisnips]
 let g:UltiSnipsExpandTrigger="<leader>i"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" 使用 :UltiSnipsEdit 水平划分窗口
-"let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsEditSplit="horizontal"
-" 在 3.3 Snippet Search Path  中提到了如何配置搜索路径,
-" 如果只在下面变量中声明了一个绝对路径,那么 ultiSnips 将不会加载第三方
-" snippet 文件,这将对性能有一个明显的提升,但是却导致了无法使用第三方文件,
-" 然而你可以拷贝第三方文件到指定目录,这里指定目录为 ~/.vim/UltiSnips
-" 注意下面的方法会导致出错
-"let g:UltiSnipsSnippetDirectories=$HOME.'/.vim/UltiSnips'
-" 而可行的方法如下:
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
-" 如果你想编辑某个 Snippet 文件,使用 :UltiSnipsEdit 然后按下 tab
-" 即可查看所有支持的类型
-
-
 
 " ==================== markdown-preview;mathjax-support-for-mkdp ====================
 " MarkdownPreview:打开预览
@@ -202,3 +187,5 @@ let g:vimtex_compiler_latexmk = {
       \   '-bibtex',
       \ ],
       \}
+set conceallevel=2
+let g:tex_conceal='abdmg'

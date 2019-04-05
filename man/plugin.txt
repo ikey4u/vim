@@ -194,3 +194,108 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
         %! TEX root = main.tex
 
     program 用于设置编译 TEX 文件时所用的编译引擎, root 用于设置整个 TEX 工程的主文件.
+
+    除此之外, 可以设置文件预览的更新速度, 时间为毫秒, 方法如下
+
+        autocmd Filetype tex setl updatetime=10
+
+- 隐藏符号
+
+    为了隐藏符号, 可以设置如下两行
+
+        set conceallevel=2
+        let g:tex_conceal='abdmg'
+
+    conceallevel 用于设置隐藏特定文本的级别.
+    0 表示正常显示文本, 1 表示隐藏的文本用一个空格来替换,
+    2 表示完全不显示隐藏的文本.
+
+    我们可以设置特定的文件类型中要隐藏的文本, 这里用 g:tex_conceal 来设定,
+    每个字符表示一种类型
+
+        a = accents/ligatures
+        b = bold and italic
+        d = delimiters
+        m = math symbols
+        g = Greek
+        s = superscripts/subscripts
+
+# ultisnips (~)
+
+- 自动补全快捷键
+
+        let g:UltiSnipsExpandTrigger="<leader>i"
+
+- 跳转
+
+        let g:UltiSnipsJumpForwardTrigger="<c-j>"
+        let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+- 配置搜索路径
+
+    在 3.3 Snippet Search Path  中提到了如何配置搜索路径,
+    如果只在下面变量中声明了一个绝对路径, 那么 ultiSnips 将不会加载第三方snippet 文件,
+    这将对性能有一个明显的提升,但是却导致了无法使用第三方文件,
+    然而你可以拷贝第三方文件到指定目录,这里指定目录为 ~/.vim/UltiSnips.
+    注意下面的方法会导致出错
+
+        let g:UltiSnipsSnippetDirectories=$HOME.'/.vim/UltiSnips'
+
+    而可行的方法如下
+
+        let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
+- 编辑 snip 文件
+
+    如果你想编辑某个 Snippet 文件,使用 :UltiSnipsEdit 然后按下 tab
+    即可查看所有支持的类型, 另外可以修改 :UltiSnipsEdit 打开后的窗口布局,
+    比如设置为水平布局
+
+        let g:UltiSnipsEditSplit="horizontal"
+
+## snip 文件编写
+
+一个 snippet 文件的格式如下
+
+    snippet trigger_word [ "description" [ options ] ]
+    ...
+    endsnippet
+
+snippet 和 endsnippet 中的所有行就是自动插入的行.
+
+可以使用反引号括起来来动态的执行命令, 如
+
+    snippet today "Date"
+    `date +%F`
+    endsnippet
+
+也可以 `!p ` 开头, 执行 python 命令
+
+    snippet box "Box"
+    `!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+    │ $1 │
+    `!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+    $0
+    endsnippet
+
+设置使用的 python 版本
+
+    let g:UltiSnipsUsePythonVersion = 3
+
+参考
+
+- How I'm able to take notes in mathematics lectures using LaTeX and Vim @[https://castel.dev/post/lecture-notes-1/]
+
+# semantic hightlight
+
+语义高亮插件. 将每一个不同的关键字或者变量设置为不同颜色, 增加区分度.
+
+- 特定文件自动启用
+
+        let g:semanticEnableFileTypes = ['javascript', 'vim', 'text', 'cpp', 'c', 'go', 'python', 'tex']
+
+    文件类型可以用 :set ft 来查看.
+
+- 手动启用
+
+    运行 :SemanticHighlight 启用语义高亮, 运行 :SemanticHighlightRevert 取消.

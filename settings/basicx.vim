@@ -24,7 +24,8 @@ augroup END
 " [当文件在外部被修改,自动更新该文件]
 " 手动的方式:使用 :e! 命令即可
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim
-set updatetime=100 "100ms 更新一次
+set updatetime=100 " 100ms 更新一次
+autocmd Filetype tex setl updatetime=10 " 如果为 TEX 文件, 则设置更新时间为 10ms
 set autoread
 augroup autoupdate
     autocmd!
