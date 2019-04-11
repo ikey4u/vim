@@ -148,4 +148,3 @@ augroup cusindent
     " 在 vue 中我们禁用这个特性
     autocmd FileType vue syntax sync fromstart
 augroup END
-

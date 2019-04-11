@@ -87,7 +87,7 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 let g:NERDSpaceDelims=1
 
 " [semantic highlight]
-let g:semanticEnableFileTypes = ['javascript', 'vim', 'text', 'cpp', 'c', 'go', 'python', 'tex']
+let g:semanticEnableFileTypes = ['javascript', 'vim', 'cpp', 'c', 'go', 'python', 'tex']
 
 " [ultisnips]
 let g:UltiSnipsExpandTrigger="<leader>i"

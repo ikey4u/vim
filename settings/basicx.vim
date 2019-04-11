@@ -306,7 +306,6 @@ function! SetColor(color)
         let colorname = colors[0]
         exec 'colorscheme '. colorname
     else
-        echom "Usage: SetColor <colorname>.<light|dark>"
         let colors = [
                     \ "desert.dark",
                     \ "diokai.dark",
@@ -317,10 +316,18 @@ function! SetColor(color)
                     \ "fruchtig.light",
                     \ "cosmic_latte.<dark|light>",
                     \ ]
-        echom "Available color schemes:"
+
+        redir => message
+        silent echom "Usage: SetColor <colorname>.<light|dark>"
+        silent echom "Available color schemes:"
         for color in colors
-            echom "    " . color
+            silent echom "    " . color
         endfor
+        redir END
+
+        vnew
+        setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+        silent put=message
     endif
 endfunction
 command! -nargs=? -complete=command SetColor call SetColor(<q-args>)
