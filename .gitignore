@@ -12,3 +12,4 @@
 build
 plugged
 user.vim
+*.netrwhist

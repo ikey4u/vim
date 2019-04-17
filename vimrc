@@ -32,4 +32,3 @@ if has("gui_running")
     exec "source " . g:home . "/" . "settings/plugin.vim"
     exec "source " . g:home . "/" . "settings/plugincfg.vim"
 endif
-

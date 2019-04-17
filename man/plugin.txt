@@ -8,93 +8,6 @@ Author: bugnofree
 标志有 x 的是插件是已经不再使用的或者禁用了的.
 标志有 ? 的是插件是目前有点问题, 但凑合还能用.
 
-# fcitx-vim-osx (~)
-
-场景是这样的, 当位于插入模式时, 你在输入中文, 如果你想移动一下光标,
-于是你按下 <ESC> 进入正常模式, 而输入法仍然保持这中文输入法,
-这个时候你按键移动时就不会生效, 而是启动了输入法, 这就很蛋疼.
-
-所以这个时候就要用这个工具了, 这个工具的地址为 @[https://github.com/dangxuandev/fcitx-remote-for-osx.git].
-
-不过我已经将其放到 `$HOME/.vim/plugin/fcitx-remote/mac` 里面了. 所以以下操作在这个目录里面进行.
-
-这个目录下面只有一个 main.m 和 build.py, 我们告诉 build.py 要编译的拼音输入法名称即可编译所需的二进制文件.
-
-怎么知道是哪一个输入法打呢? 执行下面的命令
-
-    python2 build.py build -general
-    ./fcitx-remote-general -h
-        Usage: fcitx-remote [OPTION]
-            -c		deactivate input method
-            -o		activate input method
-            -t		switch Active/Inactive
-            -s <imname>	switch to the input method uniquely identified by <imname>
-            [no option]	display fcitx state, 1 for inactive, 2 for acitve
-            -h		display this help and exit
-            -n		display current imname
-
-手动将输入法切换到要设置的输入法后, 执行下面打命令
-
-    ./fcitx-remote-general -n
-
-比如我的输出为 im.rime.inputmethod.Squirrel.Rime, 查看如下打对应表
-
-- baidu-pinyin: com.baidu.inputmethod.BaiduIM.pinyin,
-- baidu-wubi: com.baidu.inputmethod.BaiduIM.wubi,
-- sogou-pinyin: com.sogou.inputmethod.sogou.pinyin,
-- qq-wubi: com.tencent.inputmethod.QQInput.QQWubi,
-- squirrel-rime: com.googlecode.rimeime.inputmethod.Squirrel.Rime,
-- squirrel-rime-upstream: im.rime.inputmethod.Squirrel.Rime,
-- osx-pinyin: com.apple.inputmethod.SCIM.ITABC,
-- osx-wubi: com.apple.inputmethod.SCIM.WBX,
-- qingg: com.aodaren.inputmethod.Qingg,
-- loginput: com.logcg.inputmethod.LogInputMac.LogInputMacSP,
-- loginput2: com.logcg.inputmethod.LogInputMac2.LogInputMac2SP,
-- general: GENERAL
-
-所以我可以得到名称是 squirrel-rime-upstream, 因此执行下面命令编译二进制
-
-    python2 build.py build squirrel-rime-upstream
-
-此时会生成一个名称为 fcitx-remote-squirrel-rime-upstream 的二进制文件,
-将这个二进制文件重命名为 fcitx-remote 即可.
-
-对应的需要安装一个插件 @[https://github.com/dangxuandev/fcitx-vim-osx],
-这个我已经将其放到 `$HOME/.vim/plugin/fcitx-remote` 中了, 你不需要任何操作.
-
-目前 RIME 还有一个问题是这样的, 比较难以描述:
-
-插入模式下, 你是输入法的中文状态, 然后你回到了正常模式, 于是输入法自动切换到英文模式.
-
-这个时候, 你把窗口打焦点聚焦到另外一个应用程序上, 然后再回到 vim,
-再进入插入模式, 也切换到了中文状态, 但是你发现你无法输入中文了,
-还是处于中文状态, 你不得不手动调用切换输入法的快捷键, 将其调整到中文模式.
-
-在这里 @[https://github.com/rime/squirrel/issues/292] 有人也遇到了这个问题, 看来是 rime 输入法的问题.
-
-临时打解决方法是, 在 vim 里面, rime 虽然显示中文图标但是无法切换的时候,
-按两下 <command-tab> 快捷键, 就是说光标聚焦到其他程序, 再聚焦回来,
-可以临时解决.
-
-试用了几天后, 现在不打算使用 rime 了, 提了 issue 作者说是第三方软件的问题,
-但是明明我同样的配置, 搜狗输入法就没有问题.
-
-# deoplete (x)
-
-deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如下
-
-    let g:python3_host_prog = g:pybin
-    if has('nvim')
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    else
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'roxma/nvim-yarp'
-        Plug 'roxma/vim-hug-neovim-rpc'
-    endif
-    let g:deoplete#enable_at_startup = 1
-
-其难以忍受打问题为: 新开一个窗口, 分屏打开两个文件, 第一次按下 <c-w> 会导致 <c-w> 失效.
-
 # fzf (~)
 
 在系统上安装 fzf
@@ -299,3 +212,99 @@ snippet 和 endsnippet 中的所有行就是自动插入的行.
 - 手动启用
 
     运行 :SemanticHighlight 启用语义高亮, 运行 :SemanticHighlightRevert 取消.
+
+# fcitx-vim-osx (x)
+
+场景是这样的, 当位于插入模式时, 你在输入中文, 如果你想移动一下光标,
+于是你按下 <ESC> 进入正常模式, 而输入法仍然保持这中文输入法,
+这个时候你按键移动时就不会生效, 而是启动了输入法, 这就很蛋疼.
+
+所以这个时候就要用这个工具了, 这个工具的地址为 @[https://github.com/dangxuandev/fcitx-remote-for-osx.git].
+
+不过我已经将其放到 `$HOME/.vim/plugin/fcitx-remote/mac` 里面了. 所以以下操作在这个目录里面进行.
+
+这个目录下面只有一个 main.m 和 build.py, 我们告诉 build.py 要编译的拼音输入法名称即可编译所需的二进制文件.
+
+怎么知道是哪一个输入法打呢? 执行下面的命令
+
+    python2 build.py build -general
+    ./fcitx-remote-general -h
+        Usage: fcitx-remote [OPTION]
+            -c		deactivate input method
+            -o		activate input method
+            -t		switch Active/Inactive
+            -s <imname>	switch to the input method uniquely identified by <imname>
+            [no option]	display fcitx state, 1 for inactive, 2 for acitve
+            -h		display this help and exit
+            -n		display current imname
+
+手动将输入法切换到要设置的输入法后, 执行下面打命令
+
+    ./fcitx-remote-general -n
+
+比如我的输出为 im.rime.inputmethod.Squirrel.Rime, 查看如下打对应表
+
+- baidu-pinyin: com.baidu.inputmethod.BaiduIM.pinyin,
+- baidu-wubi: com.baidu.inputmethod.BaiduIM.wubi,
+- sogou-pinyin: com.sogou.inputmethod.sogou.pinyin,
+- qq-wubi: com.tencent.inputmethod.QQInput.QQWubi,
+- squirrel-rime: com.googlecode.rimeime.inputmethod.Squirrel.Rime,
+- squirrel-rime-upstream: im.rime.inputmethod.Squirrel.Rime,
+- osx-pinyin: com.apple.inputmethod.SCIM.ITABC,
+- osx-wubi: com.apple.inputmethod.SCIM.WBX,
+- qingg: com.aodaren.inputmethod.Qingg,
+- loginput: com.logcg.inputmethod.LogInputMac.LogInputMacSP,
+- loginput2: com.logcg.inputmethod.LogInputMac2.LogInputMac2SP,
+- general: GENERAL
+
+所以我可以得到名称是 squirrel-rime-upstream, 因此执行下面命令编译二进制
+
+    python2 build.py build squirrel-rime-upstream
+
+此时会生成一个名称为 fcitx-remote-squirrel-rime-upstream 的二进制文件,
+将这个二进制文件重命名为 fcitx-remote 即可.
+
+对应的需要安装一个插件 @[https://github.com/dangxuandev/fcitx-vim-osx],
+这个我已经将其放到 `$HOME/.vim/plugin/fcitx-remote` 中了, 你不需要任何操作.
+
+目前 RIME 还有一个问题是这样的, 比较难以描述:
+
+插入模式下, 你是输入法的中文状态, 然后你回到了正常模式, 于是输入法自动切换到英文模式.
+
+这个时候, 你把窗口打焦点聚焦到另外一个应用程序上, 然后再回到 vim,
+再进入插入模式, 也切换到了中文状态, 但是你发现你无法输入中文了,
+还是处于中文状态, 你不得不手动调用切换输入法的快捷键, 将其调整到中文模式.
+
+在这里 @[https://github.com/rime/squirrel/issues/292] 有人也遇到了这个问题, 看来是 rime 输入法的问题.
+
+临时打解决方法是, 在 vim 里面, rime 虽然显示中文图标但是无法切换的时候,
+按两下 <command-tab> 快捷键, 就是说光标聚焦到其他程序, 再聚焦回来,
+可以临时解决.
+
+试用了几天后, 现在不打算使用 rime 了, 提了 issue 作者说是第三方软件的问题,
+但是明明我同样的配置, 搜狗输入法就没有问题.
+
+(2019-04-17) 我决定再一次转换为 rime 输入法, 熟悉一下这个牛逼的输入法.
+
+mac 下面使用 rime 输入法无需配置即可解决中英文切换问题, 具体效果如下
+
+    插入模式下进入输入法 rime, 默认时英文, 然后按下左 shift, 进入中文, 打字完毕后,
+    按下 ESC 进入到正常模式, 这时 rime 自动切换到其英文模式, 可以正常使用 hjkl 等来移动,
+    当移动完毕后, 进入插入模式, 此时 rime 仍然保持其英文模式, 按下 shift 即可进入中文模式继续打字.
+
+# deoplete (x)
+
+deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如下
+
+    let g:python3_host_prog = g:pybin
+    if has('nvim')
+        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'roxma/nvim-yarp'
+        Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+    let g:deoplete#enable_at_startup = 1
+
+其难以忍受打问题为: 新开一个窗口, 分屏打开两个文件, 第一次按下 <c-w> 会导致 <c-w> 失效.
+
