@@ -27,10 +27,10 @@ endfunction
 function! OpenShell()
     call system(g:terminal." . &")
 endfunction
-nnoremap os :call OpenShell()<CR>
+nnoremap <leader>os :call OpenShell()<CR>
 
 " normal 模式下输入 oe 在当前目录打开文件浏览器
 function! OpenExp()
     call system(g:openex." .")
 endfunction
-nnoremap oe :call OpenExp()<CR>
+nnoremap <leader>oe :call OpenExp()<CR>

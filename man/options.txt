@@ -44,17 +44,11 @@ Author: bugnofree
 
 - g:terminal
 
-    终端程序的绝对路径, 在 normal 模式下可以使用 `os` 打开终端.
-    os 是 open shell 的缩写.
-
     - windows `C:\Windows\system32\cmd.exe`
     - linux 自己找吧
     - mac 参考默认设置
 
 - g:openex
-
-    打开文件浏览器窗口的命令, normal 模式下可以使用 `oe` 调用.
-    oe 是 open explorer 的缩写.
 
     - windows `start`
     - linux 自己找吧

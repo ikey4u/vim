@@ -195,6 +195,8 @@ snippet 和 endsnippet 中的所有行就是自动插入的行.
 
     let g:UltiSnipsUsePythonVersion = 3
 
+下面我们来看一下如何使用 python 来插入 snips
+
 参考
 
 - How I'm able to take notes in mathematics lectures using LaTeX and Vim @[https://castel.dev/post/lecture-notes-1/]
