@@ -149,15 +149,6 @@ nmap <F5> :make<CR>
 "注意冒号前面有一个空格,否则命令不会生效
 nmap <C-F5> :make clean<CR>
 
-" [F3快捷键插入时间(年月日)]
-nmap <F3> a<C-R>=strftime("%Y-%m-%d")<CR><Esc>
-imap <F3> <C-R>=strftime("%Y-%m-%d")<CR>
-
-" [SHIFIT + F3 插入(年月日时分秒)]
-nmap <S-F3> a<C-R>=strftime("%Y-%m-%d %T")<CR><Esc>
-imap <S-F3> <C-R>=strftime("%Y-%m-%d %T")<CR>
-
-
 " [清除行尾空格]
 " 常规模式(normal)下输入 cS 清除行尾空格(也就是按下Esc后,输入一个小写c再输入一个大写S)并保证为unix文件格式
 nmap cS :%s/\s\+$//g<CR>:noh :set fileformat=unix<CR>

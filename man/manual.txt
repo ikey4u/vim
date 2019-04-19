@@ -149,11 +149,8 @@ Author: bugnofree
     normal 模式下使用 <leader>font 即可打开字体设置窗口,
     可以快速调整当前字体大小和样式.
 
-# TODO
+- snippets
 
-- vim 自动刷新 PDF 预览窗口
-
-    可参考的有
-
-    - Configure Preview to auto reload pdf and stay at the same location @[https://apple.stackexchange.com/questions/155753/configure-preview-to-auto-reload-pdf-and-stay-at-the-same-location]
-    - Automatically Refreshing Mac Preview when the PDF file is modified @[https://stackoverflow.com/questions/28315585/automatically-refreshing-mac-preview-when-the-pdf-file-is-modified]
+    - data\i 插入日期, 类似于 `2019-04-19`
+    - time\i 插入时间, 类似于 `10:51`
+    - datetime\i 插入时间日期, 类似于 `2019-04-19 10:51`

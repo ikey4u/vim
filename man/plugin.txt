@@ -307,4 +307,3 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
     let g:deoplete#enable_at_startup = 1
 
 其难以忍受打问题为: 新开一个窗口, 分屏打开两个文件, 第一次按下 <c-w> 会导致 <c-w> 失效.
-
