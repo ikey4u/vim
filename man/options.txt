@@ -15,6 +15,7 @@ Author: bugnofree
     let g:mybook = "$HOME/Documents/sync/mybook.txt"
     let g:mytmp = "$HOME/Documents/sync/mytmp.txt"
     let g:myidea = "$HOME/Documents/sync/myidea.txt"
+    let g:myidea = "$HOME/Documents/sync/today.txt"
 
     let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
     let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
@@ -43,7 +44,8 @@ Author: bugnofree
 
 - g:terminal
 
-    终端程序的绝对路径, 在 normal 模式下可以使用 `sh` 打开终端.
+    终端程序的绝对路径, 在 normal 模式下可以使用 `os` 打开终端.
+    os 是 open shell 的缩写.
 
     - windows `C:\Windows\system32\cmd.exe`
     - linux 自己找吧
@@ -51,15 +53,16 @@ Author: bugnofree
 
 - g:openex
 
-    打开文件浏览器窗口的命令, normal 模式下可以使用 `ex` 调用.
+    打开文件浏览器窗口的命令, normal 模式下可以使用 `oe` 调用.
+    oe 是 open explorer 的缩写.
 
     - windows `start`
     - linux 自己找吧
     - mac `open`
 
-- g:myplan, g:mybook, g:mytmp, g:myidea
+- g:myplan, g:mybook, g:mytmp, g:myidea, g:today
 
-    配置规划, 读书, 临时笔记, 思考的相关文档目录,
+    配置规划, 读书, 临时笔记, 思考, 今日工作的相关文档目录,
     如果你需要则配置, 否则可忽略.
 
 - `idapro`, `idaprotag`

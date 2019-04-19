@@ -23,15 +23,14 @@ function! KillPre()
     endif
 endfunction
 
-"在当前目录打开terminator
-"在normal模式下输入sh以在当前目录打开命令行
+" normal 模式下输入 os 在当前目录打开终端
 function! OpenShell()
-    call system(g:terminal." &")
+    call system(g:terminal." . &")
 endfunction
-nmap sh :call OpenShell()<CR>
+nnoremap os :call OpenShell()<CR>
 
-"在当前目录打开文件浏览器]
+" normal 模式下输入 oe 在当前目录打开文件浏览器
 function! OpenExp()
     call system(g:openex." .")
 endfunction
-nmap se :call OpenExp()<CR>
+nnoremap oe :call OpenExp()<CR>
