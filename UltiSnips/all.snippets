@@ -4,3 +4,17 @@ snippet lic
 # Date: $1
 # Contact: pwnkeeper@gmail.com
 endsnippet
+
+snippet startw "begin one work flow item"
++ [${1}] $2`!p
+from datetime import datetime
+t[2] = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+`
+endsnippet
+
+snippet endw "finish one work flow item"
+- [${1}] $2`!p
+from datetime import datetime
+t[2] = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+`
+endsnippet

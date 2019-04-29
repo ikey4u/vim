@@ -4,6 +4,23 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
+- vim mode
+
+    常见的几种模式就不说了, 说一下不常见的模式.
+
+    在 ex 模式下我们会执行很多命令, 要查看这些历史命令, 我们可以在 normal 模式下,
+    输入 `q:` 然后就进入到了一种 `[Command Line]` 的模式.
+
+    在这种模式下, 可以编辑修改历史命令, 也可以复制粘贴命令.
+
+- vim diff
+
+    同时打开多个文件进行对比
+
+        gvim -d f1.c f2.c f3.c
+
+    也可以在已经打开的一个文件里面执行 :vert diffsplit <anohter file> 来添加要对比的文件.
+
 - vim 终端/term
 
     vim 8.1 引入了终端功能. 即能在 vim 中划分出一个命令行窗口,
