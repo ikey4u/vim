@@ -67,6 +67,7 @@ Author: bugnofree
     - PDF 预览: <leader>ll
     - 编译的配置信息: <leader>li
     - 编译的输出信息: <leader>lo
+    - vimtex  的编译日志: <leader>lq
 
 - 自动编译 bibtex 的问题
 
@@ -132,6 +133,11 @@ Author: bugnofree
         m = math symbols
         g = Greek
         s = superscripts/subscripts
+
+- 错误排查
+
+    如果一切配置正常, 但是使用 \ll 无法预览,
+    那么可能是文件写错了, 命令行用 xelatex 编译一下看看具体的错误.
 
 # ultisnips (~)
 
