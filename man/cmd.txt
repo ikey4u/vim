@@ -4,14 +4,20 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
-- vim mode
+- 执行选中的文本
 
-    常见的几种模式就不说了, 说一下不常见的模式.
+    选中一段文本, 然后按下 y 复制.
+
+    再执行 `:@"` 即可执行.
+
+- vim command line window/cmdline-window
 
     在 ex 模式下我们会执行很多命令, 要查看这些历史命令, 我们可以在 normal 模式下,
     输入 `q:` 然后就进入到了一种 `[Command Line]` 的模式.
 
     在这种模式下, 可以编辑修改历史命令, 也可以复制粘贴命令.
+
+    可以按下 <c-w>,c 退出.
 
 - vim diff
 
