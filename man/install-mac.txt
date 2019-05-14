@@ -6,19 +6,14 @@ Author: bugnofree
 
 编译环境参考 @[./install-overview.txt] 或 @[http://ahageek.com/writer/special/vim/install-overview]
 
-配置完成后执行如下命令完成安装
+从这里 @[https://github.com/macvim-dev/macvim/releases] 下载二进制文件,
+安装完成后, 输入 :version 命令确认 python 为动态加载模式,
+也就是包含以下输出 +python/dyn +python3/dyn, 然后设置环境变量
 
-安装 xcode
+    export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
-    xcode-select --install
-    sudo xcode-select -switch /Library/Developer/CommandLineTools
-
-查看 vim 信息
-
-    brew search macvim
-    brew info macvim
-
-安装 macvim
+由于 YCM 依赖于 cmake , 所以安装一下 cmake
 
     brew install cmake
-    brew install macvim --with-lua --with-override-system-vim
+
+克隆 vim 配置文件到 ~/.vim 并设置 user.vim 中的 python 路径.
