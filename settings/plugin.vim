@@ -55,4 +55,7 @@ Plug 'itchyny/lightline.vim'
 " 文件搜索
 Plug '~/.fzf'
 
+" vim-surround @[https://github.com/tpope/vim-surround]
+Plug 'tpope/vim-surround'
+
 call plug#end()
