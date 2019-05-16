@@ -158,35 +158,35 @@ Author: bugnofree
     这个新打开的文件我们仍希望处于已有的 vim实例中.
 
     怎么做呢?有以下几种方法,添加到 ~/.bashrc 中即可:
-        #>>> commands for awesome vim
-        #@1 remote new tab
-            alias gvimtab="gvim --remote-tab"
-        #@2 open file in sp mode overrding the current focused vim window
-            alias gvimcsp="gvim --remote +split"
-        #@3 open file in vsp mode overrding the current focused vim window
-            alias gvimcvsp="gvim --remote +vsplit"
-        #@4 open file in sp mode not overrding the current focused vim window
-            gvimsp()
-            {
-                if [[ $# == 1 ]]
-                then
-                    fpath=$(realpath $1)
-                    gvim --remote-send  ":split ${fpath}<CR>"
-                else
-                    gvim --remote-send  ":split<CR>"
-                fi
-            }
-        #@5 open file in vsp mode not overrding the current focused vim window
-            gvimvsp()
-            {
-                if [[ $# == 1 ]]
-                then
-                    fpath=$(realpath $1)
-                    gvim --remote-send  ":vsplit ${fpath}<CR>"
-                else
-                    gvim --remote-send  ":vsplit<CR>"
-                fi
-            }
+
+        alias gvimtab="gvim --remote-tab"
+        alias gvimcsp="gvim --remote +split"
+        alias gvimcvsp="gvim --remote +vsplit"
+        gvimsp()
+        {
+            if [[ $# == 1 ]]
+            then
+                filepath=$(realpath $1)
+                gvim --remote-send  ":split ${filepath}<CR>"
+            else
+                gvim --remote-send  ":split<CR>"
+            fi
+        }
+        gvimvsp()
+        {
+            if [[ $# == 1 ]]
+            then
+                filepath=$(realpath $1)
+                gvim --remote-send  ":vsplit ${filepath}<CR>"
+            else
+                gvim --remote-send  ":vsplit<CR>"
+            fi
+        }
+
+    注意, filepath 不要写成 fpath, 因为 zsh 默认的自动补全里面有一个 fpath 变量.
+
+    mac 下面默认没有 realpath 等工具, 安装 brew install coreutils 即可.
+
 - xxd 编辑二进制文件应注意的问题
 
     通常地我会在 vim 中打开一个二进制文件,然后使用 `:%!xxd -g 1` 来将其转换为

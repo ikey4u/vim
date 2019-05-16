@@ -315,3 +315,56 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
     let g:deoplete#enable_at_startup = 1
 
 其难以忍受打问题为: 新开一个窗口, 分屏打开两个文件, 第一次按下 <c-w> 会导致 <c-w> 失效.
+
+# ctags (~)
+
+- 编译安装
+
+    安装 cmake 和 automake工具后, 执行如下命令编译 ctags, 程序前缀设置为 ex
+
+        git clone https://github.com/universal-ctags/ctags.git
+        cd ctags/
+        ./autogen.sh
+        ./configure --prefix=/usr/local/ --program-prefix=ex
+        make && sudo make install
+
+- 生成 tags
+
+        exctags -R *
+
+- 使用方法
+
+    - `ctrl+]` 到定义处
+    - `ctrl+t` 返回原位置
+    - `ctrl+w+]` 在新窗口打开定义
+
+- 其他
+
+    ctags 并不会自动更新,如何自动更新呢?
+
+    安装 autotags.vim 插件, 然后在 .vimrc 中加入如下选项
+        let g:autotagCtagsCmd="exctags"
+        let g:autotagTagsFile="tags"
+
+# GNU Global (~)
+
+- 编译安装
+
+        curl -O https://ftp.gnu.org/gnu/global/global-6.6.2.tar.gz
+        tar zxvf global-6.6.2.tar.gz
+        cd global-6.6.2
+        ./configure --with-universal-ctags=/usr/local/bin/exctags
+        make && sudo make install
+
+- 生成 tag
+
+        gtags --gtagslabel ctags
+
+- 用法
+
+    将光标移动到某个定义出,执行 :Gtags 即可查看定义, 执行 :Gtags -r 即可查看引用.
+
+若要自动更新 gtags, 可以在 ~/.vimrc 中设置如下选项:
+
+    let Gtags_Auto_Update = 1
+
