@@ -105,7 +105,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 " :TableModeToggle进入表格模式,
 " 输入 | name | addr | phone|
 " 下一行连续输入两个"||",自动补全
-" 它的命令前缀是<Leader>t，可以通过 g:table_mode_map_prefix 来更改。
+" 它的命令前缀是<Leader>t,可以通过 g:table_mode_map_prefix 来更改.
 "<Leader>tm table mode 开关
 "<Leader>tt 使用g:table_mode_delimiter定义的分隔符插入表格
 "<Leader>T 使用用户输入的分隔符插入表格
@@ -122,39 +122,25 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 " ==================== vim-javacomplete2 ====================
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
+" ctags, gtags, autotag {
+    set tags=./tags;,tags;
+    set tags+=g:idaprotag;
 
-" ==================== ctags;gtags ====================
-" ctag和cscope不属于vim插件,可以通过apt安装到系统
-" sudo apt install exuberant-ctags cscope
-" 进入源码目录,执行以下命令生成索引文件:
-" ctag -R * && cscope -Rbq
-" tags 文件设置
-set tags=./tags;,tags;
-set tags+=g:idaprotag;
-" gtags 设置
-"替换默认的 ctags 和 cscope
-"set cscopetag
-"set cscopeprg='gtags-cscope'
-let GtagsCscope_Auto_Load = 1
-let CtagsCscope_Auto_Map = 1
-let GtagsCscope_Quiet = 1
-let Gtags_Auto_Update = 1
-"[ autotags ]
-"g:autotagmaxTagsFileSize	a cap on what size tag file to strip etc
-"g:autotagExcludeSuffixes	suffixes to not ctags on
-"g:autotagVerbosityLevel	logging verbosity (as in Python logging module)
-let g:autotagCtagsCmd="exctags"
-let g:autotagTagsFile="tags"
-"g:autotagDisabled	Disable autotag (enable by setting to any non-blank value)
-"g:autotagStopAt	stop looking for a tags file (and make one) at this directory (defaults to $HOME)
+    let g:autotagCtagsCmd="exctags"
+    let g:autotagTagsFile="tags"
+
+    set cscopetag
+    set cscopeprg=gtags-cscope
+    let GtagsCscope_Auto_Load = 1
+    let GtagsCscope_Auto_Map = 1
+    let GtagsCscope_Quiet = 1
+
+" }
 
 " ==================== tagbar ====================
 "设置 tagbar 的快捷键为F8
 nmap <F8> :TagbarToggle<CR>
 
-" ==================== vim-autotag ====================
-" 自动更新 tags 文件
-"
 " ==================== AnsiEsc ====================
 " 显示linux终端颜色,比如将 [[0;32m  OK  [0m]
 " 转换为颜色高亮显示,命令:':AnsiEsc' 执行转换,
@@ -189,3 +175,4 @@ let g:vimtex_compiler_latexmk = {
       \}
 set conceallevel=2
 let g:tex_conceal='abdmg'
+

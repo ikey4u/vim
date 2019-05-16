@@ -316,7 +316,7 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
 
 其难以忍受打问题为: 新开一个窗口, 分屏打开两个文件, 第一次按下 <c-w> 会导致 <c-w> 失效.
 
-# ctags (~)
+# ctags, gtags (~)
 
 - 编译安装
 
@@ -328,43 +328,57 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
         ./configure --prefix=/usr/local/ --program-prefix=ex
         make && sudo make install
 
+
+    执行如下命令安装 gtags
+
+        curl -O https://ftp.gnu.org/pub/gnu/global/global-6.6.3.tar.gz
+        tar zxvf global-6.6.3.tar.gz
+        cd global-6.6.3
+        ./configure --with-universal-ctags=/usr/local/bin/exctags
+        make && sudo make install
+        cp -f *.vim ~/.vim/plugin
+
 - 生成 tags
 
         exctags -R *
+        gtags --gtagslabel ctags 或者 gtags
 
-- 使用方法
+- ctags 用法
 
     - `ctrl+]` 到定义处
     - `ctrl+t` 返回原位置
     - `ctrl+w+]` 在新窗口打开定义
+
+- gtags 用法
+
+    将光标移动到某个定义处, 执行 :Gtags 即可查看定义, 执行 :Gtags -r 即可查看引用.
+
+    - 查看某个 token 的定义或者引用
+
+        光标移动到该 token 处, 执行 :GtagsCurso
+
+    - 何处定义了某函数 :Gtags <function name>, 或略大小写 :Gtags -i <function name>
+        Gtags 命令是可以自动补全的.
+
+    - 何处引用了某函数 :Gtags -r <function name>
+    - quickfix 移动 :cn -> 下一条 :cp -> 上一条 :cl -> 列出所有行
 
 - 其他
 
     ctags 并不会自动更新,如何自动更新呢?
 
     安装 autotags.vim 插件, 然后在 .vimrc 中加入如下选项
+
         let g:autotagCtagsCmd="exctags"
         let g:autotagTagsFile="tags"
 
-# GNU Global (~)
+    使用 gtags-cscope 取代默认的 cscope
 
-- 编译安装
+        set cscopetag
+        set cscopeprg=gtags-cscope
 
-        curl -O https://ftp.gnu.org/gnu/global/global-6.6.2.tar.gz
-        tar zxvf global-6.6.2.tar.gz
-        cd global-6.6.2
-        ./configure --with-universal-ctags=/usr/local/bin/exctags
-        make && sudo make install
+    自动更新 gtags
 
-- 生成 tag
-
-        gtags --gtagslabel ctags
-
-- 用法
-
-    将光标移动到某个定义出,执行 :Gtags 即可查看定义, 执行 :Gtags -r 即可查看引用.
-
-若要自动更新 gtags, 可以在 ~/.vimrc 中设置如下选项:
-
-    let Gtags_Auto_Update = 1
-
+        let GtagsCscope_Auto_Load = 1
+        let GtagsCscope_Auto_Map = 1
+        let GtagsCscope_Quiet = 1

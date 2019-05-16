@@ -31,6 +31,7 @@ Plug 'dhruvasagar/vim-table-mode'
 
 " tagbar
 Plug 'majutsushi/tagbar'
+
 " ctags 文件自动更新
 Plug 'craigemery/vim-autotag'
 
