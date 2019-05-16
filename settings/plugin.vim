@@ -29,9 +29,6 @@ Plug 'iamcco/mathjax-support-for-mkdp'
 " 插入表格
 Plug 'dhruvasagar/vim-table-mode'
 
-" tagbar
-Plug 'majutsushi/tagbar'
-
 " ctags 文件自动更新
 Plug 'craigemery/vim-autotag'
 
@@ -58,5 +55,8 @@ Plug '~/.fzf'
 
 " vim-surround @[https://github.com/tpope/vim-surround]
 Plug 'tpope/vim-surround'
+
+" LeaderF @[https://github.com/Yggdroot/LeaderF]
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 call plug#end()

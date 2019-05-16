@@ -351,8 +351,6 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
 
 - gtags 用法
 
-    将光标移动到某个定义处, 执行 :Gtags 即可查看定义, 执行 :Gtags -r 即可查看引用.
-
     - 查看某个 token 的定义或者引用
 
         光标移动到该 token 处, 执行 :GtagsCurso
@@ -382,3 +380,29 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
         let GtagsCscope_Auto_Load = 1
         let GtagsCscope_Auto_Map = 1
         let GtagsCscope_Quiet = 1
+
+# LeaderF (~)
+
+配置 ctags 程序
+
+    let g:Lf_Ctags = "exctags"
+
+用法
+
+    :Leaderf <subcommand>
+
+subcommand 有如下几个
+
+- file                search files
+- tag                 navigate tags using the tags file
+- rg                  grep using rg
+- function            navigate functions or methods in the buffer
+- mru                 search most recently used files
+- searchHistory       execute the search command in the history
+- cmdHistory          execute the command in the history
+- help                navigate the help tags
+- line                search a line in the buffer
+- colorscheme         switch between colorschemes
+- self                execute the commands of itself
+- bufTag              navigate tags in the buffer
+- buffer              search buffers

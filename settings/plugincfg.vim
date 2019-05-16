@@ -137,9 +137,8 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " }
 
-" ==================== tagbar ====================
-"设置 tagbar 的快捷键为F8
-nmap <F8> :TagbarToggle<CR>
+" leaderf
+let g:Lf_Ctags = "exctags"
 
 " ==================== AnsiEsc ====================
 " 显示linux终端颜色,比如将 [[0;32m  OK  [0m]
