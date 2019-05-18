@@ -333,3 +333,11 @@ function! SetColor(color)
 endfunction
 command! -nargs=? -complete=command SetColor call SetColor(<q-args>)
 
+" \P 拷贝文件路径到剪切板
+nnoremap <silent> <leader>P :let @+ = expand("%:p")<cr>
+
+
+
+
+
+
