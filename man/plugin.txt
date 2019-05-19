@@ -381,6 +381,8 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
         let GtagsCscope_Auto_Map = 1
         let GtagsCscope_Quiet = 1
 
+    条转到变量的定义处可以时光标定位到变量处, 然后按下 gd
+
 # LeaderF (~)
 
 配置 ctags 程序
