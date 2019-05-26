@@ -59,4 +59,7 @@ Plug 'tpope/vim-surround'
 " LeaderF @[https://github.com/Yggdroot/LeaderF]
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
+" typescript 插件
+Plug 'leafgarland/typescript-vim'
+
 call plug#end()
