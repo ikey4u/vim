@@ -157,19 +157,20 @@ Author: bugnofree
     有时候我们已经打开了 vim,然后希望从 shell 的命令行中新打开一个文件,
     这个新打开的文件我们仍希望处于已有的 vim实例中.
 
-    怎么做呢?有以下几种方法,添加到 ~/.bashrc 中即可:
+    怎么做呢? 有以下几种方法,添加到 ~/.bashrc 中即可:
 
-        alias gvimtab="gvim --remote-tab"
-        alias gvimcsp="gvim --remote +split"
-        alias gvimcvsp="gvim --remote +vsplit"
+        vimbin=gvim
+        alias gvimtab="$vimbin --remote-tab"
+        alias gvimcsp="$vimbin --remote +split"
+        alias gvimcvsp="$vimbin --remote +vsplit"
         gvimsp()
         {
             if [[ $# == 1 ]]
             then
                 filepath=$(realpath $1)
-                gvim --remote-send  ":split ${filepath}<CR>"
+                $vimbin --remote-send  ":split ${filepath}<CR>"
             else
-                gvim --remote-send  ":split<CR>"
+                $vimbin --remote-send  ":split<CR>"
             fi
         }
         gvimvsp()
@@ -177,9 +178,9 @@ Author: bugnofree
             if [[ $# == 1 ]]
             then
                 filepath=$(realpath $1)
-                gvim --remote-send  ":vsplit ${filepath}<CR>"
+                $vimbin --remote-send  ":vsplit ${filepath}<CR>"
             else
-                gvim --remote-send  ":vsplit<CR>"
+                $vimbin --remote-send  ":vsplit<CR>"
             fi
         }
 
