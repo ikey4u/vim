@@ -1,11 +1,5 @@
 "  Use \man command to open manual, and read it to config.
 
-" TODO
-" - set winpos
-" - set guifont
-" - install browser-sync
-
-" Detect operating system
 if !exists("g:os")
     if has("mac")
         let g:os = "mac"
