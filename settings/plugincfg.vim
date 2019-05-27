@@ -94,7 +94,7 @@ let g:UltiSnipsExpandTrigger="<leader>i"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="horizontal"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+let g:UltiSnipsSnippetDirectories=[expand(g:home).'/UltiSnips']
 
 " ==================== markdown-preview;mathjax-support-for-mkdp ====================
 " MarkdownPreview:打开预览

@@ -164,6 +164,14 @@ Author: bugnofree
 
         let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
+    更加通用的写法是
+
+
+        let g:UltiSnipsSnippetDirectories=[expand(g:home).'/UltiSnips']
+
+    这里的 g:home 是定义的全局 vim 变量, 表示 vim 主目录,
+    该变量可跨平台使用.
+
 - 编辑 snip 文件
 
     如果你想编辑某个 Snippet 文件,使用 :UltiSnipsEdit 然后按下 tab
