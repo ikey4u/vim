@@ -92,14 +92,25 @@ endif
 set textwidth=80            " textwidth,设置文本行宽度
 set formatoptions+=mM       "formatoptions,设置自动换行的条件, m 表示允许对 multi_byte 字符换行
 
-"设置lines或者columns会导致控制台中的vim使用异常
-"因此这里使用if语句判断,如果是gvim则启用
-if has("gui_running")
-    set lines=50            "设置行数,也就是上下的长度
-    set columns=141         "设置列数,也就是左右的宽度
-    winpos 244 93          "设置窗口的位置, 第一个参数表示距离屏幕左侧的距离,
-                            "第二个参数表示距离屏幕上侧的距离
-endif
+" 启动窗口大小设置 {
+    " 设置lines或者columns会导致控制台中的vim使用异常
+    " 因此这里使用if语句判断, 如果是gvim则启用.
+
+    " 设置 vim 启动后的窗口大小, 有如下几个命令
+
+    " - 设置行数 set lines=50
+    " - 设置列数 set columns=141
+    " - 设置窗口位置 winpos 244 93
+
+        " 第一个参数表示距离屏幕左侧的距离, 第二个参数表示距离屏幕上侧的距离
+    if has("gui_running")
+        " windows 下默认启用最大窗口, linux 和 mac 平台也计划启用最大窗口,
+        " 但是还未测试
+        if g:os == "win"
+            au GUIEnter * simalt ~x
+        endif
+    endif
+" }
 
 " 文件备份设置
 set nowritebackup                                     "编辑时不需要备份文件
