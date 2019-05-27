@@ -1,9 +1,12 @@
 " Set variables of python binary and python dll
 if g:os == "win"
     let g:pybin = g:pyhome."/python"
+    let &pythonthreedll=g:pydll
 else
     let g:pybin = g:pyhome."/bin/python3"
 endif
+
+
 function! SetPydll()
 python3 << EOF
 """
@@ -29,6 +32,7 @@ if has('python3')
 endif
 
 " IDApython autocomplete
+function! SetIDAPro()
 python3 << EOF
 import os
 import vim
@@ -36,3 +40,5 @@ idapro = vim.eval("g:idapro")
 if idapro.strip() != "":
     os.environ['PYTHONPATH']="$PYTHONPATH:" + idapro
 EOF
+endfunction
+call SetIDAPro()

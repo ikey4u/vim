@@ -8,6 +8,7 @@ Author: bugnofree
 先看一个样例文件
 
     let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
+    let g:pydll = "C:/prog/py37/python37.dll"
 
     let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
     let g:openex = "open"
@@ -41,6 +42,10 @@ Author: bugnofree
         C:/Users/Administrator/AppData/Local/Programs/Python/Python37
 
     windows 用户也是一样的.
+
+- g:pydll
+
+    python3 动态链接库的绝对路径. windows 用户必须设置.
 
 - g:terminal
 
