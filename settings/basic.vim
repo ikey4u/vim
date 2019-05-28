@@ -39,21 +39,28 @@ set ambiwidth=double                            "防止特殊符号无法正常�
 set mouse=a                                     "启用鼠标
 set showcmd                                     "正常模式下状态行显示输入的命令
 syntax on                                       "开启代码着色
-let html_use_css = 1                            "设置TOhtml 使用样式表而不是行内样式
+let html_use_css = 1                            "设置 TOhtml 使用样式表而不是行内样式
 let html_number_lines = 0                       "取消 TOhtml 的行号
 "set mouse-=a									"禁用鼠标
-"au GUIEnter * simalt ~x                        "设置启动最大化
-"set backspace=indent,eol,start                 "启用 backspace 的正常功能
 
-" 文件编码, 文件格式, 字体
-"注:使用utf-8格式后,软件与程序源码,文件路径不能有中文,否则报错
-set encoding=utf-8                                    "设置gvim内部编码,默认不更改
-set fileencoding=utf-8                                "设置当前文件编码,可以更改,如:gbk(同cp936)
-set fileencodings=ucs-bom,utf-8,gbk,cp936             "设置支持打开的文件的编码,这一行搞不好就会乱码
-set tenc=utf-8                                        "设置终端编码
-set fileformat=unix                                   "设置新(当前)文件的<EOL>格式,可以更改,
-                                                      "如:dos(windows系统最好设置为dos否则容易出现^M等字符)
-set fileformats=unix,dos,mac                          "给出文件的<EOL>格式类型
+" 编码设置 {
+
+    " 注:使用utf-8格式后,软件与程序源码,文件路径不能有中文,否则报错
+
+    set encoding=utf-8                                    "设置gvim内部编码
+    if g:os == 'win'
+        " 这两行代码必须位于 set encoding=utf-8 之前, 用于解决 windows 下 gvim
+        " 的乱码问题
+        source $vimruntime/delmenu.vim
+        source $vimruntime/menu.vim
+    endif
+    set fileencoding=utf-8                                " 设置当前文件编码,可以更改,如:gbk(同cp936)
+    set fileencodings=ucs-bom,utf-8,gbk,cp936             " 设置支持打开的文件的编码,这一行搞不好就会乱码
+    set tenc=utf-8                                        " 设置终端编码
+    set fileformat=unix                                   " 设置新(当前)文件的<EOL>格式,可以更改,
+                                                          " 如:dos(windows系统最好设置为dos否则容易出现^M等字符)
+    set fileformats=unix,dos,mac                          " 给出文件的<EOL>格式类型
+" }
 
 if has('unix')
     if has('mac')
@@ -111,6 +118,7 @@ set formatoptions+=mM       "formatoptions,设置自动换行的条件, m 表示
         endif
     endif
 " }
+
 
 " 文件备份设置
 set nowritebackup                                     "编辑时不需要备份文件
