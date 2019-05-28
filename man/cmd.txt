@@ -4,6 +4,32 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
+- vim 最小配置原则
+
+    ~/.vim/vimrc 中写入如下配置
+
+        " 编码
+        set encoding=utf-8
+        set fileencoding=utf-8
+        set fileencodings=ucs-bom,utf-8,gbk,cp936
+        set tenc=utf-8
+        set fileformat=unix
+        set fileformats=unix,dos,mac
+        " 显示行号
+        set number
+        " 语法高亮
+        syntax on
+        " 设置粘贴模式
+        set paste
+        " tab 以空格替换
+        set expandtab
+        " 一个 tab 的空格数目
+        set tabstop=4
+        " 缩进长度
+        set shiftwidth=4
+        " \cd 切换到当前文件路径
+        noremap <leader>cd :lcd %:p:h <cr>
+
 - 执行选中的文本
 
     选中一段文本, 然后按下 y 复制.
