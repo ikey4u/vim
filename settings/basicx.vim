@@ -151,11 +151,11 @@ nmap <C-F5> :make clean<CR>
 
 " [清除行尾空格]
 " 常规模式(normal)下输入 cS 清除行尾空格(也就是按下Esc后,输入一个小写c再输入一个大写S)并保证为unix文件格式
-nmap cS :%s/\s\+$//g<CR>:noh :set fileformat=unix<CR>
+nnoremap Cs :%s/\s\+$//g<CR>:noh :set fileformat=unix<CR>
 
 " [清除 ^M 符号]
 " 常规模式下输入 cM 清除行尾 ^M 符号并保证为unix文件格式
-nmap cM :%s/\r$//g<CR>:noh :set fileformat=unix<CR>
+nnoremap Cm :%s/\r$//g<CR>:noh :set fileformat=unix<CR>
 
 
 " [快捷键快速切换尺寸]

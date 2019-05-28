@@ -60,10 +60,6 @@ Author: bugnofree
     - <leader>==  纵向 +15
     - <leader>--  纵向 -15
 
-- 清楚 ^M 符号
-
-    正常模式下输入 cM 命令即可
-
 - 会话保存
 
     Ex 模式下输入 `:call MKS()` 即可保存会话, 保存到 `$HOME/ss.vim`,
@@ -76,7 +72,11 @@ Author: bugnofree
 
 - 清除行尾空格
 
-    正常模式下输入 cS 命令即可.
+    正常模式下输入 Cs 命令即可.
+
+- 清除 ^M 符号
+
+    正常模式下输入 Cm 命令即可
 
 - `:Tabmsg <cmd>` 在新的 tab 中捕获命令 `cmd` 的输出
 
