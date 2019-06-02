@@ -108,24 +108,24 @@ endfunction
 " [会话保存]
 " 功能:自动保存并加载会话
 " 使用方法:在vim中输入 :call MKS() 即可自动保存当前会话并退出
-"         会话文件位于 $HOME/ss.vim 中,若要恢复会话,使用 gvim -S $HOME/ss.vim 即可.
+"         会话文件位于 $HOME/.session.vim 中,若要恢复会话,使用 gvim -S $HOME/.session.vim 即可.
 "         这样加载的后自动恢复原有布局,为了更加方便的使用,可以在 ~/.bashrc 中加入一下
 "         函数:
 "         gvims()
 "         {
-"             if [[ -f $HOME/ss.vim ]]
+"             if [[ -f $HOME/.session.vim ]]
 "             then
-"                 gvim -S $HOME/ss.vim
+"                 gvim -S $HOME/.session.vim
 "             else
 "                 gvim
 "             fi
 "         }
 "         这样的话,只需要执行 gvims 即可自动打开会话.
 function! MKS()
-    exe "mksession! $HOME/ss.vim"
+    exe "mksession! $HOME/.session.vim"
     exe "wqa"
 endfunction
-let g:AutoSessionFile="$HOME/ss.vim"
+let g:AutoSessionFile="$HOME/.session.vim"
 let g:OrigPWD=getcwd()
 if filereadable(g:AutoSessionFile)
         if argc()==0

@@ -209,6 +209,15 @@ Author: bugnofree
                 $vimbin --remote-send  ":vsplit<CR>"
             fi
         }
+        gvims()
+        {
+            if [[ -f $HOME/.session.vim ]]
+            then
+                gvim -S $HOME/.session.vim
+            else
+                gvim
+            fi
+        }
 
     注意, filepath 不要写成 fpath, 因为 zsh 默认的自动补全里面有一个 fpath 变量.
 
