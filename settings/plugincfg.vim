@@ -140,6 +140,7 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " leaderf
 let g:Lf_Ctags = "exctags"
 
+
 " ==================== AnsiEsc ====================
 " 显示linux终端颜色,比如将 [[0;32m  OK  [0m]
 " 转换为颜色高亮显示,命令:':AnsiEsc' 执行转换,
@@ -174,4 +175,5 @@ let g:vimtex_compiler_latexmk = {
       \}
 set conceallevel=2
 let g:tex_conceal='abdmg'
+
 

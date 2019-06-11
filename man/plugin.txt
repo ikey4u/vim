@@ -361,7 +361,7 @@ deoplete 自动补全插件, 需要安装 pip3 install neovim, 参考配置如�
 
     - 查看某个 token 的定义或者引用
 
-        光标移动到该 token 处, 执行 :GtagsCurso
+        光标移动到该 token 处, 执行 :GtagsCursor
 
     - 何处定义了某函数 :Gtags <function name>, 或略大小写 :Gtags -i <function name>
         Gtags 命令是可以自动补全的.

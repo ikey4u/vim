@@ -43,6 +43,7 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'mattn/emmet-vim', { 'commit': 'dcf8f6efd8323f11e93aa1fb1349c8a1dcaa1e15' }
 Plug 'marijnh/tern_for_vim'
 Plug 'Valloric/YouCompleteMe'
+Plug 'majutsushi/tagbar'
 
 " 多光标插件
 Plug 'terryma/vim-multiple-cursors'

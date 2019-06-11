@@ -19,6 +19,7 @@ Author: bugnofree
     # 下载源码编译
     cd /tmp
     git clone https://github.com/vim/vim.git
+    git reset --hard d6ec173
     cd vim
     ./configure --with-features=huge \
         --enable-multibyte \
