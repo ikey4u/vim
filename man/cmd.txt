@@ -242,15 +242,6 @@ Author: bugnofree
 
         :r !ls -la
 
-- vim 中的特殊按键
-        Shift: <S-?>,比如 Shift+s : <S-s>
-        Ctrl:  <C-?>,比如 Ctrl+s  : <C-s>
-        Alt :  <A-?>,比如 Alt+s  : <A-s>
-        F1~F12 : <F1> 到 <F12>
-        回车:    <CR> 或者 <Enter> 或者 <Return>
-        空格:    <Space>
-        Esc:     <Esc>
-
 - 顺畅的跳转到文件的某处
 
     normal 模式下直接输入 {count}% 即可, 比如要跳转到 50%,直接输入 50% 即可.
@@ -284,9 +275,11 @@ Author: bugnofree
 
     默认的 :map 操作是递归的, 而 :noremap 则是非递归的,什么意思呢?
     比如
+
         :map j gg
         :map Q j
         :noremap W j
+
     那么 Q 将会被映射为 gg,因为 j 被映射为 gg 了.而 W 只会被映射为 j.
 
     map 的语法格式如下:
@@ -300,6 +293,31 @@ Author: bugnofree
         <silent> 属性指明执行命令时不在命令行上进行回显
     - {lhs} 左侧序列值,是你要定义的快捷方式
     - {rhs} 右侧序列值,是具体执行快捷方式所对应的 vim 命令
+
+    当我们做映射的时候, 会用到许多特殊按键, vim 中的特殊按键可以参考 :h key-notation 来查看.
+
+    这里列出几种常见的
+
+        Shift: <S-?>,比如 Shift+s : <S-s>
+        Ctrl:  <C-?>,比如 Ctrl+s  : <C-s>
+        Alt :  <A-?> 或者 <M-?>, 比如 Alt+s  : <A-s>
+        F1~F12 : <F1> 到 <F12>
+        回车:    <CR> 或者 <Enter> 或者 <Return>
+        空格:    <Space>
+        Esc:     <Esc>
+
+    这里注意对于普通字母的大小写问题.
+
+    比如你想使用 alt+shift+p 来触发某个动作, 那么你可以写成
+    <A-P> 或者 <A-S-p>.
+
+    但是如过你想使用 alt+shift+] 来触发某个动作,
+    你可能会写成 <A-S-]>, 但是这个动作并不会被触发,
+    因为 shift + ] 触发后, vim 看到的是符号 `}` 而非 `]`.
+
+    为了达到 alt+shift+] 的效果, 你可以写成 <A-}>.
+
+    在 vim 中不同的映射作用于不同的模式(:help map-overview).
 
 - 字符选取
     - 选择一个单引号内的内容,vi',选择一个双引号内的内容,vi"

@@ -176,4 +176,7 @@ let g:vimtex_compiler_latexmk = {
 set conceallevel=2
 let g:tex_conceal='abdmg'
 
-
+" auto-pairs {
+    " 更换 auto-pairs 的默认快捷键为 alt+shift+p
+    let g:AutoPairsShortcutToggle = "<A-s-p>"
+" }

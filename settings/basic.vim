@@ -167,3 +167,12 @@ augroup cusindent
     " 在 vue 中我们禁用这个特性
     autocmd FileType vue syntax sync fromstart
 augroup END
+
+" 复制粘贴 {
+    " normal, select 模式下用 alt + c 复制, alt + p 粘贴
+    noremap <m-c> "+y
+    noremap <m-p> "+p
+
+    " Insert 和命令行模式下 alt + p 粘贴, 映射为内置的粘贴快捷键 CTRL-R +
+    noremap! <m-p> <C-R>+
+" }
