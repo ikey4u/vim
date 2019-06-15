@@ -416,3 +416,37 @@ subcommand 有如下几个
 - self                execute the commands of itself
 - bufTag              navigate tags in the buffer
 - buffer              search buffers
+
+leaderf 的主要作用还是用来查找文件, 所以我们需要告诉 LeaderF 从哪里开始查找,
+定义如下变量(元素可以自己随便定义)
+
+    let g:Lf_RootMarkers = ['.git', '.svn', '.leaderf']
+
+只定义这个是不行的, 还需定义工作目录模式
+
+    let g:Lf_WorkingDirectoryMode = '<mode>'
+
+<mode> 有如下几种
+
+    - c 设置工作目录为当前工作目录(默认)
+    - a [当前工作目录] 的最近的包含了 RootMarkers 的祖先目录
+    - A [  当前文件  ] 的最近的包含了 RootMarkers 的祖先目录
+    - f 当前文件的目录
+
+我们可以设置 mode 为 'Ac'.
+
+    let g:Lf_WorkingDirectoryMode = 'Ac'
+
+其常用的快捷键为
+
+- <leader>f 搜索 leaderf 的工作目录中的文件
+- <leader>b 搜索 buffer 中的文件
+- <C-j> <C-k> 在搜索结果中向下向上移动
+- <ESC> 或者 <C-C> 推出 LeaderF
+- <C-R> 在 fuzzy 搜索和 regex 搜索模式间切换
+- <Tab> 切换为 vim 的 normal 模式, 可以在结果中移动, 然后回车即可选择文件
+- <C-V> 从剪贴板粘贴
+- <C-X> 水平窗口打开
+- <C-]> 垂直窗口打开
+- <C-T> tab 中打开
+- <C-P> 预览结果

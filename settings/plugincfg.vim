@@ -137,8 +137,11 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " }
 
-" leaderf
-let g:Lf_Ctags = "exctags"
+" leaderf {
+    let g:Lf_Ctags = "exctags"
+    let g:Lf_RootMarkers = ['.git', '.svn', '.leaderf']
+    let g:Lf_WorkingDirectoryMode = 'Ac'
+" }
 
 
 " ==================== AnsiEsc ====================
