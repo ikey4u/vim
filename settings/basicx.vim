@@ -85,6 +85,7 @@ function! CNmark2ENmark()
         exe "try | %s/！/!/g | catch | endtry"
         exe "try | %s/·/`/g | catch | endtry"
         exe "try | %s/、/,/g | catch | endtry"
+        exe "try | %s/│/|/g | catch | endtry"
 endfunction
 
 " [英文标点替换为中文标点]
@@ -103,6 +104,7 @@ function! ENmark2CNmark()
         exe "try | %s/\(/（/g | catch | endtry"
         exe "try | %s/$/￥/g | catch | endtry"
         exe "try | %s/!/！/g | catch | endtry"
+        exe "try | %s/|/│/g | catch | endtry"
 endfunction
 
 " [会话保存]
