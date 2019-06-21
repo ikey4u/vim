@@ -153,12 +153,18 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " 禁止切换 buffer 时关闭预览
 let g:mkdp_auto_close = 0
 
-" ==================== tern for vim ====================
-" cd ~/.vim/plugged/tern_for_vim && npm install
-let g:tern_show_signature_in_pum = 1
+" tern for vim {
+"   cd ~/.vim/plugged/tern_for_vim && npm install
 
-" nerdtree
-noremap <leader>r :NERDTreeFind<cr>
+    let g:tern_show_signature_in_pum = 1
+" }
+
+" nerdtree {
+    " <leader>r 自动刷新 nerdtree 目录到当前工作目录
+    noremap <leader>r :NERDTreeFind<cr>
+    " 忽略的文件列表
+    let NERDTreeIgnore = ['\.pyc$', '__pycache__', '\.db$']
+" }
 
 " [vimtex]
 let g:vimtex_quickfix_enabled = 1
