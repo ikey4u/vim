@@ -126,15 +126,16 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
     set tags=./tags;,tags;
     set tags+=g:idaprotag;
 
-    let g:autotagCtagsCmd="exctags"
-    let g:autotagTagsFile="tags"
+    if g:os != "win"
+        let g:autotagCtagsCmd="exctags"
+        let g:autotagTagsFile="tags"
 
-    set cscopetag
-    set cscopeprg=gtags-cscope
-    let GtagsCscope_Auto_Load = 1
-    let GtagsCscope_Auto_Map = 1
-    let GtagsCscope_Quiet = 1
-
+        set cscopetag
+        set cscopeprg=gtags-cscope
+        let GtagsCscope_Auto_Load = 1
+        let GtagsCscope_Auto_Map = 1
+        let GtagsCscope_Quiet = 1
+    endif
 " }
 
 " leaderf {
