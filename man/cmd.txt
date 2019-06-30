@@ -401,9 +401,9 @@ Author: bugnofree
 - 替换搜索
 
     只替换 visual 选中的部分, 使用 %V 原子指明, 如下替换 us 为 az.
+
         :s/\%Vus/az/g
 
 - 替换空行
+
         :g/^\s*$/d
-
-

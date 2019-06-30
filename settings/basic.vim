@@ -160,7 +160,7 @@ endif
 augroup cusindent
     autocmd!
     " html, css 缩进为 2
-    autocmd FileType javascript,vue,html,css,yaml setlocal ts=2 sw=2 sts=0 et
+    autocmd FileType javascript,vue,html,css,yaml,dart,typescript setlocal ts=2 sw=2 sts=0 et
     " txt 缩进为 0
     autocmd FileType text setlocal nocindent
     " vim 异步高亮, 在多语言文件比如 vue 中, 会导致语言高亮失效
