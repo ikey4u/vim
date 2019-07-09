@@ -5,23 +5,9 @@ Author: bugnofree
 ---
 
 安装完成后, 需要在 `$HOME/.vim` 下新建一个 user.vim 文件, 在该文件中配置几个选项,
-先看一个样例文件
+以完成自定义, 可以复制 .vim 目录下的 _user.vim 为 user.vim, 然后修改 user.vim 即可.
 
-    let g:pyhome = "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7"
-    let g:pydll = "C:/prog/py37/python37.dll"
-
-    let g:terminal = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"
-    let g:openex = "open"
-    let g:myplan = "$HOME/Documents/sync/myplan.txt"
-    let g:mybook = "$HOME/Documents/sync/mybook.txt"
-    let g:mytmp = "$HOME/Documents/sync/mytmp.txt"
-    let g:myidea = "$HOME/Documents/sync/myidea.txt"
-    let g:myidea = "$HOME/Documents/sync/today.txt"
-
-    let g:idapro = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python"
-    let g:idaprotag = "/Applications/IDAPro7.0/ida.app/Contents/MacOS/python/tags"
-
-你只需要修改各个选项的值即可(即等号后面的字符串), 各个选项的含义如下
+_user.vim 中各个选项的含义如下
 
 - g:pyhome
 
