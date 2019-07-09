@@ -269,35 +269,47 @@ EOF
 endfunction
 command! FmtJSON call FormatJSON()
 
+" 周记录
+function! Day()
+    exec 'vsplit ' . expand(g:myday)
+endfunction
+command! Day call Day()
+
+" 周记录
+function! Week()
+    exec 'vsplit ' . expand(g:myweek)
+endfunction
+command! Week call Week()
+
+" 月记录
+function! Month()
+    exec 'vsplit ' . expand(g:mymonth)
+endfunction
+command! Month call Month()
+
+" 年记录
+function! Year()
+    exec 'vsplit ' . expand(g:myyear)
+endfunction
+command! Year call Year()
+
 " 计划日程
-function! Myplan()
+function! Plan()
     exec 'vsplit ' . expand(g:myplan)
 endfunction
-command! Myplan call Myplan()
+command! Plan call Plan()
 
 " 书籍阅读
-function! Mybook()
+function! Book()
     exec 'vsplit ' . expand(g:mybook)
 endfunction
-command! Mybook call Mybook()
-
-" 临时笔记
-function! Mytmp()
-    exec 'vsplit ' . expand(g:mytmp)
-endfunction
-command! Mytmp call Mytmp()
+command! Book call Book()
 
 " 创意思维
-function! Myidea()
+function! Idea()
     exec 'vsplit ' . expand(g:myidea)
 endfunction
-command! Myidea call Myidea()
-
-" 当天工作
-function! Today()
-    exec 'vsplit ' . expand(g:today)
-endfunction
-command! Today call Today()
+command! Idea call Idea()
 
 function! SetColor(color)
     let colors = split(a:color, '\.')
