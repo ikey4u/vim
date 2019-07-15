@@ -62,20 +62,22 @@ let html_number_lines = 0                       "取消 TOhtml 的行号
     set fileformats=unix,dos,mac                          " 给出文件的<EOL>格式类型
 " }
 
-if has('unix')
-    if has('mac')
-        " Mac
-        set guifont=Source\ Code\ Pro:h12
-    else
-        " Linux
-        " git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
-        " fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
-        set guifontwide=Source\ Code\ Pro\ Semi-Bold\ 10
+" 设置字体 {
+    if has('unix')
+        if has('mac')
+            " Mac
+            set guifont=Source\ Code\ Pro:h12
+        else
+            " Linux
+            " git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
+            " fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
+            set guifontwide=Source\ Code\ Pro\ Semi-Bold\ 10
+        endif
+    elseif has('win32') || has('win64')
+        " Windows
+        set guifont=Source\ Code\ Pro:h10
     endif
-elseif has('win32') || has('win64')
-    " Windows
-    set guifont=Source\ Code\ Pro:h10
-endif
+" }
 
 " 折叠
 set foldlevel=99									  "默认情况下不折叠
