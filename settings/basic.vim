@@ -178,3 +178,7 @@ augroup END
     " Insert 和命令行模式下 alt + p 粘贴, 映射为内置的粘贴快捷键 CTRL-R +
     noremap! <m-p> <C-R>+
 " }
+
+" shebang 行启用缩进 {
+    set cinoptions=#1
+" }

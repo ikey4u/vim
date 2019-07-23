@@ -4,6 +4,19 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
+- cino 选项
+
+    全称是 c indent options, 用于设置 vim 的缩进功能.
+
+    默认 vim 中以 # 开头的行, 使用 >> 是无法缩进的,
+    这个时候需要配置 vim 为如下
+
+        set cinoptions=#1
+
+    即可, 只要不为 0 即可.
+
+    更多选项, 参看 :help cinoptions-values
+
 - vim 最小配置原则
 
     ~/.vim/vimrc 中写入如下配置
