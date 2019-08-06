@@ -269,24 +269,6 @@ EOF
 endfunction
 command! FmtJSON call FormatJSON()
 
-" 周记录
-function! Day()
-    exec 'vsplit ' . expand(g:myday)
-endfunction
-command! Day call Day()
-
-" 周记录
-function! Week()
-    exec 'vsplit ' . expand(g:myweek)
-endfunction
-command! Week call Week()
-
-" 月记录
-function! Month()
-    exec 'vsplit ' . expand(g:mymonth)
-endfunction
-command! Month call Month()
-
 " 年记录
 function! Year()
     exec 'vsplit ' . expand(g:myyear)

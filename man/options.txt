@@ -45,10 +45,9 @@ _user.vim 中各个选项的含义如下
     - linux 自己找吧
     - mac `open`
 
-- g:myplan, g:mybook, g:mytmp, g:myidea, g:today
+- g:myplan, g:mybook, g:myidea, g:year
 
-    配置规划, 读书, 临时笔记, 思考, 今日工作的相关文档目录,
-    如果你需要则配置, 否则可忽略.
+    相关文档快速打开, 如果你需要则配置, 否则可忽略.
 
 - `idapro`, `idaprotag`
 
