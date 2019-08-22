@@ -1,0 +1,47 @@
+snippet xposed_meta "Insert xposed metadata in AndroidManifest.xml"
+<meta-data android:name="xposedmodule" android:value="true" />
+<meta-data android:name="xposeddescription" android:value="$0" />
+<meta-data android:name="xposedminversion" android:value="82" />
+endsnippet
+
+snippet xposed_dep "Xposed dependency in build.gradle"
+repositories {
+	jcenter()
+}
+dependencies {
+	compileOnly 'de.robv.android.xposed:api:82'
+}
+endsnippet
+
+snippet xposed_main "Import xposed packages"
+import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
+
+public class $0 implements IXposedHookLoadPackage {
+	public void handleLoadPackage(final LoadPackageParam lpparam) throws Throwable {
+		XposedBridge.log("Loaded app: " + lpparam.packageName);
+	}
+}
+endsnippet
+
+snippet xposed_hook "Xposed before"
+findAndHookMethod($0, new XC_MethodHook() {
+    @Override
+    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+        super.beforeHookedMethod(param);
+    }
+    @Override
+    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+        super.afterHookedMethod(param);
+    }
+});
+endsnippet
+
+snippet main "Java main function"
+public class $0 {
+	public static void main(String[] args) throws Exception
+	{
+	}
+}
+endsnippet
