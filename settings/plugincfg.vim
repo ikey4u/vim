@@ -119,8 +119,9 @@ let g:UltiSnipsSnippetDirectories=[expand(g:home).'/UltiSnips']
 "<Leader>tdc 删除一列
 "
 
-" ==================== vim-javacomplete2 ====================
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" { vim-javacomplete2
+    autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" }
 
 " ctags, gtags, autotag {
     set tags=./tags;,tags;

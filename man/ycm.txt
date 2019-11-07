@@ -107,7 +107,7 @@ YCM 不工作的时候极其蛋疼, 往往不知道从哪里调试错误, 十分
 
         py3=/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/bin/python3
         cd $HOME/.vim/plugged/YouCompleteMe
-        $py3 install.py --clang-completer --java-completer --go-completer --rust-completer
+        $py3 install.py --clang-completer --java-completer --rust-completer
 
 - 修改 vimrc 中 ycm 的 python3 路径
 - 安装其他的 python3 第三方库依赖
@@ -134,4 +134,3 @@ YCM 不工作的时候极其蛋疼, 往往不知道从哪里调试错误, 十分
 禁止 ycm 自动触发
 
     let g:ycm_auto_trigger = 1
-

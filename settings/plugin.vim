@@ -43,8 +43,7 @@ Plug 'vim-scripts/AnsiEsc.vim'
     Plug 'mattn/emmet-vim', { 'commit': 'dcf8f6efd8323f11e93aa1fb1349c8a1dcaa1e15' }
     Plug 'marijnh/tern_for_vim'
     Plug 'majutsushi/tagbar'
-    " 默认禁用 YCM
-    " Plug 'Valloric/YouCompleteMe'
+    Plug 'Valloric/YouCompleteMe'
 " }
 
 " 多光标插件
