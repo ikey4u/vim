@@ -64,9 +64,4 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " typescript 插件
 Plug 'leafgarland/typescript-vim'
 
-" vim-rooter 插件 {
-" 切换 vim 工作目录到项目根目录
-    Plug 'airblade/vim-rooter'
-" }
-
 call plug#end()
