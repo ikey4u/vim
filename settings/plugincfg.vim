@@ -5,74 +5,75 @@
 " LargeFile
 let g:LargeFile=10									  "优化大文件编辑
 
-" ==================== YouCompleteMe ====================
-"默认配置文件路径"
-let g:ycm_global_ycm_extra_conf = g:home . '/' . '.ycm_extra_conf.py'
-"关闭语法检测,太碍眼了
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_show_diagnostics_ui = 0
-"打开vim时不再询问是否加载ycm_extra_conf.py配置
-"let g:ycm_confirm_extra_conf=0
-"让Vim的补全菜单行为与一般IDE一致
-set completeopt=longest,menu
-let g:ycm_path_to_python_interpreter = g:pybin
-let g:ycm_server_python_interpreter=g:pybin
-let g:ycm_seed_identifiers_with_syntax=1
-"是否在注释中也开启补全
-let g:ycm_complete_in_comments=1
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-"开始补全的字符数"
-let g:ycm_add_preview_to_completeopt=1
-let g:ycm_min_num_of_chars_for_completion=2
-"补全后自动关闭预览窗口"
-let g:ycm_autoclose_preview_window_after_completion=1
-" 打印日志
-let g:ycm_server_use_vim_stdout = 1
-let g:ycm_server_keep_logfiles = 1
-" 禁止缓存匹配项,每次都重新生成匹配项"
-let g:ycm_cache_omnifunc=0
-"字符串中也开启补全"
-let g:ycm_complete_in_strings=1
-" 黑名单
-"打开pdf,无后缀的文件时禁用ycm,文件类型可以使用 :set ft? 来查看
-let g:ycm_filetype_blacklist = {
-      \ 'pdf':1,
-      \ 'java':1,
-      \'':1}
-"启用ycm的文件
-"let g:ycm_filetype_whitelist = {
-"      \ 'C':1,
-"      \ 'CPP':1,
-"      \ 'Python':1
-"      \}
-"离开插入模式后自动关闭预览窗口"
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-" 启用语义补全, 绑定快捷键为 ctrl+z, 如果冲突了请更换
-" 语义补全和符号补全不同, 符号补全是根据当前 buffer 中收集到的符号进行补全
-" 而语义即使 buffer 中没有, 也会自动去库里面找, 比如你以前没有输入过 strstr
-" 这个函数, 那么符号补全就不会找出 strstr 这个符号, 但是当你输入 str 然后按下
-" ctrl+z 的时候就会找到该函数
-let g:ycm_key_invoke_completion = '<c-z>'
-noremap <c-z> <NOP>
-" 自动弹出语义补全, 输入两个字符后自动弹出语义补全
-let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-            \ 'cs,lua,javascript': ['re!\w{2}'],
-            \ 'css': [ 're!^\s{4}', 're!:\s+'],
-            \ 'html': [ '</' ],
-            \ }
+" YouCompleteMe
+if isdirectory(expand(g:home) . "/plugged/YouCompleteMe")
+    "默认配置文件路径"
+    let g:ycm_global_ycm_extra_conf = g:home . '/' . '.ycm_extra_conf.py'
+    "关闭语法检测,太碍眼了
+    let g:ycm_enable_diagnostic_signs = 0
+    let g:ycm_enable_diagnostic_highlighting = 0
+    let g:ycm_show_diagnostics_ui = 0
+    "打开vim时不再询问是否加载ycm_extra_conf.py配置
+    "let g:ycm_confirm_extra_conf=0
+    "让Vim的补全菜单行为与一般IDE一致
+    set completeopt=longest,menu
+    let g:ycm_path_to_python_interpreter = g:pybin
+    let g:ycm_server_python_interpreter=g:pybin
+    let g:ycm_seed_identifiers_with_syntax=1
+    "是否在注释中也开启补全
+    let g:ycm_complete_in_comments=1
+    let g:ycm_collect_identifiers_from_comments_and_strings = 0
+    "开始补全的字符数"
+    let g:ycm_add_preview_to_completeopt=1
+    let g:ycm_min_num_of_chars_for_completion=2
+    "补全后自动关闭预览窗口"
+    let g:ycm_autoclose_preview_window_after_completion=1
+    " 打印日志
+    let g:ycm_server_use_vim_stdout = 1
+    let g:ycm_server_keep_logfiles = 1
+    " 禁止缓存匹配项,每次都重新生成匹配项"
+    let g:ycm_cache_omnifunc=0
+    "字符串中也开启补全"
+    let g:ycm_complete_in_strings=1
+    " 黑名单
+    "打开pdf,无后缀的文件时禁用ycm,文件类型可以使用 :set ft? 来查看
+    let g:ycm_filetype_blacklist = {
+          \ 'pdf':1,
+          \'':1}
+    "启用ycm的文件
+    "let g:ycm_filetype_whitelist = {
+    "      \ 'C':1,
+    "      \ 'CPP':1,
+    "      \ 'Python':1
+    "      \}
+    "离开插入模式后自动关闭预览窗口"
+    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+    " 启用语义补全, 绑定快捷键为 ctrl+z, 如果冲突了请更换
+    " 语义补全和符号补全不同, 符号补全是根据当前 buffer 中收集到的符号进行补全
+    " 而语义即使 buffer 中没有, 也会自动去库里面找, 比如你以前没有输入过 strstr
+    " 这个函数, 那么符号补全就不会找出 strstr 这个符号, 但是当你输入 str 然后按下
+    " ctrl+z 的时候就会找到该函数
+    let g:ycm_key_invoke_completion = '<c-z>'
+    noremap <c-z> <NOP>
+    " 自动弹出语义补全, 输入两个字符后自动弹出语义补全
+    let g:ycm_semantic_triggers =  {
+                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+                \ 'cs,lua,javascript': ['re!\w{2}'],
+                \ 'css': [ 're!^\s{4}', 're!:\s+'],
+                \ 'html': [ '</' ],
+                \ }
 
-" 关闭错误警告
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_enable_diagnostic_highlighting = 0
+    " 关闭错误警告
+    let g:ycm_show_diagnostics_ui = 1
+    let g:ycm_enable_diagnostic_signs = 0
+    let g:ycm_enable_diagnostic_highlighting = 0
 
- "上下左右键的行为 会显示其他信息
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+     "上下左右键的行为 会显示其他信息
+    inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+    inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+    inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+    inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+endif
 
 
 " ==================== nerdcommenter ====================
@@ -99,29 +100,10 @@ let g:UltiSnipsSnippetDirectories=[expand(g:home).'/UltiSnips']
 " ==================== markdown-preview;mathjax-support-for-mkdp ====================
 " MarkdownPreview:打开预览
 " MarkdownPreviewStop:关闭预览
-"
 
-" ==================== vim-table-mode ====================
-" :TableModeToggle进入表格模式,
-" 输入 | name | addr | phone|
-" 下一行连续输入两个"||",自动补全
-" 它的命令前缀是<Leader>t,可以通过 g:table_mode_map_prefix 来更改.
-"<Leader>tm table mode 开关
-"<Leader>tt 使用g:table_mode_delimiter定义的分隔符插入表格
-"<Leader>T 使用用户输入的分隔符插入表格
-"<Leader>tr 重新对齐
-"[| 移动到前一个表格
-"]| 移动到下一个表格
-"{| 移动到上面一个表格
-"}| 移动到下面一个表格
-"|| 插入表头边框
-"<Leader>tdd 删除一行
-"<Leader>tdc 删除一列
-"
-
-" { vim-javacomplete2
+if isdirectory(expand(g:home) . "/plugged/vim-javacomplete2")
     autocmd FileType java setlocal omnifunc=javacomplete#Complete
-" }
+endif
 
 " ctags, gtags, autotag {
     set tags=./tags;,tags;
@@ -191,3 +173,7 @@ let g:tex_conceal='abdmg'
     " 更换 auto-pairs 的默认快捷键为 alt+shift+p
     let g:AutoPairsShortcutToggle = "<A-s-p>"
 " }
+
+if isdirectory(expand(g:home) . "/plugged/coc.nvim")
+    set statusline^=%{coc#status()}
+endif

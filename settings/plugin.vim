@@ -39,7 +39,7 @@ Plug 'vim-scripts/AnsiEsc.vim'
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'artur-shaik/vim-javacomplete2'
+    " Plug 'artur-shaik/vim-javacomplete2'
     Plug 'mattn/emmet-vim', { 'commit': 'dcf8f6efd8323f11e93aa1fb1349c8a1dcaa1e15' }
     Plug 'marijnh/tern_for_vim'
     Plug 'majutsushi/tagbar'
@@ -63,5 +63,10 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " typescript 插件
 Plug 'leafgarland/typescript-vim'
+
+" vim-rooter 插件 {
+" 切换 vim 工作目录到项目根目录
+    Plug 'airblade/vim-rooter'
+" }
 
 call plug#end()

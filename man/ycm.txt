@@ -4,6 +4,23 @@ Date: 2019-01-15
 Author: bugnofree
 ---
 
+# 补全方案
+
+C 家族, go, rust, java 自动安装
+
+    cd $HOME/.vim/plugged/YouCompleteMe
+    py3=<path/to/vim/linked/python3> # 使用 vim --version 找到你 vim 链接的python 路径
+    $py3 install.py --clang-completer --java-completer --rust-completer --go-completer
+
+你需要先安装 rust, go 和 java 8. 你可能需要一个代理...
+
+go, c, c++ 编译后都是完美支持的.
+
+java 的话支持 gradle 建立的工程, 反正 java 我主要是写 android,
+ycm 能够完美的导入 java 系统包, 但是对于自定义的 java 类, 支持效果不好.
+
+rust 目前支持....很水. 不多说了.
+
 # 错误调试
 
 ## YCM 有调试信息
@@ -107,9 +124,9 @@ YCM 不工作的时候极其蛋疼, 往往不知道从哪里调试错误, 十分
 
         py3=/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/bin/python3
         cd $HOME/.vim/plugged/YouCompleteMe
-        $py3 install.py --clang-completer --java-completer --rust-completer
+        $py3 install.py --clang-completer --rust-completer
 
-- 修改 vimrc 中 ycm 的 python3 路径
+- 修改 vimrc 中 ycm 的 python3 路径(配置 user.vim 里面的 g:pyhome 即可)
 - 安装其他的 python3 第三方库依赖
         py3=/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/bin/python3
         $py3 -m pip install neovim
@@ -134,3 +151,4 @@ YCM 不工作的时候极其蛋疼, 往往不知道从哪里调试错误, 十分
 禁止 ycm 自动触发
 
     let g:ycm_auto_trigger = 1
+
