@@ -454,3 +454,89 @@ leaderf 的主要作用还是用来查找文件, 所以我们需要告诉 Leader
 - <C-]> 垂直窗口打开
 - <C-T> tab 中打开
 - <C-P> 预览结果
+
+# coc 自动补全
+
+
+在 ~/.vim/settings/plugin.vim 中写入如下一行配置
+
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+重启 vim 使用 :PluginInstall 即可. 在 ~/.vim/settings/plugincfg.vim 中加入如下配置
+
+    set statusline^=%{coc#status()}
+
+这行配置用于显示 coc 插件状态, 具体可以参考 :h coc-status.
+
+安装常用插件扩展(https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#manage-coc-extensions)
+
+    :CocInstall coc-json coc-html coc-css coc-python coc-java coc-rls coc-tsserver
+
+coc-rls 安装要求
+
+    rustup component add rls rust-analysis rust-src
+
+这里也可以用 http.proxy 来配置代理, 所有的配置可以参见 @[https://github.com/neoclide/coc.nvim/blob/c183b25aef5008ab4511049d871593818a3e1b3f/data/schema.json]
+具体如何配置见下面的示例.
+
+对于没有专门扩展的, 我们可以自己配置语言服务器, 这个配置文件可以使用 :CocConfig 来打开,
+这里面可以加入语言服务器 (https://github.com/neoclide/coc.nvim/wiki/Language-servers).
+
+    {
+        "http.proxy": "127.0.0.1:1087",
+        "languageserver": {
+            "ccls": {
+              "command": "ccls",
+              "filetypes": ["c", "cpp", "objc", "objcpp"],
+              "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+              "initializationOptions": {
+                 "cache": {
+                   "directory": "/tmp/ccls"
+                 }
+               }
+            }
+        }
+    }
+
+
+这里的 ccls 用来补全 C 家族, 需要自己编译安装. 下载 clang @[https://releases.llvm.org/download.html],
+下载后解压到一个固定目录, 比如 $HOME/.usr/ 中, 这个地址将会被硬编码到 ccls 中.
+
+这个固定目录下面有如下文件
+
+    ➜  ls clang+llvm-9.0.0-x86_64-darwin-apple
+    bin     include lib     libexec share
+
+编译方法如下
+
+    git clone --depth=1 --recursive https://github.com/MaskRay/ccls
+    cd ccls
+    cmake -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/path/to/clang+llvm-xxx
+    cmake --build Release
+
+编译完成后, 在 Release 目录下生成一个 ccls 文件, 自己考虑拷贝到某个目录,
+然后加入环境变量即可.
+
+# table mode
+
+:TableModeToggle 进入表格模式,
+
+输入
+
+    | name | addr | phone|
+
+ 下一行连续输入两个"||",自动补全
+
+ 它的命令前缀是<Leader>t,可以通过 g:table_mode_map_prefix 来更改.
+
+    <Leader>tm table mode 开关
+    <Leader>tt 使用g:table_mode_delimiter定义的分隔符插入表格
+    <Leader>T 使用用户输入的分隔符插入表格
+    <Leader>tr 重新对齐
+    [| 移动到前一个表格
+    ]| 移动到下一个表格
+    {| 移动到上面一个表格
+    }| 移动到下面一个表格
+    || 插入表头边框
+    <Leader>tdd 删除一行
+    <Leader>tdc 删除一列
