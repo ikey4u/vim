@@ -77,6 +77,27 @@ Author: bugnofree
         count(dict, 'x')
         string(dict)
 
+- 比较
+
+    通过 :h expr-<what> 来获取帮助. 比如 :h expr-== 可以获取如下帮助
+
+        use 'ignorecase'    match case	   ignore case ~
+        equal			==		==#		==?
+        not equal		!=		!=#		!=?
+        greater than		>		>#		>?
+        greater than or equal	>=		>=#		>=?
+        smaller than		<		<#		<?
+        smaller than or equal	<=		<=#		<=?
+        regexp matches		=~		=~#		=~?
+        regexp doesn't match	!~		!~#		!~?
+        same instance		is		is#		is?
+        different instance	isnot		isnot#		isnot?
+
+        Examples:
+        "abc" ==# "Abc"	  evaluates to 0
+        "abc" ==? "Abc"	  evaluates to 1
+        "abc" == "Abc"	  evaluates to 1 if 'ignorecase' is set, 0 otherwise
+
 - 表达式
 
     常见的表达式有如下几种, 参考模仿即可

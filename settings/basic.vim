@@ -179,6 +179,14 @@ augroup END
     noremap! <m-p> <C-R>+
 " }
 
-" shebang 行启用缩进 {
-    set cinoptions=#1
+" shebang 设定 {
+    function! CinOptions()
+        " sh 类型的文件启用 shebang 缩进, 其他文件则取消
+        if &filetype == "sh"
+            set cinoptions=#1
+        else
+            set cinoptions=#0
+        endif
+    endfunction
+    autocmd WinEnter * :call CinOptions()
 " }
