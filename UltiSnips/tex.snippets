@@ -1,3 +1,8 @@
+snippet tex
+%! TEX program = xelatex
+%! TEX root = $0.tex
+endsnippet
+
 snippet proof
 \begin{proof}
 $0
@@ -32,6 +37,13 @@ snippet code
 \begin{lstlisting}[style=verb]
 $0
 \end{lstlisting}
+endsnippet
+
+snippet twominipage "并列的两个minipage"
+\noindent\begin{minipage}{.45\textwidth}
+\end{minipage}\hfill
+\noindent\begin{minipage}{.45\textwidth}
+\end{minipage}
 endsnippet
 
 # 两列代码(不带行号)
@@ -86,9 +98,9 @@ snippet 1sub
 \subsection*{$0}
 endsnippet
 
-snippet figure
+snippet fig
 \begin{figure}[H]
-    \centerline{\includegraphics[width=0.7\textwidth]{./Figures$0}}
+    \centerline{\includegraphics[width=0.7\textwidth]{$0}}
     \caption{$1}
 	\label{$2}
 \end{figure}
@@ -106,6 +118,8 @@ snippet table
 \begin{tabular}{|c|c|c|}\hline
 	$0 a & b & c \\\\ \hline
 \end{tabular}
+\caption{}
+\label{}
 \end{table}
 endsnippet
 
