@@ -443,10 +443,13 @@ leaderf 的主要作用还是用来查找文件, 所以我们需要告诉 Leader
 
 其常用的快捷键为
 
-- <leader>f 搜索 leaderf 的工作目录中的文件
-- <leader>b 搜索 buffer 中的文件
+- <leader>F 搜索 leaderf 的工作目录中的文件, 这里我用 F 表示文件
+- <leader>Fb 搜索 buffer 中的文件
+- <leader>fc 搜索光标下面的文本
+- <leader>fe 搜索正则表达式文本
+- <leader>ff 搜索文本, f 表示 find 文本
 - <C-j> <C-k> 在搜索结果中向下向上移动
-- <ESC> 或者 <C-C> 推出 LeaderF
+- <ESC> 或者 <C-C> 退出 LeaderF
 - <C-R> 在 fuzzy 搜索和 regex 搜索模式间切换
 - <Tab> 切换为 vim 的 normal 模式, 可以在结果中移动, 然后回车即可选择文件
 - <C-V> 从剪贴板粘贴

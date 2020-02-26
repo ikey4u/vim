@@ -122,9 +122,24 @@ endif
 " }
 
 " leaderf {
+    " 搜索文件
+    let g:Lf_ShortcutF = "<leader>F"
+    " 搜索 buffer 中的文件
+    noremap <leader>Fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+
     let g:Lf_Ctags = "exctags"
     let g:Lf_RootMarkers = ['.git', '.svn', '.leaderf']
     let g:Lf_WorkingDirectoryMode = 'Ac'
+
+    " 搜索正则文本
+    " 限制结果行的最大长度为 1000, 然而由于 leaderf 自定义的 rg 命令并非直接的
+    " rg, 而是一个 wrapper, 这个 wrapper 只提供了过滤最大长度, 没有提供显示过滤的行的一部分,
+    " rg 本身提供了 --max-columns-preview 这个选项, 先将就这用吧
+    noremap <leader>fe :<C-U><C-R>=printf("Leaderf! rg -M 1000 -e ")<CR>
+    " 搜索文本
+    noremap <leader>ff :<C-U><C-R>=printf("Leaderf! rg -M 1000 ")<CR>
+    " 搜索光标下的文本
+    noremap <leader>fc :<C-U><C-R>=printf("Leaderf! rg -M 1000 -e %s ", expand("<cword>"))<CR><CR>
 " }
 
 
@@ -152,6 +167,7 @@ let g:mkdp_auto_close = 0
 
 " [vimtex]
 let g:vimtex_quickfix_enabled = 1
+let g:vimtex_quickfix_mode = 1
 let g:vimtex_view_method = 'skim'
 let g:vimtex_compiler_latexmk = {
       \ 'build_dir': 'out',
