@@ -88,7 +88,7 @@ endif
 let g:NERDSpaceDelims=1
 
 " [semantic highlight]
-let g:semanticEnableFileTypes = ['javascript', 'vim', 'cpp', 'c', 'go', 'python', 'tex', 'kotlin']
+let g:semanticEnableFileTypes = ['javascript', 'vim', 'cpp', 'c', 'go', 'python', 'tex', 'kotlin', 'groovy']
 
 " [ultisnips]
 let g:UltiSnipsExpandTrigger="<leader>i"
