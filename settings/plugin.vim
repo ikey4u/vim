@@ -64,4 +64,6 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " typescript 插件
 Plug 'leafgarland/typescript-vim'
 
+Plug 'udalov/kotlin-vim'
+
 call plug#end()
