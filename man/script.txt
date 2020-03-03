@@ -321,10 +321,13 @@ Author: bugnofree
 
 自带文档看一下即可, 查看命令 `:h python-vim`.
 
-一般的在 vim 里面用 python 写一个函数的方法如下
+检查一下有哪个 ptyhon, 在 ex 模式中输入 `:echo has('python')`  或者 `:echo has('python3')`,
+哪个输出 1 便用哪个.
+
+在 vim 里面用 python 写一个函数的方法如下
 
     function! FuncName()
-    python >> EOF
+    python3 << EOF
     import vim
     // codes ...
     EOF

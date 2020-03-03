@@ -54,6 +54,7 @@ Plug 'itchyny/lightline.vim'
 
 " 文件搜索
 Plug '~/.fzf'
+Plug 'junegunn/fzf.vim'
 
 " vim-surround @[https://github.com/tpope/vim-surround]
 Plug 'tpope/vim-surround'

@@ -122,8 +122,10 @@ endif
 " }
 
 " leaderf {
+    " 不再使用 leaderf 的文件搜索功能了, 挺鸡肋的, 有时候会出现文件搜索不到的情况,
+    " 而且很莫名其妙找不到原因, 这里禁用 leaderf 默认的 <leader>f 快捷键.
     " 搜索文件
-    let g:Lf_ShortcutF = "<leader>F"
+    let g:Lf_ShortcutF = ""
     " 搜索 buffer 中的文件
     noremap <leader>Fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 
@@ -193,3 +195,23 @@ let g:tex_conceal='abdmg'
 if isdirectory(expand(g:home) . "/plugged/coc.nvim")
     set statusline^=%{coc#status()}
 endif
+
+" fzf {
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment']
+    \}
+    " 好吧, vim 用着很舒服, 但是 vimscript 真他妈的操蛋, 真他妈的操蛋!
+    noremap <leader>F :call FindWorkingDir()<CR> :<C-U><C-R>=printf("Files %s", eval('g:VimRoot'))<CR><CR>
+" }
