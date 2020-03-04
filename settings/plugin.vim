@@ -43,7 +43,8 @@ Plug 'vim-scripts/AnsiEsc.vim'
     Plug 'mattn/emmet-vim', { 'commit': 'dcf8f6efd8323f11e93aa1fb1349c8a1dcaa1e15' }
     Plug 'marijnh/tern_for_vim'
     Plug 'majutsushi/tagbar'
-    Plug 'Valloric/YouCompleteMe'
+    " 使用 frozen 选项禁止更新 YCM, 这个需要手动编译
+    Plug 'Valloric/YouCompleteMe',  { 'frozen': 1 }
 " }
 
 " 多光标插件
@@ -56,10 +57,10 @@ Plug 'itchyny/lightline.vim'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
-" vim-surround @[https://github.com/tpope/vim-surround]
+" vim-surround
 Plug 'tpope/vim-surround'
 
-" LeaderF @[https://github.com/Yggdroot/LeaderF]
+" LeaderF
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " typescript 插件
