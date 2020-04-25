@@ -140,6 +140,8 @@ set statusline+=\ %{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}\ \|
 " 设置代码默认配色方案
 set background=dark
 colorscheme desert
+set t_Co=256
+hi Terminal ctermbg=lightgrey ctermfg=red guibg=#44115a guifg=white
 
 "弹出菜单的着色
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#2A2A2A guibg=#E8E8E8
