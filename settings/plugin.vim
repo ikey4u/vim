@@ -14,7 +14,7 @@ Plug 'posva/vim-vue'
 Plug 'dart-lang/dart-vim-plugin'
 
 " 词法高亮(每个变量都是不同颜色)
-Plug 'jaxbot/semantic-highlight.vim'
+" Plug 'jaxbot/semantic-highlight.vim'
 
 "大文件打开加速
 Plug 'vim-scripts/LargeFile'
@@ -22,7 +22,7 @@ Plug 'vim-scripts/LargeFile'
 " 显示每一行的尾部空格
 Plug 'vim-scripts/ShowTrailingWhitespace'
 
-"m arkdown预览以及数学公式支持
+" markdown预览以及数学公式支持
 Plug 'iamcco/markdown-preview.vim'
 Plug 'iamcco/mathjax-support-for-mkdp'
 
@@ -67,5 +67,4 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'leafgarland/typescript-vim'
 
 Plug 'udalov/kotlin-vim'
-
 call plug#end()

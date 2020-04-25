@@ -115,10 +115,10 @@ endsnippet
 snippet table
 \begin{table}[H]
 \centering
+\caption{}
 \begin{tabular}{|c|c|c|}\hline
 	$0 a & b & c \\\\ \hline
 \end{tabular}
-\caption{}
 \label{}
 \end{table}
 endsnippet
@@ -246,4 +246,19 @@ snippet sq
 \verb|'$1'|
 endsnippet
 
+snippet twofig
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[t]{0.48\textwidth}
+		\centerline{\includegraphics[width=0.8\textwidth]{}}
+		\caption{}
+		\label{}
+	\end{minipage}
+	\begin{minipage}[t]{0.48\textwidth}
+		\centerline{\includegraphics[width=0.8\textwidth]{}}
+		\caption{}
+		\label{}
+	\end{minipage}
+\end{figure}
+endsnippet
 

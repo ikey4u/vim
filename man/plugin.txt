@@ -489,8 +489,11 @@ leaderf 的主要作用还是用来查找文件, 所以我们需要告诉 Leader
 - <C-T> tab 中打开
 - <C-P> 预览结果
 
-# coc 自动补全
+其他命令
 
+- LeaderfColorschme: 用于查看不同颜色主题, 按 <C-p> 预览
+
+# coc 自动补全
 
 在 ~/.vim/settings/plugin.vim 中写入如下一行配置
 

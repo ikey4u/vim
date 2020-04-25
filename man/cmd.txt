@@ -236,7 +236,7 @@ Author: bugnofree
 
     mac 下面默认没有 realpath 等工具, 安装 brew install coreutils 即可.
 
-- xxd 编辑二进制文件应注意的问题
+- xxd 编辑二进制文件应注意的问题/hex, 16
 
     通常地我会在 vim 中打开一个二进制文件,然后使用 `:%!xxd -g 1` 来将其转换为
     十六进制模式. 但是 vim 会根据 .vimrc 中的 fileencoding 设置对文件内容进行解释,
