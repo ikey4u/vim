@@ -139,9 +139,10 @@ set statusline+=\ %{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}\ \|
 
 " 设置代码默认配色方案
 set background=dark
-colorscheme desert
-set t_Co=256
-hi Terminal ctermbg=lightgrey ctermfg=red guibg=#44115a guifg=white
+colorscheme perun
+" vim 中终端配色默认使用系统中终端的配色, 因此在 vim 配置中修改终端配色作用不大,
+" 下面的选项是 vim 对其自带终端颜色的配置
+" hi Terminal ctermbg=2 ctermfg=3 guibg=#827472 guifg=black
 
 "弹出菜单的着色
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#2A2A2A guibg=#E8E8E8
