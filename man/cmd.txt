@@ -64,7 +64,11 @@ Author: bugnofree
 
         gvim -d f1.c f2.c f3.c
 
-    也可以在已经打开的一个文件里面执行 :vert diffsplit <anohter file> 来添加要对比的文件.
+   如果文件已经打开, 那么可以使用
+
+       :diffsplit <filename>
+
+   或者多次在不同的文件上使用 `:diffthis`.
 
 - vim 终端/term
 
